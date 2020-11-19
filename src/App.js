@@ -1,8 +1,13 @@
 import React from 'react';
+import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom';
 
-function App() {
+import LoginFormPage from './components/LoginFormPage/index';
+
+const App = () => {
   return (
-    <h1>Hello world!</h1>
+    <BrowserRouter>
+      <Route path="/login" render={() => <LoginFormPage />} />
+    </BrowserRouter>
   );
 }
 
