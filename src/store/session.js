@@ -1,5 +1,6 @@
 
 import { fetch } from './csrf';
+import errorNotifications from '../errorNotifications';
 
 export const LOAD_USER = "songcamp/session/LOAD_USER";
 export const REMOVE_USER = "songcamp/session/REMOVE_USER";
@@ -15,15 +16,18 @@ export const removeUser = (user) => ({
 
 
 export const login = ({credential, password}) => async (dispatch) => {
-    // console.log("inside login!!")
-    const res = await fetch('/api/session', {
-        method: 'POST',
-        body: JSON.stringify({ credential, password })
-    })
+    
+        const res = await fetch('/api/session', {
+            method: 'POST',
+            body: JSON.stringify({ credential, password })
+        })
+    
+        // if(!res.ok) {
+        //     throw res;
+        // }
 
-    dispatch(loadUser(res.data.user));
-    return res;
-
+        dispatch(loadUser(res.data.user));
+        return res;
 }
 
 const initialState = { user: null };

@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
-import { useDispatch } from "react-redux";
-import { login } from '../../store/session';
+import { useDispatch, useSelector } from "react-redux";
+import * as sessionActions from '../../store/session';
+import { Redirect } from 'react-router-dom';
 
 const LoginFormPage = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
     const dispatch = useDispatch();
+    const sessionUser = useSelector(state => state.session.user);
+    const [credential, setCredential] = useState("");
+    const [password, setPassword] = useState("");
+    const [errors, setErrors] = useState([]);
 
+    if (sessionUser) return (
+        <Redirect to="/" />
+      );
 
     const updateProperty = (property) => (e) => {
         property(e.target.value);
@@ -20,20 +25,19 @@ const LoginFormPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('IN HANDLESUBMIT!!!');
+
         const payload = {
-            email,
+            credential,
             password,
         }
 
-        dispatch(login(payload));
+        return dispatch(sessionActions.login({ credential, password }))
+                .catch((res) => {
+                    if (res.data && res.data.errors) setErrors(res.data.errors);
+        });
 
         // hideLoginForm();
     }
-    //     (async () => {
-    //         await dispatch(login(payload));
-    //     })();
-    // }
 
     return (
         <div className="signup-form-holder">
@@ -41,9 +45,12 @@ const LoginFormPage = () => {
                 <div className="signup-form-header-container">
                     <h3 className="signup-form-header">Log in</h3> <span onClick={handleClose} className="signup-form-close-btn">x</span>
                 </div>
+                <ul>
+                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>
                 <form className="signup-form">
                     <label>Email address</label>
-                    <input name="email" placeholder={email} value={email} onChange={updateProperty(setEmail)}/>
+                    <input name="email" placeholder={credential} value={credential} onChange={updateProperty(setCredential)}/>
                     <label>Password</label>
                     <input type="password" name="password" placeholder={password} value={password} onChange={updateProperty(setPassword)}/>
                     <button onClick={handleSubmit}>Log in</button>
