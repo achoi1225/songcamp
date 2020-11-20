@@ -7,6 +7,7 @@ import fanSignupReducer from './ui-fan-signup-form';
 import loginFormReducer from './ui-login-form';
 import roleFormReducer from './ui-role-form';
 import genresReducer from './genres'; 
+import followsReducer from './follows'; 
 
 
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     loginForm: loginFormReducer,
     roleForm: roleFormReducer,
     genres: genresReducer,
+    follows: followsReducer,
 });
 
 let enhancer;
