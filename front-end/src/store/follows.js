@@ -124,7 +124,7 @@ export function followsReducer(state={}, action){
 
 export default followsReducer;
 
-// ERRORS ===================================================================================================
+// ERRORS NOTIFICATIONS =============================================================================================
 // if(err.status >= 400 && err.status < 600) {
         //     const errorJSON = await err.json();
             // const errorsContainer = document.querySelector(".errors-container");
