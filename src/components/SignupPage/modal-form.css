@@ -1,0 +1,153 @@
+.form-holder {
+    /* display: none; */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(5, 0, 0, 0.3);
+    font-size: 16px;
+    color: #333333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* color: red; */
+}
+
+.form-content {
+    background-color: white;
+    margin: 15% auto;
+    /* box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.2); */
+    border-radius: 7px;
+    width: 40%;
+    min-width: 360px;
+    overflow: hidden;
+}
+
+.form-header-container {
+    height: 45px;
+    font-size: 18px;
+    background-color: #F5F5F5;
+    text-align: center;
+    /* border-radius: 7px; */
+    display:flex;
+    padding: 10px 10px 10px 0;
+}
+
+.form-header {
+    font-size: 18px;
+    font-weight: normal;
+    flex-grow: 1;
+    margin-left: 30px;
+}
+
+.form {
+    padding: 25px 90px;
+    display: flex;
+    flex-direction: column;
+  }
+
+.form label {
+    margin: 20px 0 3px 0;
+}
+
+.form input {
+    border: none;
+    height: 35px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.form button {
+    background-color: #42A1C6;
+    color: white;
+    font-size: 16px;
+    font-weight: normal;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    padding: 10px 0 10px 0;
+    margin: 35px 0 30px 0;
+
+}
+
+.form-close-btn {
+    /* z-index: 3; */
+    font-size: 19px;
+    color: gray;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.form-close-btn:hover {
+    color: black;
+}
+
+.errors-container {
+    /* text-align: center; */
+    color: red;
+}
+
+/* ============================================================================== */
+/* ROLE FORM */
+/* ============================================================================== */
+
+.role-form-content {
+    /* position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+    margin: 0 auto; */
+    background-color: white;
+    /* margin: 33% auto; */
+    border-radius: 7px;
+    width: 27%;
+    min-width: 430px;
+    overflow: hidden;
+}
+
+.role-form {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    padding: 0 20px;
+  }
+
+.role-form__option-holder {
+    display: flex;
+    justify-content: space-evenly;
+    border-bottom: 1px solid lightgray;
+    padding: 20px 0;
+}
+
+.role-form__option-holder img {
+    object-fit: cover;
+    width: 145px;
+    height: 145px;
+}
+
+.role-form__button-holder {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+    text-align: center;
+    justify-content: center;
+}
+
+.role-form__fan-button {
+    font-size: 18px;
+    color: #52B5BE;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: transparent;
+    border: 2px solid #52B5BE;
+    margin-bottom: 7px;
+}
+
+.role-form__artist-button {
+    font-size: 18px;
+    color: #5030B3;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: transparent;
+    border: 2px solid #5030B3;
+    margin-bottom: 7px;
+}

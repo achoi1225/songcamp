@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
+
+import SignupPage from "./components/SignupPage";
 import LoginFormPage from "./components/LoginFormPage/index";
 import SignupFormPage from "./components/SignupFormPage";
+import Navigation from './components/Navigation';
 import * as sessionActions from "./store/session";
 
 const App = () => {
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser())
@@ -15,14 +18,20 @@ const App = () => {
   }, [dispatch]);
 
   return isLoaded && (
+    <>
+      <Navigation isLoaded={isLoaded}/>
     <Switch>
-      <Route path="/login">
+      <Route exact={true} path="/signup" 
+        render = {() => <SignupPage /> }
+      />
+      <Route exact path="/login">
         <LoginFormPage/>
       </Route>
-      <Route path="/signup">
+      {/* <Route exact path="/signup">
         <SignupFormPage />
-      </Route>
+      </Route> */}
     </Switch>
+    </>
   );
 }
 

@@ -1,0 +1,179 @@
+.fan-page-holder {
+    background-color: #F8F8F8;
+    display:flex;
+    height: 100vh; 
+}
+
+.fan-page {
+    width: 900px;
+    background-color: white;
+    margin: 0 auto;
+    display:flex;
+    flex-direction: column;
+    padding: 30px 0 0 0;
+    height: 100vh;
+}
+
+.fan-page-header {
+    
+}
+
+.content-holder {
+    /* background-color: red; */
+    display: flex;
+    margin-bottom: 40px;
+    padding: 0 20px;
+}
+
+.photo-holder {
+    background-color: black;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.photo {
+    object-fit: cover;
+    width: 300px;
+    height: 300px;
+    margin-bottom: 6px;
+}
+
+.upload-img-btn {
+    font-weight: bold;
+    color: #AFD6D7;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+}
+
+.upload-img-btn:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.delete-photo-btn {
+    position: absolute;
+    margin: -139px 0 0 135px;
+    font-size: 20px;
+    border-radius: 0;
+    border: none;
+    background-color: #47A4A5;
+    width: 30px;
+    padding: 2px 0;
+    outline: none;
+    cursor: pointer;
+}
+
+.fa {
+ color: white;
+}
+
+.name-bio-holder {
+    display: flex;
+    flex-direction: column;
+    margin-left: 25px;
+    padding: 5px 0;
+}
+
+.name {
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.bio-header {
+    color: #47A4A5;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.bio-edit-btn {
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    /* border: none; */
+    outline: none;
+    margin-left: 20px;
+    padding: 1px 5px;
+    font-weight: bold;
+    color: gray;
+    background-color: transparent;
+    cursor: pointer;
+
+}
+
+.bio-edit-btn:hover {
+    text-decoration: underline;
+}
+
+.bio {
+    max-width: 350px;
+    /* background-color: #47A4A5;  */
+    padding: 2px 10px 10px 0;
+}
+
+.follows-header-holder {
+    font-size: 17px;
+    font-weight: bold;
+    margin: 0 0 10px 20px;
+}
+
+.follows-header-holder span {
+    font-weight: 500;
+    font-size: 16px;
+    color: #41A0C3;
+}
+
+.follows-holder {
+    /* background-color: forestgreen; */
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    border-top: 1px dashed lightgray; 
+    /* background-color: #F8F8F8; */
+}
+
+.follow-holder {
+    display: flex;
+    padding: 20px 0 0 20px;
+    /* width: 200px;     */
+    /* background-color: aquamarine; */
+}
+
+.artist-photo {
+    object-fit: cover;
+    width: 70px;
+    height: 70px;
+    margin-bottom: 6px;
+}
+
+.artist-name-btn-holder {
+    width: 100px;
+    height: 100px;
+    padding-left: 10px;
+    /* background-color: red; */
+}
+
+.artist-name {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.unfollow-btn {
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    background-color: #47A4A5;
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    padding: 6px 7px;
+}
+

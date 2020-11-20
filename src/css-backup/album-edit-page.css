@@ -1,0 +1,178 @@
+body {
+    background-color: #F7F7F7;
+}
+
+.album-edit-page__holder {
+    width: 1000px;
+    /* background-color: #F7F7F7; */
+    /* background-color: red; */
+    margin: 0 auto;
+    display: flex;
+    font-size: 13px;
+}
+
+.album-edit-page__left-col {
+    width: 500px;
+    padding-top: 20px;
+    /* background-color: #F7F7F7; */
+    /* z-index: 3; */
+    z-index: 9;
+}
+
+.album-edit-page__right-col {
+    width: 500px;
+    background-color: white;
+    padding: 50px 15px;
+    border-left: 1px solid lightgray;
+    height: 100vh;
+}
+
+.album-edit-page__album-select {
+    background-color: #F7F7F7;
+    border: 1px solid lightgray;
+    border-right: none;
+    display: flex;
+    padding: 10px 0 10px 10px;
+    /* z-index: 9; */
+    margin: 0 0 25px 0;
+}
+
+.album-edit-page__album-select:hover {
+    background-color: white;
+    cursor: pointer;
+    margin-right: -1px;
+}
+
+.active {
+    background-color: white;
+    margin-right: -1px;
+}
+
+.album-edit-page__album-placeholder {
+    width: 150px;
+    height: 150px;
+    border: 1px dashed lightgray;
+}
+
+.album-edit-page__album-art {
+    width: 150px;
+    height: 150px;
+    background-size:     cover;                    
+    background-repeat:   no-repeat;
+    background-position: center center;  
+    /* border: 1px dashed lightgray; */
+}
+
+.album-edit-page__album-art {
+    object-fit: cover;
+    width: 152px;
+    height: 152px;
+}
+
+.album-edit-page__album-details-holder {
+    font-size: 11px;
+    margin-left: 10px;
+}
+
+.album-edit-page__album-details-holder h4 {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.album-edit-page__album-details-holder span {
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.album-edit-page__add-track-btn {
+    font-size: 18px;
+    color: #41A0C3;
+    border: none;
+    background-color: transparent;
+    margin-top: 20px;
+    position: relative;
+    animation-name: add-track-animation;
+    animation-duration: 0.5s;
+}
+  
+@keyframes add-track-animation {
+    0%   {left:-200px; top:0px; opacity: 0}
+    100% {left:0px; top:0px;}
+  }
+
+.fa-arrow-right {
+    color: #41A0C3;
+}
+
+.album-edit-page__tracks-header {
+    font-size: 13px;
+    font-weight: bold;
+    color: gray;
+    margin-bottom: 10px;
+}
+
+.album-edit-page__track-select {
+    height: 70px;
+    border: 1px dashed lightgray;
+    border-right: none;
+    /* display:flex; */
+    /* align-items: center; */
+    padding: 25px 30px 0 30px;
+    font-size: 15px;
+    /* line-height: 10px; */
+}
+
+.album-edit-page__track-select:hover {
+    background-color: white;
+}
+
+.album-edit-page__track-select span {
+    color: gray;
+    margin-right: 5px;
+}
+
+.album-edit-page__track-title {
+
+}
+
+.album-edit-page__album-detail-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.album-edit-page__album-detail-form label:first-child{
+    font-weight: bold;
+    margin-top: 0;
+}
+
+.album-edit-page__album-title-input {
+    height: 35px;
+    padding: 0 5px;
+    margin-bottom: 10px;
+}
+
+.album-edit-page__album-detail-form label {
+    margin-top: 20px;
+}
+
+.album-edit-page__upload-input {
+    padding: 5px 5px;
+    border: 1px solid black;
+}
+        
+.album-edit-page__track-form {
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 200px; */
+}
+
+label.album-edit-page__track-title-input {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.album-edit-page__track-form input {
+    padding: 5px 5px;
+    margin: 5px 0 20px 0;
+    border: 1px solid lightgray;
+}

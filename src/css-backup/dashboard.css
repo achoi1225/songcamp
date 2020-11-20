@@ -1,0 +1,222 @@
+.artist-page__holder {
+    /* background-image: linear-gradient(to bottom, #7CBDC9, white); */
+    background-color: #F8F8F8;
+    display:flex;
+    height: 100vh; 
+}
+
+.artist-page {
+    width: 1000px;
+    background-color: white;
+    margin: 0 auto;
+    display:flex;
+    flex-direction: column;
+    padding: 30px 30px;
+}
+
+.artist-page h3 {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.artist-page__header-holder {
+    width: 400px;
+    /* background-color: red; */
+}
+
+.artist-page__header {
+    font-weight:400;
+}
+
+.top-content__holder {
+    /* background-color: burlywood; */
+    display:flex;
+    flex-direction: row;
+    margin: 50px 0 50px 0;
+}
+
+.discography {
+    flex-grow: 1;
+    /* background-color: aquamarine; */
+}
+
+.discography__add-album-message {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.discography__header-holder {
+    display: flex;
+    /* border-bottom: 1px dashed lightgray; */
+}
+
+.discography__add-btn {
+    /* border: 1px solid black; */
+    border: none;
+    border-radius: 3px;
+    font-size: 11px;
+    color: white;
+    /* line-height: 8px; */
+    font-weight: normal;
+    height: 18px;
+    padding: 0 8px 3px 8px;
+    margin-left: 15px;
+    background-color: #41A0C3;
+    cursor: pointer;
+}
+
+.discography h3 {
+    /* font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px; */
+}
+
+.album {
+    
+}
+
+.albums__holder {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 90px 0 0;
+    /* background-color: #3187F5; */
+}
+
+.album__placeholder {
+    width: 150px;
+    height: 150px;
+    background-color: #F8F8F8;
+    border: 2px dashed lightgray;
+    margin: 0 13px 13px 0;
+}
+
+.album__holder {
+    width: 150px;
+    margin: 0 13px 13px 0;
+    /* background-color: red; */
+}
+
+.album__artwork {
+    width: 150px;
+    height: 150px;
+    background-size:     cover;                    
+    background-repeat:   no-repeat;
+    background-position: center center; 
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    border: 1px solid lightgray;
+}
+
+.album__draft {
+    background-color: black;
+    font-size: 13px;
+    font-weight: bold;
+    color: red;
+    padding: 1px 9px;
+}
+
+.album__title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.album__edit-btn {
+    color: #3187F5;
+    font-weight: bold;
+    font-size: 13px;
+    border: none;
+    background-color: transparent;
+}
+
+.album__edit-btn:hover {
+    text-decoration: underline;
+}    
+
+.artist-info__holder {
+    /* background-color: chocolate; */
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 38px;
+}
+
+.artist-info__holder button {
+    color: #3187F5;
+    font-weight: bold;
+    font-size: 13px;
+    background-color: transparent;
+    /* cursor: pointer; */
+}
+
+.artist-info__holder button:hover {
+    text-decoration: underline;
+}
+
+.artist-info__photo {
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 6px;
+}
+
+.artist-info__photo-placeholder {
+    width: 120px;
+    height: 120px;
+    border: 1px dashed lightgray;
+    background-color: red;
+    margin-bottom: 6px;
+}
+
+/* .artist-info__photo-placeholder:hover {
+    border-bottom: 1px solid  #3187F5;
+} */
+
+.artist-info__name {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.artist-info__add-bio-btn {
+    width: 85px;
+    border: none;
+}
+
+/* .artist-info__add-bio-btn:hover {
+    border-bottom: 1px solid  #3187F5;
+} */
+
+.followers__holder {
+    display: flex;
+    flex-direction: row;
+}
+
+.follower__placeholder {
+    width: 60px;
+    height: 60px;
+    background-color: #F8F8F8;
+    border: 1px dashed lightgray;
+    margin: 0 13px 13px 0;
+}
+
+.follower__photo-holder {
+    width: 60px;
+    margin: 0 13px 13px 0;
+    font-size: 13px;
+}
+
+.follower__photo {
+    width: 60px;
+    height: 60px;
+    background-size:     cover;                    
+    background-repeat:   no-repeat;
+    background-position: center center; 
+    border: 1px solid lightgray;
+    /* display: flex;
+    justify-content: flex-end;
+    align-items: flex-end; */
+}

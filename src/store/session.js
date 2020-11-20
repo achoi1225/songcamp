@@ -39,7 +39,7 @@ export const login = ({credential, password}) => async (dispatch) => {
 
 
 // ==============================================================
-// RESTOR USER
+// RESTORE USER
 // ==============================================================
 export const restoreUser = () => async dispatch => {
     const res = await fetch('/api/session');
@@ -49,21 +49,61 @@ export const restoreUser = () => async dispatch => {
 
 
 // ==============================================================
-// USER SIGN UP
+// FAN SIGN UP
 // ==============================================================
-export const signup = (user) => async (dispatch) => {
-    const { username, email, password } = user;
-    const response = await fetch("/api/users", {
+export const fanSignup = (user) => async (dispatch) => {
+    const { userName, email, password, artistName, genre, isArtist, bio, imgUrl } = user;
+    const response = await fetch("/api/users/fans", {
       method: "POST",
       body: JSON.stringify({
-        username,
+        userName,
         email,
         password,
+        artistName,
+        isArtist,
+        bio,
+        imgUrl,
+        genre
       }),
     });
     dispatch(loadUser(response.data.user));
     return response;
 };
+
+
+// ==============================================================
+// ARTIST SIGN UP
+// ==============================================================
+export const artistSignup = (user) => async (dispatch) => {
+    const { userName, email, password, artistName, genre, isArtist, bio, imgUrl } = user;
+    const response = await fetch("/api/users/artists", {
+      method: "POST",
+      body: JSON.stringify({
+        userName,
+        email,
+        password,
+        artistName,
+        isArtist,
+        bio,
+        genre,
+        imgUrl,
+      }),
+    });
+    dispatch(loadUser(response.data.user));
+    return response;
+};
+
+
+// ==============================================================
+// LOGOUT USER
+// ==============================================================
+export const logout = () => async (dispatch) => {
+    const response = await fetch('/api/session', {
+      method: 'DELETE',
+    });
+    dispatch(removeUser());
+    return response;
+  };
 
 
 // ==============================================================

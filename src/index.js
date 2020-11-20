@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './css/index.css';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
@@ -17,6 +17,17 @@ if (process.env.NODE_ENV !== 'production') {
   window.csrfFetch = fetch;
   window.store = store;
   window.sessionActions = sessionActions;
+
+  // window.store.dispatch(window.sessionActions.signup({
+  //   username: 'NewUser',
+  //   email: 'new@user.io',
+  //   password: 'password',
+  //   artistName: 'newArtist',
+  //   isArtist: true,
+  //   bio: 'new bio!',
+  //   imgUrl: null,
+  //   genre: 'Rock'
+  // }));
 
 }
 

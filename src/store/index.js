@@ -2,9 +2,20 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
 import sessionReducer from './session';
+import artistSignupReducer from './ui-artist-signup-form';
+import fanSignupReducer from './ui-fan-signup-form';
+import loginFormReducer from './ui-login-form';
+import roleFormReducer from './ui-role-form';
+import genresReducer from './genres'; 
+
 
 const rootReducer = combineReducers({
     session: sessionReducer,
+    artistSignupForm: artistSignupReducer,
+    fanSignupForm: fanSignupReducer,
+    loginForm: loginFormReducer,
+    roleForm: roleFormReducer,
+    genres: genresReducer,
 });
 
 let enhancer;
