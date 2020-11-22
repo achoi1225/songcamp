@@ -8,6 +8,8 @@ import App from './App';
 import configureStore from './store';
 import { restoreCSRF, fetch } from './store/csrf';
 import * as sessionActions from './store/session';
+import * as followsActions from './store/follows';
+import * as albumsActions from './store/albums';
 
 const store = configureStore();
 
@@ -17,6 +19,8 @@ if (process.env.NODE_ENV !== 'production') {
   window.csrfFetch = fetch;
   window.store = store;
   window.sessionActions = sessionActions;
+  window.followsActions = followsActions;
+  window.albumsActions = albumsActions;
 
   // window.store.dispatch(window.sessionActions.signup({
   //   username: 'NewUser',
@@ -28,6 +32,10 @@ if (process.env.NODE_ENV !== 'production') {
   //   imgUrl: null,
   //   genre: 'Rock'
   // }));
+
+
+  // window.store.dispatch(window.followsActions.getFollowing());
+  // window.store.dispatch(window.albumsActions.getAllAlbumsForOneArtist(21));
 
 }
 

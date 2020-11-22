@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // import { uploadPhoto, deletePhoto, getUser, editBio } from '../store/actions/user'; 
-import {USER_ID} from '../store/actions/authentication';
-import { getFollowers } from '../store/actions/follows';
-import { getAllAlbumsForOneArtist } from '../store/actions/albums';
+import * as followsActions from '../../store/follows';
+import * as albumsActions from '../../store/albums';
+import * as userActions from '../../store/user';
 import Dashboard from './Dashboard';
 
 const DashboardContainer = () => {
@@ -21,8 +21,9 @@ const DashboardContainer = () => {
             user={sessionUser}
             followers={followers}
             albums={albums}
-            getFollowers={() => dispatch(getFollowers())}
-            getAllAlbumsForOneArtist={(userId) => dispatch(getAllAlbumsForOneArtist(userId))}
+            getFollowers={() => dispatch(followsActions.getFollowers())}
+            getAllAlbumsForOneArtist={(userId) => dispatch(albumsActions.getAllAlbumsForOneArtist(userId))}
+            editBio={(userId) => dispatch(userActions.editBio(userId))}
         />
     );
 }

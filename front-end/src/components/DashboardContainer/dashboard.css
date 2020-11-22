@@ -1,0 +1,282 @@
+.artist-page__holder {
+    /* background-image: linear-gradient(to bottom, #7CBDC9, white); */
+    background-color: #F8F8F8;
+    height: 100vh; 
+}
+
+.artist-page {
+    width: 1100px;
+    height: 100vh;
+    background-color: white;
+    margin: 0 auto;
+    display:flex;
+    padding: 30px 30px;
+}
+
+.artist-page h3 {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.artist-page__header-holder {
+    width: 400px;
+    margin-bottom: 35px;
+}
+
+.artist-page__header {
+    font-weight:400;
+}
+
+
+/* LEFT COLUMN ============================================================ */
+.left-column__holder {
+    display:flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding-right: 100px;
+    /* background-color: red; */
+}
+
+.discography {
+    margin-bottom: 60px;
+}
+
+.discography__add-album-message {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.discography__header-holder {
+    display: flex;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 10px;
+}
+
+.discography__add-btn {
+    /* border: none; */
+    border-radius: 3px;
+    font-size: 11px;
+    line-height: 11px;
+    color: white;
+    font-weight: normal;
+    /* height: 18px; */
+    padding: 0 8px;
+    margin-left: 15px;
+    background-color: #41A0C3;
+}
+
+.albums__holder {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-top: 30px;
+}
+
+.album__placeholder {
+    width: 190px;
+    height: 190px;
+    background-color: #F8F8F8;
+    border: 2px dashed lightgray;
+    margin: 0 25px 25px 0;
+}
+
+.album__holder {
+    width: 190px;
+    margin: 0 13px 13px 0;
+    /* background-color: red; */
+}
+
+.album__artwork {
+    width: 190px;
+    height: 190px;
+    background-size:     cover;                    
+    background-repeat:   no-repeat;
+    background-position: center center; 
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    border: 1px solid lightgray;
+}
+
+.album__draft {
+    background-color: black;
+    font-size: 13px;
+    font-weight: bold;
+    color: red;
+    padding: 1px 9px;
+}
+
+.album__title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.album__edit-btn {
+    color: #3187F5;
+    font-weight: bold;
+    font-size: 12px;
+    border: none;
+    background-color: transparent;
+}
+
+.album__edit-btn:hover {
+    text-decoration: underline;
+}    
+
+.followers__holder {
+    display: flex;
+    flex-direction: row;
+    margin-top: 25px;
+}
+
+.followers__header-holder {
+    border-bottom: 1px solid lightgray;
+}
+
+.follower__placeholder {
+    width: 60px;
+    height: 60px;
+    background-color: #F8F8F8;
+    border: 1px dashed lightgray;
+    margin: 0 20px 20px 0;
+}
+
+.follower__photo-holder {
+    width: 60px;
+    margin: 0 20px 20px 0;
+    font-size: 13px;
+}
+
+.follower__photo {
+    width: 60px;
+    height: 60px;
+    background-size:     cover;                    
+    background-repeat:   no-repeat;
+    background-position: center center; 
+    border: 1px solid lightgray;
+}
+
+
+/* RIGHT COLUMN ============================================================ */
+.right-column__holder {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 130px;
+}
+
+.artist-info__photo {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 6px;
+    background-size:     cover;                    
+    background-repeat:   no-repeat;
+    background-position: center center; 
+
+
+}
+
+.artist-info__photo-placeholder {
+    width: 150px;
+    height: 150px;
+    border: 1px dashed lightgray;
+    background-color: red;
+    margin-bottom: 6px;
+}
+
+.artist-info__photo-placeholder:hover {
+    border-bottom: 1px solid  #3187F5;
+}
+
+.artist-info__name {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.artist-info__add-bio-btn {
+    border: none;
+    color: #3187F5;
+    font-weight: bold;
+    font-size: 12px;
+    background-color: transparent;
+}
+
+.artist-info__add-bio-btn:hover {
+    text-decoration: underline;
+}
+
+.artist-info__bio-holder {
+    font-size: 13px;
+    word-wrap: break-word;
+    
+}
+
+.artist-info__bio-edit-btn {
+    color: #3187F5;
+    font-weight: bold;
+    font-size: 13px;
+    background-color: transparent;
+    /* cursor: pointer; */
+}
+
+.artist-info__bio-edit-btn:hover {
+    text-decoration: underline;
+}
+
+.artist-info__submit-form-btn {
+    border: 1px solid lightgray;
+    background-color: #41A0C3;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 500;
+    color: white;
+    padding: 2px 7px 3px 7px;
+}
+
+.artist-info__submit-form-btn:hover {
+    text-decoration: underline;
+}
+
+.artist-info__cancel-btn {
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 500;
+    color: maroon;
+    padding: 2px 7px 3px 7px;
+    background-color: white;
+    margin-left: 10px;
+}
+
+.artist-info__cancel-btn:hover {
+    text-decoration: underline;
+}
+
+.artist-info__bio-holder textarea {
+    padding: 5px;
+    outline: none;
+}
+
+.artist-info__bio-header {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    padding-bottom: 5px;
+    border-bottom: 1px dashed lightgray;
+}
+
+.artist-info__bio-header button {
+    border: transparent;
+    font-size: 12px;
+    margin-left: 15px;
+}
+
+.artist-info__bio-text-field {
+    width: 150px;
+    height: 200px;
+}
+/* .artist-info__add-bio-btn:hover {
+    border-bottom: 1px solid  #3187F5;
+} */

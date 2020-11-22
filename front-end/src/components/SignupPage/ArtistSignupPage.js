@@ -26,7 +26,7 @@ const ArtistSignupForm = () => {
 
     useEffect(() => {
         dispatch(genreActions.getGenres());
-    }, []);
+    }, [dispatch]);
 
     const updateProperty = (property) => (e) => {
         console.log(e.target.value)

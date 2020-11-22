@@ -4,8 +4,10 @@ import { Route, Switch } from "react-router-dom";
 
 import SignupPage from "./components/SignupPage";
 import LoginFormPage from "./components/LoginFormPage/index";
-import SignupFormPage from "./components/SignupFormPage";
+// import SignupFormPage from "./components/SignupFormPage";
 import Navigation from './components/Navigation';
+import DashboardContainer from './components/DashboardContainer';
+import CreateAlbumPageContainer from './components/CreateAlbumPageContainer';
 import * as sessionActions from "./store/session";
 
 const App = () => {
@@ -20,17 +22,23 @@ const App = () => {
   return isLoaded && (
     <>
       <Navigation isLoaded={isLoaded}/>
-    <Switch>
-      <Route exact={true} path="/signup" 
-        render = {() => <SignupPage /> }
-      />
-      <Route exact path="/login">
-        <LoginFormPage/>
-      </Route>
-      {/* <Route exact path="/signup">
-        <SignupFormPage />
-      </Route> */}
-    </Switch>
+      <Switch>
+        <Route exact={true} path="/signup" 
+          render = {() => <SignupPage /> }
+        />
+        <Route exact path="/login">
+          <LoginFormPage/>
+        </Route>
+        <Route exact path="/dashboard">
+          <DashboardContainer/>
+        </Route>
+        <Route exact path="/create-album">
+          <CreateAlbumPageContainer/>
+        </Route>
+        {/* <Route exact path="/signup">
+          <SignupFormPage />
+        </Route> */}
+      </Switch>
     </>
   );
 }

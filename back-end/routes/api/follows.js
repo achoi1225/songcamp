@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-
 const asyncHandler = require("express-async-handler");
+
 const { requireAuth } = require("../../utils/auth");
 const { Follower, User } = require("../../db/models");
 
@@ -21,12 +21,12 @@ router.use(requireAuth);
 // GET LIST OF ALL ARTISTS FAN IS FOLLOWING
 // =============================================================================================
 router.get('/following', asyncHandler(async(req, res) => {
-    console.log("CHECK INSIDE REQ!!!! ", req);
     const userId = parseInt(req.user.id, 10);
     const following = await Follower.findAll({
         where: {
             userId: userId
         },
+        attributes: ['id', 'userId', 'followingId'],
         include: [
             {
                 model: User,
@@ -51,8 +51,9 @@ router.get('/followers', asyncHandler(async(req, res) => {
     const userId = parseInt(req.user.id, 10);
     const followers = await Follower.findAll({
         where: {
-            followingId: userId
+            followingId: userId,
         },
+        attributes: ['id', 'userId', 'followingId'],
         include: [
             {
                 model: User, 

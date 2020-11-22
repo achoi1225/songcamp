@@ -8,6 +8,8 @@ import loginFormReducer from './ui-login-form';
 import roleFormReducer from './ui-role-form';
 import genresReducer from './genres'; 
 import followsReducer from './follows'; 
+import albumsReducer from './albums'; 
+import albumReducer from './album'; 
 
 
 const rootReducer = combineReducers({
@@ -18,6 +20,8 @@ const rootReducer = combineReducers({
     roleForm: roleFormReducer,
     genres: genresReducer,
     follows: followsReducer,
+    albums: albumsReducer,
+    album: albumReducer,
 });
 
 let enhancer;

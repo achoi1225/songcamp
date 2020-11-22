@@ -1,8 +1,4 @@
-// import { baseUrl } from '../../config';
-// import { TOKEN_KEY, USER_ID } from './authentication';
-
-// const userId = localStorage.getItem(USER_ID);
-// const token = localStorage.getItem(TOKEN_KEY);
+import { fetch } from './csrf';
 
 export const LOAD_FOLLOWING = "songcamp/following/LOAD_FOLLOWING";
 export const LOAD_FOLLOWERS = "songcamp/followers/LOAD_FOLLOWERS";
@@ -31,6 +27,7 @@ export const getFollowing = () => async (dispatch) => {
         console.log("FOLLOWING LIST!!!! ", res.data.following);
 
         dispatch(loadFollowing(res.data.following));
+        return res;
 } 
 
 
@@ -39,10 +36,8 @@ export const getFollowing = () => async (dispatch) => {
 // =============================================================================================
 export const getFollowers = () => async (dispatch) => {
         const res = await fetch(`/api/follows/followers`);
-
-        console.log("FOLLOWING LIST!!!! ", res.data.followers);
-
         dispatch(loadFollowers(res.data.followers));
+        return res;
 } 
 
 
@@ -133,7 +128,7 @@ export default followsReducer;
             //     `<div class="alert alert-danger">
             //         Something went wrong. Please try again.
             //     </div>`
-            // ]
+            // 
 
             // const { errors } = errorJSON;
 
