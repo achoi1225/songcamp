@@ -46,17 +46,16 @@ export const getFollowers = (id) => async (dispatch) => {
 // ==============================================================
 export const follow = (followingId) => async (dispatch, getState) => {
     
-    const body = { followingId } ;
+    // const body = { followingId } ;
     const {
         session: { user: { id } }
     } = getState();
 
-    const res = await fetch(`/api/follows/user/${id}`, {
+    const res = await fetch(`/api/follows/${followingId}`, {
         method: "POST",
-        body: JSON.stringify(body),
     });
 
-    console.log("add follow successful!!!! ", res.data.newFollowing);
+    console.log("add follow successful!!!! ", res.data.newFollow);
     dispatch(getFollowing(id));
     return res;
 } 
@@ -65,20 +64,24 @@ export const follow = (followingId) => async (dispatch, getState) => {
 // ==============================================================
 // DELETE A FOLLOWING
 // ==============================================================
-export const deleteFollow = (id) => async (dispatch, getState) => {
+export const deleteFollow = (followingId) => async (dispatch, getState) => {
 
-    console.log("INSIDE DELETE FOLLOW!!", id)
+    const {
+        session: { user: { id } }
+    } = getState();
 
-        const res = await fetch(`/api/follows/${id}`, {
+    console.log("INSIDE DELETE FOLLOW!!", followingId)
+
+        const res = await fetch(`/api/follows/${followingId}`, {
             method: "DELETE",
         });
     
-        // if(response.status === 401) {
-        //     window.location.href = "/log-in";
-        //     return;
-        // }
+        if(res.status === 401) {
+            window.location.href = "/log-in";
+            return;
+        }
 
-        dispatch(getFollowing());
+        dispatch(getFollowing(id));
         return res;
 }
 

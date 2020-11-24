@@ -5,6 +5,8 @@ import CheckIcon from '@material-ui/icons/Check';
 // import classNames from 'classnames';
 
 // import {USER_ID} from '../store/actions/authentication';
+import * as albumActions from '../../store/album';
+import * as tracksActions from '../../store/tracks';
 import './album-edit-page.css';
 import './upload-form.css';
 import AlbumForm from './AlbumForm';
@@ -13,16 +15,21 @@ import UploadedTracks from './UploadedTracks';
 import AddTrackSection from './AddTrackSection';
 import CircularIndeterminate from './CircularIndeterminate';
 
-const CreateAlbumPage = ({ 
-    user, 
-    createAlbum, 
-    editAlbum, 
-    deleteAlbumArtwork, 
-    publishAlbum,
-    album, 
-    createTrack,
-    editTrackTitle,
-    deleteTrack }) => {
+const CreateAlbumPage = ( 
+    // user, 
+    // createAlbum, 
+    // editAlbum, 
+    // deleteAlbumArtwork, 
+    // publishAlbum,
+    // album, 
+    // createTrack,
+    // editTrackTitle,
+    // deleteTrack 
+    ) => {
+
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.session.user)
+    const album = useSelector((state) => state.album.current)
 
     const [albumTitle, setAlbumTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -42,9 +49,16 @@ const CreateAlbumPage = ({
     const albumDetailSelectIdx = 0;
     const addTrackIdx = 1;
     // let albumId;
-
+        // dispatch(albumActions.createAlbum(data))
+    // dispatch(albumActions.editAlbum(data, albumId))
+//     dispatch(albumActions.deleteAlbumArtwork(data, albumId))
+//    dispatch(albumActions.publishAlbum(data, albumId))
+//     dispatch(tracksActions.createTrack(data))
+//     dispatch(tracksActions.editTrackTitle(data, trackId))
+//    dispatch(tracksActions.deleteTrack(trackId))
+    
     console.log("TRACK COUNT!!! ", trackCount);
-    console.log("CURRENT TRACK ID!!! ", currentTrackId);
+    console.log(" TRACK ID!!! ", currentTrackId);
  
 
     const handleAlbumDetailSelect = (e) => {
@@ -86,7 +100,8 @@ const CreateAlbumPage = ({
 
         (async () => {
             try{
-                const res = await createAlbum(data);
+                const res = await dispatch(albumActions.createAlbum(data))
+                // const res = await createAlbum(data);
                 console.log("RES FOR NEW ALBUM ", res.data.newAlbum);
                 await setCurrentIdx(1);
                 await setImg("");
@@ -133,7 +148,8 @@ const CreateAlbumPage = ({
 
         (async () => {
             try{
-                await deleteAlbumArtwork(data, album.id);
+                await dispatch(albumActions.editAlbum(data, album.id));
+                // await deleteAlbumArtwork(data, album.id);
                 // e.target.value = null;
             } catch(res) {
                 if (res.data && res.data.errors) setAlbumFormErrors(res.data.errors);
@@ -155,7 +171,9 @@ const CreateAlbumPage = ({
 
         try {
             (async () => {
-                const newTrack = await createTrack(data);
+                //     dispatch(tracksActions.editTrackTitle(data, trackId))
+                // const newTrack = await createTrack(data);
+                const newTrack = await dispatch(tracksActions.createTrack(data))
                 await setUploadedTracksVisible(true); 
                 await setTracksData(prevState => ({...prevState, track1: ''}));
                 await setTracksData(prevState => ({...prevState, title1: ''}));
@@ -186,7 +204,8 @@ const CreateAlbumPage = ({
         data.append("allowDownload", false);
 
         (async () => {
-            await editTrackTitle(data, currentTrackId);
+            await dispatch(tracksActions.editTrackTitle(data, currentTrackId))
+            // await editTrackTitle(data, currentTrackId);
             await setCurrentIdx(1);
         })()
     }
@@ -196,7 +215,8 @@ const CreateAlbumPage = ({
         e.preventDefault();
         try{
             (async () => {
-                const res = await deleteTrack(trackId);
+                const res = await dispatch(tracksActions.deleteTrack(trackId))
+                // const res = await deleteTrack(trackId);
                 await setTrackCount(trackCount - 1);
                 await setCurrentIdx(1);
                 console.log("DELETED! ", res);
@@ -215,7 +235,8 @@ const CreateAlbumPage = ({
         
         (async () => {
             try{
-                await publishAlbum(data, album.id);
+                await dispatch(albumActions.publishAlbum(data, album.id))
+                // await publishAlbum(data, album.id);
                 await setIsPublished(true);
             } catch(res) {
                 if (res.data && res.data.errors) setAlbumFormErrors(res.data.errors);

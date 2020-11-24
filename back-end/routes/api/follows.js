@@ -75,10 +75,12 @@ router.get('/followers/:id(\\d+)', asyncHandler(async(req, res) => {
 // CREATE A NEW FOLLOWING
 // =============================================================================================
 router.post(`/:id(\\d+)`, asyncHandler( async(req, res) => {
-    const userId = parseInt(req.params.id);
-    const { followingId } = req.body;
+    // const userId = parseInt(req.params.id);
+    // const { followingId } = req.body;
+    const userId = parseInt(req.user.id, 10);
+    const followingId = parseInt(req.params.id);
 
-    console.log("FOLLOWING ID!!!!", req.body);
+    // console.log("FOLLOWING ID!!!!", req.body);
 
     const newFollow = await Follower.create({
         userId,
@@ -93,10 +95,16 @@ router.post(`/:id(\\d+)`, asyncHandler( async(req, res) => {
 // DELETE A FOLLOWING
 // =============================================================================================
 router.delete('/:id(\\d+)', asyncHandler( async(req, res, next) => {
-    
-    const id = parseInt(req.params.id);
+    const userId = parseInt(req.user.id, 10);
+    const followingId = parseInt(req.params.id);
     console.log("INSIDE DELETE!!")
-    const following = await Follower.findByPk(id);
+    // const following = await Follower.findByPk(id);
+    const following = await Follower.findOne({
+        where: {
+            userId,
+            followingId
+        },
+    });
 
     if(following) {
         console.log("following!!", following);

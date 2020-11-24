@@ -1,0 +1,227 @@
+.album-page__holder{
+    /* background-image: linear-gradient(to bottom, #7CBDC9, white); */
+    background-color: #F8F8F8;
+    display:flex;
+    height: 100vh;
+}
+
+.album-page {
+    width: 1000px;
+    margin: 0 auto;
+    display:flex;
+    flex-direction: column;
+    padding: 50px 30px;
+    /* background-image: linear-gradient(to top, #7CBDC9, white); */
+    background-color: white;
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+}
+
+.album-page__header-holder {
+    width: 400px;
+}
+
+.album-page__header {
+    font-size: 27px;
+    font-weight:400;
+}
+
+.album-page__content-holder {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.album-page__left-content {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+.album-page__left-content .artist-name-holder{
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+/* LEFT CONTENT ========================================== */
+.left-content__artist-link {
+    font-size: 14px;
+    color: #0b87ed;
+    margin-left: 4px;
+    text-decoration: none;
+}
+
+.left-content__artist-link:hover {
+    text-decoration: underline;
+}
+
+.album-page__left-content .album-header {
+    height: 150px;
+}
+
+.audio-player-holder {
+    margin-bottom: 15px;
+}
+
+.track-holder {
+    height:23px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    /* background-color: red; */
+}
+
+.track-holder span {
+    color: #777777;
+    line-height: 13px;
+    font-weight: 500;
+    margin-left: 8px;
+    font-size: 13px;
+}
+
+.track {
+    display: flex;
+    border: none;
+    outline: none;
+    color: #0b87ed;
+    background-color: transparent;
+    margin-left: 4px;
+    font-size: 13px;
+}
+
+.track-holder__play-btn {
+    border: 1px solid darkgray;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 23px;
+    height: 22px;
+    padding: 2px 0 0 2px;
+}
+
+.track-holder__play-btn:hover {
+    color: #0b87ed;
+    border-color: #777777;
+}
+
+.track:hover {
+    text-decoration: underline;
+}
+
+.description {
+    padding: 15px 0;
+    font-size: 13px;
+    line-height: 16px;
+    margin-top: 25px;
+}
+
+.description__header {
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.rights {
+    font-size: 12px;
+    color: #727272;
+}
+
+/* MIDDLE CONTENT ========================================== */
+.album-page__middle-content {
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 25px;
+    /* background-color: red; */
+}
+
+.album-cover-holder {
+    width: 360px;
+    height: 360px;
+}
+
+.album-cover {
+    object-fit: cover;
+    width: 360px;
+    height: 360px;
+    border: 1px solid lightgray;
+}
+
+.album-page__followers-header {
+    font-size: 12px;
+    color: #727272;
+    margin: 30px 0 10px 0;
+}
+
+.album-page__followers-holder {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.album-page__followers-photo-holder {
+    width: 40px;
+}
+
+.album-page__followers-photo {
+    width: 40px;
+    height: 40px;
+    background-size:     cover;                    
+    background-repeat:   no-repeat;
+    background-position: center center; 
+    border: 1px solid lightgray;
+    
+}
+
+.album-page__followers-name {
+    font-size: 10px;
+    text-align: center;
+}
+
+/* MIDDLE CONTENT ========================================== */
+.album-page__right-content {
+   width: 120px;
+   display: flex;
+   flex-direction: column;
+   padding-top: 25px;
+}
+
+.artist-photo {
+    object-fit: cover;
+    width: 120px;
+    height: 130px;
+    margin-bottom: 4px;
+    background-color: black;
+}
+
+.artist-name {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.follow-btn {
+    width: 120px;
+    height: 30px;
+    margin: 20px 0 20px 0;
+    border-radius: 3px;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    background: -webkit-linear-gradient(top, #44aaaa, #52B4B4);
+}
+
+.follow-btn:hover {
+    background: -webkit-linear-gradient(top, #52B4B4, #44aaaa);
+}
+
+.bio {
+    height: 300px;
+    font-size: 12px;
+    /* line-height: 14px; */
+    /* font-weight: 500; */
+}
+
+
+/* ============================================================================================ */
+
