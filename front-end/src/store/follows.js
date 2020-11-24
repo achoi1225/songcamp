@@ -21,8 +21,8 @@ export const loadFollowers = (list) => ({
 // =============================================================================================
 // GET LIST OF ALL ARTISTS USER IS FOLLOWING
 // =============================================================================================
-export const getFollowing = () => async (dispatch) => {
-        const res = await fetch(`/api/follows/following`);
+export const getFollowing = (id) => async (dispatch) => {
+        const res = await fetch(`/api/follows/following/${id}`);
 
         console.log("FOLLOWING LIST!!!! ", res.data.following);
 
@@ -34,8 +34,8 @@ export const getFollowing = () => async (dispatch) => {
 // =============================================================================================
 // GET LIST OF ALL FANS FOLLOWING ARTIST
 // =============================================================================================
-export const getFollowers = () => async (dispatch) => {
-        const res = await fetch(`/api/follows/followers`);
+export const getFollowers = (id) => async (dispatch) => {
+        const res = await fetch(`/api/follows/followers/${id}`);
         dispatch(loadFollowers(res.data.followers));
         return res;
 } 
@@ -92,6 +92,12 @@ const filterToFollowers = (list) => {
     })
 }
 
+const filterToFollowing = (list) => {
+    return list.map(fol => {
+        return fol.following;
+    })
+}
+
 
 // ==============================================================
 // FOLLOWS REDUCER
@@ -101,7 +107,7 @@ export function followsReducer(state={}, action){
         case LOAD_FOLLOWING: {
             return {
                 ...state,
-                followingList: action.list
+                followingList: filterToFollowing(action.list)
             }
         }
 

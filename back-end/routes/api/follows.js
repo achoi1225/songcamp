@@ -20,8 +20,9 @@ router.use(requireAuth);
 // =============================================================================================
 // GET LIST OF ALL ARTISTS FAN IS FOLLOWING
 // =============================================================================================
-router.get('/following', asyncHandler(async(req, res) => {
-    const userId = parseInt(req.user.id, 10);
+router.get('/following/:id(\\d+)', asyncHandler(async(req, res) => {
+    // const userId = parseInt(req.user.id, 10);
+    const userId = req.params.id;
     const following = await Follower.findAll({
         where: {
             userId: userId
@@ -30,6 +31,7 @@ router.get('/following', asyncHandler(async(req, res) => {
         include: [
             {
                 model: User,
+                as: 'following',
                 attributes: ['id','userName','imgUrl']
             },
         ]
@@ -47,8 +49,9 @@ router.get('/following', asyncHandler(async(req, res) => {
 // =============================================================================================
 // GET LIST OF ALL FANS FOLLOWING ARTIST
 // =============================================================================================
-router.get('/followers', asyncHandler(async(req, res) => {
-    const userId = parseInt(req.user.id, 10);
+router.get('/followers/:id(\\d+)', asyncHandler(async(req, res) => {
+    // const userId = parseInt(req.user.id, 10);
+    const userId = req.params.id;
     const followers = await Follower.findAll({
         where: {
             followingId: userId,
@@ -89,9 +92,9 @@ router.post(`/:id(\\d+)`, asyncHandler( async(req, res) => {
 // =============================================================================================
 // DELETE A FOLLOWING
 // =============================================================================================
-router.delete("/:id(\\d+)", asyncHandler( async(req, res, next) => {
+router.delete('/:id(\\d+)', asyncHandler( async(req, res, next) => {
+    
     const id = parseInt(req.params.id);
-
     console.log("INSIDE DELETE!!")
     const following = await Follower.findByPk(id);
 

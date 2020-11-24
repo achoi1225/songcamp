@@ -9,6 +9,7 @@ import Navigation from './components/Navigation';
 import DashboardContainer from './components/DashboardContainer';
 import CreateAlbumPageContainer from './components/CreateAlbumPageContainer';
 import EditAlbumPageContainer from './components/EditAlbumPageContainer';
+import AlbumPageContainer from './components/AlbumPageContainer';
 import * as sessionActions from "./store/session";
 
 const App = () => {
@@ -29,6 +30,9 @@ const App = () => {
         />
         <Route exact path="/login">
           <LoginFormPage/>
+        </Route>
+        <Route exact path="/albums/:albumId">
+          <AlbumPageContainer />
         </Route>
         <Route exact path="/dashboard">
           <DashboardContainer/>

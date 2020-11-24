@@ -59,19 +59,15 @@
     line-height: 11px;
     color: white;
     font-weight: normal;
-    padding: 3px 8px 0 8px;
+    padding: 4px 8px 0 8px;
     margin-left: 15px;
     background-color: #41A0C3;
     text-decoration: none;
-    border: 1px solid #777777;
     background: -webkit-linear-gradient(top, #41A0C3, #59b5d6);
 }
 
 .discography__add-link:hover {
-    border-color: #575757;
-}
-
-.discography__add-link:active {
+    /* border-color: #575757; */
     background: -webkit-linear-gradient(top, #59b5d6, #41A0C3);
 }
 
@@ -166,10 +162,12 @@
 
 .following__holder {
     display: flex;
-    /* background-color: cadetblue; */
     flex-grow: 1;
     font-size: 11px;
     font-weight: 500;
+    flex-wrap: wrap;
+    width: 500px;
+    /* background-color: cadetblue; */
 }
 
 .following__placeholder {

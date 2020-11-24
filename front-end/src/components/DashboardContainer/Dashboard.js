@@ -12,14 +12,24 @@ import Followers from './Followers';
 
 export const BioFormContext = React.createContext();
 // Donec faucibus aliquam mi, et varius dui mattis sit amet. Sed interdum elit vel lacus condimentum, et dapibus augue consectetur. Ut libero ante, dictum sed ex id, dignissim aliquam arcu. Mauris venenatis pellentesque nisl quis bibendum. Fusce gravida, justo in bibendum ullamcorper, dolor justo tempor purus, non facilisis leo lorem eu augue.
-const Dashboard = ({ user, followers, albums, getFollowers, getAllAlbumsForOneArtist, editBio }) => {
+const Dashboard = ({ 
+    user, 
+    followers, 
+    following, 
+    albums, 
+    getFollowers, 
+    getFollowing, 
+    getAllAlbumsForOneArtist, 
+    editBio }) => {
+
     const [bio, setBio] = useState("");
     const [bioFormVisible, setBioFormVisible] = useState(false);
     const [bioEditFormVisible, setBioEditFormVisible] = useState(false);
     const [errors, setErrors] = useState([]);
 
     useEffect(() => {
-        getFollowers()
+        getFollowers(user.id)
+            .then(() =>  getFollowing(user.id))
             .then(() =>  getAllAlbumsForOneArtist(user.id))
     }, [user.id])
 
@@ -56,13 +66,14 @@ const Dashboard = ({ user, followers, albums, getFollowers, getAllAlbumsForOneAr
     }
     
 
-    if(!followers || !albums) {
+    if(!followers || !albums || !following) {
         return null;
     }
 
     return (
         <BioFormContext.Provider 
-            value={{user, 
+            value={{
+                user, 
                 bio, 
                 setBioEditFormVisible, 
                 handleSubmitBioBtn, 
@@ -125,7 +136,7 @@ const Dashboard = ({ user, followers, albums, getFollowers, getAllAlbumsForOneAr
                             <div className="following__holder">
                                 {
                                     followers ? 
-                                    <Following followers={followers} /> :
+                                    <Following following={following} /> :
                                     ( 
                                         <>
                                         <div className="following__placeholder"></div>

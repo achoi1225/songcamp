@@ -1,15 +1,15 @@
 import React from 'react';
 
-const Following = ({ followers }) => {
+const Following = ({ following }) => {
     return(
         <>
         {
-            followers.map((follower) => {
+            following.map((fol) => {
                 return(
-                    <div key={follower.id} className="following__photo-holder">
-                        <div className="following__photo" style={{backgroundImage: `url(${follower.imgUrl})`}}>
+                    <div key={fol.id} className="following__photo-holder">
+                        <div className="following__photo" style={{backgroundImage: `url(${fol.imgUrl})`}}>
                         </div>
-                        {follower.userName}
+                        {fol.userName}
                     </div>
                 )
             })

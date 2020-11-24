@@ -1,7 +1,7 @@
 import { fetch } from './csrf';
 
 // import { errorNotifications } from "../error-notifications.js";
-export const SET_CURRENT = "songcamp/albums/SET_CURRENT";
+export const SET_CURRENT = "songcamp/album/SET_CURRENT";
 
 export const setCurrent = (current) => ({
     type: SET_CURRENT,

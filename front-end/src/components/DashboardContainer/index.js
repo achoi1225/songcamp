@@ -11,6 +11,7 @@ const DashboardContainer = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const followers = useSelector((state) => state.follows.followersList);
+    const following = useSelector((state) => state.follows.followingList);
     const albums = useSelector((state) => state.albums.listForOneArtist);
     //     return null;
     // }
@@ -20,8 +21,10 @@ const DashboardContainer = () => {
         <Dashboard 
             user={sessionUser}
             followers={followers}
+            following={following}
             albums={albums}
-            getFollowers={() => dispatch(followsActions.getFollowers())}
+            getFollowers={(id) => dispatch(followsActions.getFollowers(id))}
+            getFollowing={(id) => dispatch(followsActions.getFollowing(id))}
             getAllAlbumsForOneArtist={(userId) => dispatch(albumsActions.getAllAlbumsForOneArtist(userId))}
             editBio={(userId) => dispatch(userActions.editBio(userId))}
         />

@@ -114,6 +114,73 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+// =================================================================
+        {
+          userId: 21,
+          followingId: 8,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 21,
+          followingId: 9,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 21,
+          followingId: 10,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 21,
+          followingId: 11,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 21,
+          followingId: 12,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 21,
+          followingId: 13,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 21,
+          followingId: 14,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 21,
+          followingId: 15,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 21,
+          followingId: 16,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 21,
+          followingId: 17,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 21,
+          followingId: 18,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
     );
 
