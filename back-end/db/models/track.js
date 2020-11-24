@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {});
   Track.associate = function(models) {
-    Track.belongsTo(models.Album, { foreignKey: "albumId" }, { onDelete: "cascade", hooks:true });
+    Track.belongsTo(models.Album, { foreignKey: "albumId", as: 'album' }, { onDelete: "cascade", hooks:true });
   };
   return Track;
 };
