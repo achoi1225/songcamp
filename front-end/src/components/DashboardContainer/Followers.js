@@ -1,19 +1,22 @@
-import React from 'react';
+import React from 'react'
+import { NavLink } from 'react-router-dom';
 
-const Followers = ({ followers }) => {
-    return(
+export const Followers = ({ followers }) => {
+    return (
         <>
-        {
-            followers.map((follower) => {
+        {followers && followers.map((follower) => {
                 return(
-                    <div key={follower.id} className="follower__photo-holder">
-                        <div className="follower__photo" style={{backgroundImage: `url(${follower.imgUrl})`}}>
+                    <NavLink key={follower.id} className="followers__link" exact to="">
+                        <div className="followers__photo-holder">
+                            <div className="followers__photo" style={{backgroundImage: `url(${follower.imgUrl})`}}>
+
+                            </div>
+                            {follower.userName}
                         </div>
-                        {follower.userName}
-                    </div>
+                    </NavLink>
                 )
             })
-
+        
         }
         </>
     )

@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Albums = ({ albums, handleEditAlbumBtn }) => {
     return(
@@ -19,7 +20,9 @@ const Albums = ({ albums, handleEditAlbumBtn }) => {
                         <div className="album__title">
                             {album.title}
                         </div>
-                        <button onClick={() => handleEditAlbumBtn(album.id)} className="album__edit-btn">edit</button>
+                        <NavLink exact to={`/edit-album/${album.id}`} className="album__edit-link">
+                            edit 
+                        </NavLink>
                     </div>
                 )
             })

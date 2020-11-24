@@ -11,7 +11,6 @@ const AlbumForm = ({
     setImg,
     credits,
     setCredits,
-    handleCreateAlbumSubmitBtn,
     handleEditAlbumBtn,
     albumFormErrors }) => {
     
@@ -46,10 +45,11 @@ const AlbumForm = ({
             
             { !album ? 
                 <>
-                    <span className="album-edit-page__submit-instruction">Submit to start adding songs!</span>
+                    {/* <span className="album-edit-page__submit-instruction">Submit to start adding songs!</span>
                     <button type="submit" className="album-edit-page__submit-btn" onClick={handleCreateAlbumSubmitBtn}>
                         Submit
-                    </button> 
+                    </button>  */}
+                    null
                 </> :
                 <button type="submit" className="album-edit-page__edit-btn" onClick={handleEditAlbumBtn}>Edit</button>
             }

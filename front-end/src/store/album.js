@@ -19,6 +19,8 @@ export const getOneAlbum = (id) => async (dispatch, getState) => {
     
     console.log("ONE ALBUM!!! ", res.data.album)
     dispatch(setCurrent(res.data.album));
+
+    return res;
 }
 
 
@@ -32,13 +34,13 @@ export const createAlbum = (payload) => async (dispatch, getState) => {
         body: payload
     })
 
-    // if(res.status === 401) {
-    //     window.location.href = "/log-in";
-    //     return;
-    // }
+    if(res.status === 401) {
+        window.location.href = "/log-in";
+        return;
+    }
 
-    console.log("NEW ALBUM!!!!!", res.data.newAlbum);
-    dispatch(setCurrent(res.data.newAlbum));
+    const albumId = res.data.newAlbum.id;
+    await dispatch(getOneAlbum(albumId));
     console.log("new album created!!!");
 
     return res;
@@ -61,8 +63,42 @@ export const editAlbum = (payload, albumId) => async (dispatch, getState) => {
     //     return;
     // }
 
-    console.log("RES.DATA.UPDATEDALBUM!!! ", res.data.updatedAlbum);
-    dispatch(setCurrent(res.data.updatedAlbum));
+    console.log("RES.DATA.UPDATEDALBUM!!! ", res.data.album);
+    await dispatch(getOneAlbum(albumId));
+
+    return res;
+}
+
+
+// ========================================================================================
+// DELETE ALBUM ARTWORK ONLY!
+// ========================================================================================
+export const deleteAlbumArtwork = (payload, albumId) => async (dispatch) => {
+    console.log("INSIDE EDIT ALBUM")
+
+    const res = await fetch(`/api/albums/${albumId}/delete-album-art`, {
+        method: "PATCH",
+        body: JSON.stringify(payload),
+    })
+
+    console.log("ALBUM WITH ARTWORK DELETED! ", res.data.album);
+    await dispatch(getOneAlbum(albumId));
+
+    return res;
+}
+
+
+// ========================================================================================
+// PUBLISH ALBUM
+// ========================================================================================
+export const publishAlbum = (payload, albumId) => async (dispatch) => {
+    console.log("PUBLISH ALBUM!!")
+    const res = await fetch(`/api/albums/${albumId}/publish`, {
+        method: "PATCH",
+        body: JSON.stringify(payload),
+    })
+
+    await dispatch(getOneAlbum(albumId));
 
     return res;
 }

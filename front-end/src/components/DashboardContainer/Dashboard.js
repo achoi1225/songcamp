@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react';
+import { NavLink } from 'react-router-dom';
+
 
 import './dashboard.css';
 import Albums from './Albums';
-import Followers from './Followers';
+import Following from './Following';
 import AddBioButton from './AddBioButton';
-import BioForm from './BioForm';
+// import BioForm from './BioForm';
 import BioSection from './BioSection';
+import Followers from './Followers';
 
 export const BioFormContext = React.createContext();
 // Donec faucibus aliquam mi, et varius dui mattis sit amet. Sed interdum elit vel lacus condimentum, et dapibus augue consectetur. Ut libero ante, dictum sed ex id, dignissim aliquam arcu. Mauris venenatis pellentesque nisl quis bibendum. Fusce gravida, justo in bibendum ullamcorper, dolor justo tempor purus, non facilisis leo lorem eu augue.
@@ -84,7 +87,10 @@ const Dashboard = ({ user, followers, albums, getFollowers, getAllAlbumsForOneAr
                             }
         
                             <div className="discography__header-holder">
-                                <h3>DISCOGRAPHY</h3> <button className="discography__add-btn">+ add</button>
+                                <h3>DISCOGRAPHY</h3> 
+                                <NavLink exact className="discography__add-link" to="/create-album">
+                                    + add
+                                </NavLink>
                             </div>
         
                             <div className="albums__holder">
@@ -110,22 +116,41 @@ const Dashboard = ({ user, followers, albums, getFollowers, getAllAlbumsForOneAr
                             </div> */}
                         </div>
 
-                        <div className="followers__header-holder">
-                            <h3>FOLLOWERS</h3>
+                        <div className="follows__header-holder">
+                            {/* <h3>FOLLOWING</h3> */}
+                            <h3 className="follows__following-header">Following</h3>
+                            <h3 className="follows__followers-header">Followers</h3>
                         </div>
-                        <div className="followers__holder">
-                            {
-                                followers ? 
-                                <Followers followers={followers} /> :
-                                ( 
-                                    <>
-                                    <div className="follower__placeholder"></div>
-                                    <div className="follower__placeholder"></div>
-                                    <div className="follower__placeholder"></div>
-                                    <div className="follower__placeholder"></div>
-                                    </>
-                                )
-                            }
+                        <div className="follows__holder">
+                            <div className="following__holder">
+                                {
+                                    followers ? 
+                                    <Following followers={followers} /> :
+                                    ( 
+                                        <>
+                                        <div className="following__placeholder"></div>
+                                        <div className="following__placeholder"></div>
+                                        <div className="following__placeholder"></div>
+                                        <div className="following__placeholder"></div>
+                                        </>
+                                    )
+                                }
+                            </div>
+                            <div className="followers__holder">
+                                <Followers followers={followers}/>
+                                {/* <div className="followers__photo-holder">
+                                    <div className="followers__photo">
+
+                                    </div>
+                                    test
+                                </div>
+                                <div className="followers__photo-holder">
+                                    <div className="followers__photo">
+
+                                    </div>
+                                    test
+                                </div> */}
+                            </div>
                         </div>
                     </div>
 
@@ -171,22 +196,6 @@ const Dashboard = ({ user, followers, albums, getFollowers, getAllAlbumsForOneAr
 
                             }
                         </div>
-                        {/* {
-                            bioFormVisible ?
-                            <BioForm 
-                                user={user} 
-                                bio={bio}
-                                setBio={setBio}
-                                setBioFormVisible={setBioFormVisible}
-                                handleSubmitBioBtn={handleSubmitBioBtn}
-                                updateBio={updateBio}
-                                errors={errors}
-                            /> :
-                            <AddBioButton 
-                                handleEditBioBtn={handleEditBioBtn} 
-                                setBioFormVisible={setBioFormVisible}
-                            />
-                        } */}
                     </div>
                 </div>
             </div>

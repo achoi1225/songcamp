@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { NavLink, useParams } from 'react-router-dom';
 import CheckIcon from '@material-ui/icons/Check';
 // import classNames from 'classnames';
 
@@ -13,9 +13,12 @@ import UploadedTracks from './UploadedTracks';
 import AddTrackSection from './AddTrackSection';
 import CircularIndeterminate from './CircularIndeterminate';
 
-const CreateAlbumPage = ({ 
+import * as albumActions from '../../store/album';
+
+
+const EditAlbumPage = ({ 
     user, 
-    createAlbum, 
+    // getOneAlbum, 
     editAlbum, 
     deleteAlbumArtwork, 
     publishAlbum,
@@ -30,8 +33,8 @@ const CreateAlbumPage = ({
     const [img, setImg] = useState("");
     const [isPublished, setIsPublished] = useState(false);
     const [tracksData, setTracksData] = useState({});
-    const [uploadedTracksVisible, setUploadedTracksVisible] = useState(false);
-    const [uploadedTrackClicked, setUploadedTrackClicked] = useState(false);
+    // const [uploadedTracksVisible, setUploadedTracksVisible] = useState(false);
+    // const [uploadedTrackClicked, setUploadedTrackClicked] = useState(false);
     const [currentIdx, setCurrentIdx] = useState(0);
     const [albumFormErrors, setAlbumFormErrors] = useState([]);
     const [trackFormErrors, setTrackFormErrors] = useState([]);
@@ -43,9 +46,22 @@ const CreateAlbumPage = ({
     const addTrackIdx = 1;
     // let albumId;
 
+    // let { slug } = useParams();
+    const dispatch = useDispatch();
+    let { albumId } = useParams();
+
     console.log("TRACK COUNT!!! ", trackCount);
     console.log("CURRENT TRACK ID!!! ", currentTrackId);
  
+    useEffect(() => {
+        (async () => {
+            // await getOneAlbum(albumId);
+            await dispatch(albumActions.getOneAlbum(albumId));
+            // if(album) {
+            //     setTrackCount(album.tracks.length)
+            // }
+        })()
+    }, [albumId, dispatch])
 
     const handleAlbumDetailSelect = (e) => {
         e.preventDefault();
@@ -71,32 +87,32 @@ const CreateAlbumPage = ({
         console.log("title1!!! ",  tracksData[keyName]);
     }
 
-    const handleCreateAlbumSubmitBtn = (e) => {
-        e.preventDefault();
-        setAlbumIsLoading(true);
+    // const handleCreateAlbumSubmitBtn = (e) => {
+    //     e.preventDefault();
+    //     setAlbumIsLoading(true);
 
-        const data = new FormData();
-        data.append("title", albumTitle);
-        data.append("description", description);
-        data.append("credits", credits);
-        data.append("isPublished", isPublished);
-        data.append("file", img);
-        data.append("artistId", user.id);
+    //     const data = new FormData();
+    //     data.append("title", albumTitle);
+    //     data.append("description", description);
+    //     data.append("credits", credits);
+    //     data.append("isPublished", isPublished);
+    //     data.append("file", img);
+    //     data.append("artistId", user.id);
 
 
-        (async () => {
-            try{
-                const res = await createAlbum(data);
-                console.log("RES FOR NEW ALBUM ", res.data.newAlbum);
-                await setCurrentIdx(1);
-                await setImg("");
-                await setAlbumFormErrors([]);
-                await setAlbumIsLoading(false);
-            } catch(res) {
-                if (res.data && res.data.errors) setAlbumFormErrors(res.data.errors);
-            }
-        })()
-    }
+    //     (async () => {
+    //         try{
+    //             const res = await createAlbum(data);
+    //             console.log("RES FOR NEW ALBUM ", res.data.newAlbum);
+    //             await setCurrentIdx(1);
+    //             await setImg("");
+    //             await setAlbumFormErrors([]);
+    //             await setAlbumIsLoading(false);
+    //         } catch(res) {
+    //             if (res.data && res.data.errors) setAlbumFormErrors(res.data.errors);
+    //         }
+    //     })()
+    // }
 
 
     const handleEditAlbumBtn = (e) => {
@@ -107,7 +123,7 @@ const CreateAlbumPage = ({
         data.append("title", albumTitle);
         data.append("description", description);
         data.append("credits", credits);
-        data.append("isPublished", isPublished);
+        data.append("isPublished", album.isPublished);
         data.append("file", img);
         data.append("artistId", user.id);
 
@@ -156,7 +172,7 @@ const CreateAlbumPage = ({
         try {
             (async () => {
                 const newTrack = await createTrack(data);
-                await setUploadedTracksVisible(true); 
+                // await setUploadedTracksVisible(true); 
                 await setTracksData(prevState => ({...prevState, track1: ''}));
                 await setTracksData(prevState => ({...prevState, title1: ''}));
                 await setTrackCount(trackCount+1);
@@ -168,13 +184,6 @@ const CreateAlbumPage = ({
             setTrackIsLoading(false);
             if (res.data && res.data.errors) setTrackFormErrors(res.data.errors);
         }
-
-        // createTrack(data)
-        //     .then((res) => {
-        //         setUploadedTracksVisible(true); 
-        //         console.log("LENGTH ", album.Tracks.length);
-        //         trackCount = album.Tracks.length;
-        //     })
     }
 
     const handleEditTrackTitleBtn = (e) => {
@@ -224,10 +233,10 @@ const CreateAlbumPage = ({
 
     }
 
-    if(album) {
-
-        console.log(!!album.imgUrl)
+    if(!album) {
+        return null;
     }
+
     return (
         <div className="album-edit-page__holder">
             <div className="album-edit-page__left-col">
@@ -267,7 +276,7 @@ const CreateAlbumPage = ({
 
                 <h4 className="album-edit-page__tracks-header">TRACKS</h4>
                 
-                {uploadedTracksVisible && album && album.tracks ? 
+                {album && album.tracks ? 
                     (
                         <UploadedTracks 
                             album={album}
@@ -276,8 +285,8 @@ const CreateAlbumPage = ({
                             currentIdx={currentIdx}
                             setCurrentIdx={setCurrentIdx}
                             setCurrentTrackId={setCurrentTrackId}
-                            uploadedTrackClicked={uploadedTrackClicked}
-                            setUploadedTrackClicked={setUploadedTrackClicked}
+                            // uploadedTrackClicked={uploadedTrackClicked}
+                            // setUploadedTrackClicked={setUploadedTrackClicked}
                             handleDeleteTrackBtn={handleDeleteTrackBtn}
                         />
                     ) : null
@@ -328,7 +337,7 @@ const CreateAlbumPage = ({
                                 setDescription={setDescription}
                                 credits={credits}
                                 setCredits={setCredits}
-                                handleCreateAlbumSubmitBtn={handleCreateAlbumSubmitBtn}
+                                // handleCreateAlbumSubmitBtn={handleCreateAlbumSubmitBtn}
                                 handleEditAlbumBtn={handleEditAlbumBtn}
                                 albumFormErrors={albumFormErrors} />
                         ) : null
@@ -337,6 +346,7 @@ const CreateAlbumPage = ({
                     (currentIdx >= addTrackIdx) ? 
                     (
                         <TrackForm 
+                            album={album}
                             currentIdx={currentIdx}
                             handleUploadTrackBtn={handleUploadTrackBtn}
                             // trackTitle={trackTitle}
@@ -347,7 +357,7 @@ const CreateAlbumPage = ({
                             tracksData={tracksData}
                             setTracksData={setTracksData}
                             updateTrackFormProperty={updateTrackFormProperty}
-                            trackCount={trackCount}
+                            // trackCount={trackCount}
                             handleEditTrackTitleBtn={handleEditTrackTitleBtn}/>
                     ) : null
                 }
@@ -356,4 +366,4 @@ const CreateAlbumPage = ({
     )
 }
 
-export default CreateAlbumPage;
+export default EditAlbumPage;

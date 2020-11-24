@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
+import albumReducer from '../../store/album';
 
 const TrackForm = (
     { 
+        album,
         currentIdx,
         handleUploadTrackBtn, 
         tracksData,
         setTracksData,
         updateTrackFormProperty,
-        trackCount,
+        // trackCount,
         handleEditTrackTitleBtn
     }) => {
 
@@ -21,9 +23,9 @@ const TrackForm = (
             // style={{ marginTop: `${193+(currentIdx - 2)*(2*(currentIdx - 2) + 74)}px` }}
             style={{ marginTop: currentIdx > 1 ? 
                     `${ (currentIdx-2)*70 + 245}px` :
-                    trackCount === 0 ?
+                     album.tracks.length === 0 ?
                         `245px` :
-                    `${(trackCount)*70 + 245}px`
+                    `${(album.tracks.length)*70 + 245}px`
             }}>
             <label className="album-edit-page__track-title-input">TRACK TITLE</label>
             <input

@@ -16,16 +16,16 @@ export async function fetch(url, options = {}) {
       options.headers['XSRF-Token'] = Cookies.get('XSRF-TOKEN');
     }  else {
       options.headers['Content-Type'] =
-        options.headers['Content-Type'] || 'application/json';
+      options.headers['Content-Type'] || 'application/json';
       options.headers['XSRF-Token'] = Cookies.get('XSRF-TOKEN');
     }
-  
+    
   }
   // call the default window's fetch with the url and the options passed in
   const res = await window.fetch(url, options);
-
+  
   // if the response's body is JSON, then parse the JSON body and set it to a
-    // key of `data` on the response
+  // key of `data` on the response
   const contentType = res.headers.get('content-type');
   if (contentType && contentType.includes('application/json')) {
     const data = await res.json();

@@ -53,17 +53,26 @@
     padding-bottom: 10px;
 }
 
-.discography__add-btn {
-    /* border: none; */
+.discography__add-link {
     border-radius: 3px;
     font-size: 11px;
     line-height: 11px;
     color: white;
     font-weight: normal;
-    /* height: 18px; */
-    padding: 0 8px;
+    padding: 3px 8px 0 8px;
     margin-left: 15px;
     background-color: #41A0C3;
+    text-decoration: none;
+    border: 1px solid #777777;
+    background: -webkit-linear-gradient(top, #41A0C3, #59b5d6);
+}
+
+.discography__add-link:hover {
+    border-color: #575757;
+}
+
+.discography__add-link:active {
+    background: -webkit-linear-gradient(top, #59b5d6, #41A0C3);
 }
 
 .albums__holder {
@@ -83,7 +92,7 @@
 
 .album__holder {
     width: 190px;
-    margin: 0 13px 13px 0;
+    margin: 0 20px 20px 0;
     /* background-color: red; */
 }
 
@@ -95,16 +104,20 @@
     background-position: center center; 
     display: flex;
     justify-content: flex-end;
-    align-items: flex-end;
+    /* align-items: flex-end; */
     border: 1px solid lightgray;
 }
 
 .album__draft {
     background-color: black;
     font-size: 13px;
-    font-weight: bold;
+    line-height: 13px;
+    font-weight: 500;
     color: red;
-    padding: 1px 9px;
+    width: 47px;
+    height: 19px;
+    text-align: center;
+    padding-top: 2px;
 }
 
 .album__title {
@@ -112,29 +125,54 @@
     font-weight: bold;
 }
 
-.album__edit-btn {
+.album__edit-link {
     color: #3187F5;
     font-weight: bold;
     font-size: 12px;
     border: none;
     background-color: transparent;
+    text-decoration: none;
 }
 
-.album__edit-btn:hover {
+.album__edit-link:hover {
     text-decoration: underline;
 }    
 
-.followers__holder {
+/* Following */
+.follows__header-holder {
+    /* border-bottom: 1px solid lightgray; */
     display: flex;
-    flex-direction: row;
-    margin-top: 25px;
+    margin-bottom: 15px;
 }
 
-.followers__header-holder {
-    border-bottom: 1px solid lightgray;
+.follows__header-holder h3 {
+    /* font-size: 15px; */
 }
 
-.follower__placeholder {
+.follows__following-header {
+    flex-grow: 1;
+}
+
+.follows__followers-header {
+    /* flex-grow: 1; */
+    margin-right: 140px;
+}
+
+.follows__holder {
+    display: flex;
+    flex-wrap: wrap;
+    /* background-color: red; */
+}
+
+.following__holder {
+    display: flex;
+    /* background-color: cadetblue; */
+    flex-grow: 1;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.following__placeholder {
     width: 60px;
     height: 60px;
     background-color: #F8F8F8;
@@ -142,13 +180,12 @@
     margin: 0 20px 20px 0;
 }
 
-.follower__photo-holder {
+.following__photo-holder {
     width: 60px;
     margin: 0 20px 20px 0;
-    font-size: 13px;
 }
 
-.follower__photo {
+.following__photo {
     width: 60px;
     height: 60px;
     background-size:     cover;                    
@@ -158,7 +195,52 @@
 }
 
 
-/* RIGHT COLUMN ============================================================ */
+/* Followers */
+.followers__holder {
+    display: flex;
+    flex-wrap: wrap;
+    width: 220px;
+    justify-content: space-evenly;
+    font-size: 11px;
+    font-weight: 500;
+    border-left: 1px solid lightgray;
+    /* background-color: blue; */
+}
+
+.followers__photo-holder {
+    width: 57px;
+    text-align: center;
+    /* font-size: 11px; */
+    margin-bottom: 15px;
+    /* background-color: transparent; */
+}
+
+.followers__photo {
+    height: 57px;
+    width: 57px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    background-size:     cover;                    
+    background-repeat:   no-repeat;
+    background-position: center center;
+}
+
+.followers__link {
+    /* background-color: none; */
+    color: black;
+    text-decoration: none;
+}
+
+.followers__link:hover {
+    text-decoration: underline;
+}
+
+.followers__active {
+    text-decoration: underline;
+}
+
+/* RIGHT COLUMN ============================================================================== */
 .right-column__holder {
     width: 150px;
     display: flex;
@@ -166,6 +248,7 @@
     margin-top: 130px;
 }
 
+/* ARTIST INFO */
 .artist-info__photo {
     width: 150px;
     height: 150px;
@@ -195,6 +278,8 @@
     margin-bottom: 15px;
 }
 
+
+/* BIO */
 .artist-info__add-bio-btn {
     border: none;
     color: #3187F5;
@@ -277,6 +362,4 @@
     width: 150px;
     height: 200px;
 }
-/* .artist-info__add-bio-btn:hover {
-    border-bottom: 1px solid  #3187F5;
-} */
+
