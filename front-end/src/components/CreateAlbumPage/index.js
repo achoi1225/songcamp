@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import CheckIcon from '@material-ui/icons/Check';
-// import classNames from 'classnames';
 
 import * as albumActions from '../../store/album';
-// import * as tracksActions from '../../store/tracks';
 import './album-edit-page.css';
 import './upload-form.css';
 import AlbumForm from './AlbumForm';
@@ -47,6 +45,12 @@ const CreateAlbumPage = () => {
     console.log("TRACK COUNT!!! ", trackCount);
     console.log(" TRACK ID!!! ", currentTrackId);
  
+    //Differs from EditAlbumPage =====================================
+    useEffect(() => {
+        if(album) {
+            dispatch(albumActions.removeAlbum())
+        }
+    },[album, dispatch])
 
     const handleAlbumDetailSelect = (e) => {
         e.preventDefault();

@@ -33,12 +33,12 @@
     display:flex;
     flex-direction: column;
     flex-grow: 1;
-    padding-right: 100px;
-    /* background-color: red; */
+    padding-right: 30px;
+    /* background-color: blue; */
 }
 
 .discography {
-    margin-bottom: 60px;
+    margin-bottom: 90px;
 }
 
 .discography__add-album-message {
@@ -76,6 +76,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     padding-top: 30px;
+    /* background-color: red; */
 }
 
 .album__placeholder {
@@ -100,7 +101,6 @@
     background-position: center center; 
     display: flex;
     justify-content: flex-end;
-    /* align-items: flex-end; */
     border: 1px solid lightgray;
 }
 
@@ -141,33 +141,28 @@
     margin-bottom: 15px;
 }
 
-.follows__header-holder h3 {
-    /* font-size: 15px; */
-}
-
 .follows__following-header {
     flex-grow: 1;
 }
 
 .follows__followers-header {
-    /* flex-grow: 1; */
     margin-right: 140px;
 }
 
 .follows__holder {
     display: flex;
-    flex-wrap: wrap;
-    /* background-color: red; */
+    /* flex-wrap: wrap; */
 }
 
 .following__holder {
     display: flex;
     flex-grow: 1;
+    flex-wrap: wrap;
+    align-content: flex-start;
     font-size: 11px;
     font-weight: 500;
-    flex-wrap: wrap;
     width: 500px;
-    /* background-color: cadetblue; */
+    /* background-color: #59b5d6; */
 }
 
 .following__placeholder {
@@ -180,7 +175,8 @@
 
 .following__photo-holder {
     width: 60px;
-    margin: 0 20px 20px 0;
+    margin: 0 15px 10px 0;
+    text-align: center;
 }
 
 .following__photo {
@@ -198,24 +194,21 @@
     display: flex;
     flex-wrap: wrap;
     width: 220px;
-    justify-content: space-evenly;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
     border-left: 1px solid lightgray;
-    /* background-color: blue; */
+    padding-left: 20px;
 }
 
 .followers__photo-holder {
-    width: 57px;
+    width: 50px;
     text-align: center;
-    /* font-size: 11px; */
-    margin-bottom: 15px;
-    /* background-color: transparent; */
+    margin: 0 10px 10px 0;
 }
 
 .followers__photo {
-    height: 57px;
-    width: 57px;
+    height: 50px;
+    width: 50px;
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
@@ -225,7 +218,6 @@
 }
 
 .followers__link {
-    /* background-color: none; */
     color: black;
     text-decoration: none;
 }

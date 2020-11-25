@@ -2,6 +2,7 @@ import { fetch } from './csrf';
 
 export const LOAD_ALL_ALBUMS = "songcamp/albums/LOAD_ALL_ALBUMS";
 export const LOAD_ALL_ALBUMS_FOR_ONE_ARTIST = "songcamp/albums/LOAD_ALL_ALBUMS_FOR_ONE_ARTIST";
+export const LOAD_FEATURED_ALBUMS = "songcamp/albums/LOAD_FEATURED_ALBUMS";
 
 export const loadAllAlbums = (list) => ({
     type: LOAD_ALL_ALBUMS,
@@ -13,6 +14,10 @@ export const loadAllAlbumsForOneArtist = (list) => ({
     list
 })
 
+export const loadFeaturedAlbums = (list) => ({
+  type: LOAD_FEATURED_ALBUMS,
+  list
+})
 // export const setCurrent = (current) => ({
 //     type: SET_CURRENT,
 //     current
@@ -47,6 +52,17 @@ export const getAllAlbumsForOneArtist = (userId) => async (dispatch, getState) =
 
 
 // ========================================================================================
+// GET FEATURED ALBUMS - Random 5 published records
+// ========================================================================================
+export const getFeaturedAlbums = () => async (dispatch) => {
+
+  const res = await fetch(`/api/albums/featured`);
+  
+  dispatch(loadFeaturedAlbums(res.data.featuredAlbums));
+  return res;
+}
+
+// ========================================================================================
 // ALBUMS REDUCER
 // ========================================================================================
 export function albumsReducer(state = {}, action) {
@@ -61,7 +77,14 @@ export function albumsReducer(state = {}, action) {
       case LOAD_ALL_ALBUMS_FOR_ONE_ARTIST: {
         return {
           ...state,
-          listForOneArtist: action.list,
+          oneArtistAlbumsList: action.list,
+        };
+      }
+
+      case LOAD_FEATURED_ALBUMS: {
+        return {
+          ...state,
+          featuredAlbumsList: action.list,
         };
       }
   

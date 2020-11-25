@@ -2,10 +2,15 @@ import { fetch } from './csrf';
 
 // import { errorNotifications } from "../error-notifications.js";
 export const SET_CURRENT = "songcamp/album/SET_CURRENT";
+export const REMOVE_CURRENT = "songcamp/album/REMOVE_ALBUM";
 
 export const setCurrent = (current) => ({
     type: SET_CURRENT,
     current
+})
+
+export const removeCurrent = () => ({
+    type: REMOVE_CURRENT,
 })
 
 // ========================================================================================
@@ -105,6 +110,16 @@ export const publishAlbum = (payload, albumId) => async (dispatch) => {
 
 
 // ========================================================================================
+// REMOVE ALBUM
+// ========================================================================================
+export const removeAlbum = (id) => async (dispatch, getState) => {
+
+    console.log("REMOVE ALBUM");
+    dispatch(removeCurrent());
+}
+
+
+// ========================================================================================
 // ALBUM REDUCER
 // ========================================================================================
 export function albumReducer(state = {}, action) {
@@ -116,6 +131,13 @@ export function albumReducer(state = {}, action) {
         };
       }
   
+      case REMOVE_CURRENT: {
+        return {
+          ...state,
+          current: null,
+        };
+      }
+
       default:
         return state;
     }

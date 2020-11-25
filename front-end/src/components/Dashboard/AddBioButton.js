@@ -1,29 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react'
 import BioForm from './BioForm'; 
 
-export const AddBioButton = (
-    { bioFormVisible,
-    setBioFormVisible,
-    // bio,
-    // setBio,
-    // handleSubmitBioBtn,
-    // updateBio,
-    // user,
-    // errors 
-    }) => {
+export const AddBioButton = () => {
+    
+    const [bioFormVisible, setBioFormVisible] = useState(false);
+
     return (
         <>
         {
             bioFormVisible ?
             <BioForm 
-                // user={user} 
-                // bio={bio}
-                // setBio={setBio}
-                // setBioFormVisible={setBioFormVisible}
-                // handleSubmitBioBtn={handleSubmitBioBtn}
-                // updateBio={updateBio}
-                // errors={errors}
-            /> : 
+                bioFormVisible={bioFormVisible}
+                setBioFormVisible={setBioFormVisible} /> : 
                 <button 
                     onClick={() => setBioFormVisible(true)}
                     className="artist-info__add-bio-btn">

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import * as followsActions from '../../store/follows';
 import * as albumsActions from '../../store/albums';
-import * as userActions from '../../store/user';
+// import * as userActions from '../../store/user';
 
 
 import './dashboard.css';
@@ -31,209 +31,134 @@ const Dashboard = (
     const user = useSelector(state => state.session.user);
     const followers = useSelector((state) => state.follows.followersList);
     const following = useSelector((state) => state.follows.followingList);
-    const albums = useSelector((state) => state.albums.listForOneArtist);
-    const [bio, setBio] = useState("");
-    const [bioFormVisible, setBioFormVisible] = useState(false);
-    const [bioEditFormVisible, setBioEditFormVisible] = useState(false);
-    const [errors, setErrors] = useState([]);
-
-// dispatch(followsActions.getFollowers(id))
-// dispatch(followsActions.getFollowing(id))
-// dispatch(albumsActions.getAllAlbumsForOneArtist(userId))
-// dispatch(userActions.editBio(userId))
+    const albums = useSelector((state) => state.albums.oneArtistAlbumsList);
 
     useEffect(() => {
         // getFollowers(user.id)
         dispatch(followsActions.getFollowers(user.id))
-            .then(() =>  
-                // getFollowing(user.id)
-                dispatch(followsActions.getFollowing(user.id))
-            )
-            .then(() =>  
-                // getAllAlbumsForOneArtist(user.id)
-                dispatch(albumsActions.getAllAlbumsForOneArtist(user.id))
-
-            )
+            .then(() =>  dispatch(followsActions.getFollowing(user.id)))
+            .then(() =>  dispatch(albumsActions.getAllAlbumsForOneArtist(user.id)))
     }, [user.id])
-
-    const updateBio = () => (e) => {
-        setBio(e.target.value);
-        console.log("BIO ", bio);
-    }   
 
     const handleEditAlbumBtn = (albumId) => (e) => {
         console.log("edit button clicked!");
     }
     
-    const handleEditBioBtn = (e) => {
-        setBioFormVisible(true);
-    }
-    
-    const handleCloseBioFormBtn = (e) => {
-        setBioFormVisible(false);
-        setBioEditFormVisible(false);
 
-    }
-
-    const handleSubmitBioBtn = (e) => {
-        e.preventDefault();
-        const data = { bio }
-        // editBio(data)
-        return dispatch(userActions.editBio(data))
-            .then((res) => {
-                handleCloseBioFormBtn();
-            })
-            .catch((res) => {
-                if(res.data && res.data.errors) setErrors(res.data.errors);
-            })
-    }
-    
-
-    if(!followers || !albums || !following) {
+    if(!albums) {
+        console.log("NOT LOADED YET")
         return null;
     }
 
     return (
-        <BioFormContext.Provider 
-            value={{
-                user, 
-                bio, 
-                setBioEditFormVisible, 
-                handleSubmitBioBtn, 
-                handleCloseBioFormBtn,
-                updateBio, 
-                errors}} 
-             >
-            <div className="artist-page__holder">
-                <div className="artist-page">
-                    <div className="left-column__holder">
-                        <div className="artist-page__header-holder">
-                            <h1 className="artist-page__header">{user.artistName}</h1>
-                        </div>
-                        <div className="discography">
-                            { 
-                                albums ? 
-                                null : 
-                                <div className="discography__add-album-message">
-                                    Add an album and build your fanbase!
-                                </div>
-                                
-                            }
-        
-                            <div className="discography__header-holder">
-                                <h3>DISCOGRAPHY</h3> 
-                                <NavLink exact className="discography__add-link" to="/create-album">
-                                    + add
-                                </NavLink>
+        <div className="artist-page__holder">
+            <div className="artist-page">
+                <div className="left-column__holder">
+                    <div className="artist-page__header-holder">
+                        <h1 className="artist-page__header">{user.artistName}</h1>
+                    </div>
+                    <div className="discography">
+                        { 
+                            albums ? 
+                            null : 
+                            <div className="discography__add-album-message">
+                                Add an album and build your fanbase!
                             </div>
-        
-                            <div className="albums__holder">
-                            {
-                                albums ? 
-                                <Albums albums={albums} handleEditAlbumBtn={handleEditAlbumBtn} /> :
-                                (
+                            
+                        }
+    
+                        <div className="discography__header-holder">
+                            <h3>DISCOGRAPHY</h3> 
+                            <NavLink exact className="discography__add-link" to="/create-album">
+                                + add
+                            </NavLink>
+                        </div>
+    
+                        <div className="albums__holder">
+                        {
+                            albums ? 
+                            <Albums albums={albums} handleEditAlbumBtn={handleEditAlbumBtn} /> :
+                            (
+                                <>
+                                <div className="album__placeholder"></div>
+                                <div className="album__placeholder"></div>
+                                <div className="album__placeholder"></div>
+                                <div className="album__placeholder"></div>
+                                </>
+                            )
+                        }
+                        </div>
+                        
+                        {/* <div className="albums__holder">
+                            <div className="album__placeholder"></div>
+                            <div className="album__placeholder"></div>
+                            <div className="album__placeholder"></div>
+                            <div className="album__placeholder"></div>
+                        </div> */}
+                    </div>
+
+                    <div className="follows__header-holder">
+                        {/* <h3>FOLLOWING</h3> */}
+                        <h3 className="follows__following-header">Following</h3>
+                        <h3 className="follows__followers-header">Followers</h3>
+                    </div>
+                    <div className="follows__holder">
+                        <div className="following__holder">
+                            {following ?
+                                <Following following={following} /> :
+                                ( 
                                     <>
-                                    <div className="album__placeholder"></div>
-                                    <div className="album__placeholder"></div>
-                                    <div className="album__placeholder"></div>
-                                    <div className="album__placeholder"></div>
+                                    <div className="following__placeholder"></div>
+                                    <div className="following__placeholder"></div>
+                                    <div className="following__placeholder"></div>
+                                    <div className="following__placeholder"></div>
                                     </>
                                 )
                             }
-                            </div>
-                            
-                            {/* <div className="albums__holder">
-                                <div className="album__placeholder"></div>
-                                <div className="album__placeholder"></div>
-                                <div className="album__placeholder"></div>
-                                <div className="album__placeholder"></div>
-                            </div> */}
                         </div>
+                        <div className="followers__holder">
+                            <Followers followers={followers}/>
 
-                        <div className="follows__header-holder">
-                            {/* <h3>FOLLOWING</h3> */}
-                            <h3 className="follows__following-header">Following</h3>
-                            <h3 className="follows__followers-header">Followers</h3>
-                        </div>
-                        <div className="follows__holder">
-                            <div className="following__holder">
-                                {
-                                    followers ? 
-                                    <Following following={following} /> :
-                                    ( 
-                                        <>
-                                        <div className="following__placeholder"></div>
-                                        <div className="following__placeholder"></div>
-                                        <div className="following__placeholder"></div>
-                                        <div className="following__placeholder"></div>
-                                        </>
-                                    )
-                                }
-                            </div>
-                            <div className="followers__holder">
-                                <Followers followers={followers}/>
-                                {/* <div className="followers__photo-holder">
-                                    <div className="followers__photo">
+                        {/* <div className="followers__photo-holder">
+                                <div className="followers__photo">
 
-                                    </div>
-                                    test
                                 </div>
-                                <div className="followers__photo-holder">
-                                    <div className="followers__photo">
-
-                                    </div>
-                                    test
-                                </div> */}
+                                test
                             </div>
-                        </div>
-                    </div>
+                            <div className="followers__photo-holder">
+                                <div className="followers__photo">
 
-                    
-                    <div className="right-column__holder">
-                        { user.imgUrl ?
-                                <div className="artist-info__photo" style={{backgroundImage: `url(${user.imgUrl})`}} >
-                                </div> :
-                                <button className="artist-info__photo-placeholder">add artist photo</button>
-                        }
-                        <div className="artist-info__name">
-                            {user.artistName}
-                        </div>
-
-                        <div className="artist-info__bio-holder">
-                            {
-                                user.bio ? 
-                                (
-                                    <BioSection 
-                                        user={user} 
-                                        bioEditFormVisible={bioEditFormVisible}
-                                        setBioEditFormVisible={setBioEditFormVisible}
-                                    />
-                                    // <>
-                                    // <div className="artist-info__bio-header">
-                                    //     Bio 
-                                    //     <button>edit</button>
-                                    // </div>
-                                    // {user.bio}
-                                    // </>
-                                ) :
-                                <AddBioButton 
-                                    handleEditBioBtn={handleEditBioBtn} 
-                                    setBioFormVisible={setBioFormVisible}
-                                    bioFormVisible={bioFormVisible}
-                                    handleSubmitBioBtn={handleSubmitBioBtn}
-                                    updateBio={updateBio}
-                                    bio={bio}
-                                    setBio={setBio}
-                                    user={user}
-                                    errors={errors}
-                                />
-
-                            }
+                                </div>
+                                test
+                            </div> */}
                         </div>
                     </div>
                 </div>
+
+                
+                <div className="right-column__holder">
+                    { user.imgUrl ?
+                            <div className="artist-info__photo" style={{backgroundImage: `url(${user.imgUrl})`}} >
+                            </div> :
+                            <button className="artist-info__photo-placeholder">add artist photo</button>
+                    }
+                    <div className="artist-info__name">
+                        {user.artistName}
+                    </div>
+
+                    <div className="artist-info__bio-holder">
+                        {
+                            user.bio ? 
+                            (
+                                <BioSection/>
+                            ) :
+                            <AddBioButton/>
+
+                        }
+                    </div>
+                </div>
             </div>
-        </BioFormContext.Provider>
+        </div>
     )
 }
 

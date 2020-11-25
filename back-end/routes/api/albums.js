@@ -3,10 +3,11 @@ const { check } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const multer = require("multer");
 const upload = multer();
+// const sequelize = require("sequelize");
 
 const { handleValidationErrors } = require("../../utils/validation"); 
 const { requireAuth } = require("../../utils/auth");
-const { Album, Track, User } = require("../../db/models");
+const { Album, Track, User, sequelize } = require("../../db/models");
 
 const router = express.Router();
 router.use(requireAuth);
@@ -18,6 +19,36 @@ const validateAlbumDetails = [
       .withMessage('Please provide a TITLE for your album ( max 100 characters ).'),
     handleValidationErrors,
   ];
+
+
+  // order: [
+  //   [sequelize.fn('RANDOM')]
+  // ]
+
+// ========================================================================================
+// GET FEATURED ALBUMS - Random 5 published records
+// ========================================================================================
+router.get('/featured', asyncHandler(async (req, res) => {
+
+  const featuredAlbums = await Album.findAll({
+    where: {
+      isPublished: true,
+    },
+    order: sequelize.random(),
+    limit: 5,
+    include: [
+        {model: User, as: 'artist', attributes: {exclude: ['email','hashedPassword']}},
+    ],
+    // QUERY FOR PUBLISHED ALBUMS ONLY!!!!
+  })
+
+  if(featuredAlbums) {
+    res.json({featuredAlbums});
+  } else {
+    console.log("Albums not found")
+  }
+
+}))
 
 // ========================================================================================
 // GET ALL PUBLISHED ALBUMS WITH TRACKS AND USER DATA

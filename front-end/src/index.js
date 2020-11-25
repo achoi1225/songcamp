@@ -10,6 +10,7 @@ import { restoreCSRF, fetch } from './store/csrf';
 import * as sessionActions from './store/session';
 import * as followsActions from './store/follows';
 import * as albumsActions from './store/albums';
+import * as albumActions from './store/album';
 
 const store = configureStore();
 
@@ -22,6 +23,7 @@ if (process.env.NODE_ENV !== 'production') {
   window.followsActions = followsActions;
   window.albumsActions = albumsActions;
 
+  // window.store.dispatch(window.albumsActions.getFeaturedAlbums())
   // window.store.dispatch(window.sessionActions.signup({
   //   username: 'NewUser',
   //   email: 'new@user.io',
