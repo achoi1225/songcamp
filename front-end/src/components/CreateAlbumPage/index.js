@@ -26,6 +26,11 @@ const CreateAlbumPage = (
     // editTrackTitle,
     // deleteTrack 
     ) => {
+        
+    const [tracksData, setTracksData] = useState({});
+    const [currentIdx, setCurrentIdx] = useState(0);
+    const albumDetailSelectIdx = 0;
+    const addTrackIdx = 1;
 
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user)
@@ -36,18 +41,16 @@ const CreateAlbumPage = (
     const [credits, setCredits] = useState("");
     const [img, setImg] = useState("");
     const [isPublished, setIsPublished] = useState(false);
-    const [tracksData, setTracksData] = useState({});
+
+
     const [uploadedTracksVisible, setUploadedTracksVisible] = useState(false);
-    const [uploadedTrackClicked, setUploadedTrackClicked] = useState(false);
-    const [currentIdx, setCurrentIdx] = useState(0);
+    // const [uploadedTrackClicked, setUploadedTrackClicked] = useState(false);
     const [albumFormErrors, setAlbumFormErrors] = useState([]);
     const [trackFormErrors, setTrackFormErrors] = useState([]);
     const [trackCount, setTrackCount] = useState(0);
     const [currentTrackId, setCurrentTrackId] = useState(0);
     const [albumIsLoading, setAlbumIsLoading] = useState(false);
     const [trackIsLoading, setTrackIsLoading] = useState(false);
-    const albumDetailSelectIdx = 0;
-    const addTrackIdx = 1;
     // let albumId;
         // dispatch(albumActions.createAlbum(data))
     // dispatch(albumActions.editAlbum(data, albumId))
@@ -128,7 +131,8 @@ const CreateAlbumPage = (
 
         (async () => {
             try{
-                await editAlbum(data, album.id);
+                await dispatch(albumActions.editAlbum(data, album.id));
+                // await editAlbum(data, album.id);
                 await setImg("");
                 await setAlbumFormErrors([]);
                 await setAlbumIsLoading(false);
@@ -175,11 +179,12 @@ const CreateAlbumPage = (
                 // const newTrack = await createTrack(data);
                 const newTrack = await dispatch(tracksActions.createTrack(data))
                 await setUploadedTracksVisible(true); 
-                await setTracksData(prevState => ({...prevState, track1: ''}));
+                await setTracksData(prevState => ({...prevState, track1Url: ''}));
                 await setTracksData(prevState => ({...prevState, title1: ''}));
                 await setTrackCount(trackCount+1);
                 await setCurrentIdx(1);
                 await setTrackIsLoading(false);
+                //figure out a way to 
                 console.log("TRACKS DATA!!!!! ", tracksData)
             })()
         } catch(res) {
@@ -211,20 +216,20 @@ const CreateAlbumPage = (
     }
 
 
-    const handleDeleteTrackBtn = (trackId) => (e) => {
-        e.preventDefault();
-        try{
-            (async () => {
-                const res = await dispatch(tracksActions.deleteTrack(trackId))
-                // const res = await deleteTrack(trackId);
-                await setTrackCount(trackCount - 1);
-                await setCurrentIdx(1);
-                console.log("DELETED! ", res);
-            })()
-        } catch(res) {
-            if (res.data && res.data.errors) setAlbumFormErrors(res.data.errors);
-        }
-    }
+    // const handleDeleteTrackBtn = (trackId) => (e) => {
+    //     e.preventDefault();
+    //     try{
+    //         (async () => {
+    //             const res = await dispatch(tracksActions.deleteTrack(trackId))
+    //             // const res = await deleteTrack(trackId);
+    //             await setTrackCount(trackCount - 1);
+    //             await setCurrentIdx(1);
+    //             console.log("DELETED! ", res);
+    //         })()
+    //     } catch(res) {
+    //         if (res.data && res.data.errors) setAlbumFormErrors(res.data.errors);
+    //     }
+    // }
     
     const handlePublishBtn = (e) => {
         e.preventDefault();
@@ -291,15 +296,18 @@ const CreateAlbumPage = (
                 {uploadedTracksVisible && album && album.tracks ? 
                     (
                         <UploadedTracks 
-                            album={album}
+                        //needs to be passed
                             tracksData={tracksData}
                             setTracksData={setTracksData}
                             currentIdx={currentIdx}
                             setCurrentIdx={setCurrentIdx}
                             setCurrentTrackId={setCurrentTrackId}
-                            uploadedTrackClicked={uploadedTrackClicked}
-                            setUploadedTrackClicked={setUploadedTrackClicked}
-                            handleDeleteTrackBtn={handleDeleteTrackBtn}
+                            setTrackCount={setTrackCount}
+
+
+                            // uploadedTrackClicked={uploadedTrackClicked}
+                            // setUploadedTrackClicked={setUploadedTrackClicked}
+                            // handleDeleteTrackBtn={handleDeleteTrackBtn}
                         />
                     ) : null
                 }

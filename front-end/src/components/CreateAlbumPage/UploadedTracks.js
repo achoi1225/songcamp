@@ -1,13 +1,25 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import * as albumActions from '../../store/album';
+import * as tracksActions from '../../store/tracks';
+import AlbumForm from './AlbumForm';
+import TrackForm from './TrackForm';
+import AddTrackSection from './AddTrackSection';
+import CircularIndeterminate from './CircularIndeterminate';
 
 const UploadedTracks = ({
-    album, 
+    // album, 
     tracksData, 
     setTracksData, 
     currentIdx, 
     setCurrentIdx, 
-    handleDeleteTrackBtn,
-    setCurrentTrackId }) => {
+    setCurrentTrackId,
+    trackCount,
+    setTrackCount,
+
+    // handleDeleteTrackBtn,
+    }) => {
     // if(!album) {
     //     return null;
     // }
@@ -15,8 +27,29 @@ const UploadedTracks = ({
     // if(!album) {
     //     return null;
     // }
-
+    const dispatch = useDispatch();
+    const album = useSelector((state) => state.album.current)
     const tracks = album.tracks;
+    const [trackDeleteErrors, setTrackDeleteErrors] = useState({});
+    // const [uploadedTrackClicked, setUploadedTrackClicked] = useState(false);
+    // const [currentIdx, setCurrentIdx] = useState(0);
+    // const [currentTrackId, setCurrentTrackId] = useState(0);
+
+    const handleDeleteTrackBtn = (trackId) => (e) => {
+        e.preventDefault();
+        try{
+            (async () => {
+                const res = await dispatch(tracksActions.deleteTrack(trackId))
+                // const res = await deleteTrack(trackId);
+                await setTrackCount(trackCount - 1);
+                await setCurrentIdx(1);
+                console.log("DELETED! ", res);
+            })()
+        } catch(res) {
+            if (res.data && res.data.errors) setTrackDeleteErrors(res.data.errors);
+        }
+    }
+
     return (
         <>
             {tracks.map((track, idx) => {
