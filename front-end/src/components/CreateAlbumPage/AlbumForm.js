@@ -1,20 +1,96 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
+import * as albumActions from '../../store/album';
 
 const AlbumForm = ({ 
-    album,
-    updateProperty, 
+    // album,
+    // updateProperty, 
+
+    //needs to be passed
     albumTitle, 
     setAlbumTitle, 
     description, 
     setDescription, 
-    setImg,
     credits,
     setCredits,
-    handleCreateAlbumSubmitBtn,
-    handleEditAlbumBtn,
-    albumFormErrors }) => {
+    img,
+    setImg,
+    isPublished,
+    setAlbumIsLoading,
+    setCurrentIdx
+
     
+    // handleCreateAlbumSubmitBtn,
+    // handleEditAlbumBtn,
+    // albumFormErrors 
+                    }) => {
+    // dispatch(albumActions.createAlbum(data))
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.session.user)
+    const album = useSelector((state) => state.album.current)
+    const [albumFormErrors, setAlbumFormErrors] = useState([]);
+
+    const updateProperty = (property) => (e) => {
+        e.preventDefault();
+        property(e.target.value);
+    }
+    
+    const handleCreateAlbumSubmitBtn = (e) => {
+        e.preventDefault();
+        setAlbumIsLoading(true);
+
+        const data = new FormData();
+        data.append("title", albumTitle);
+        data.append("description", description);
+        data.append("credits", credits);
+        data.append("isPublished", isPublished);
+        data.append("file", img);
+        data.append("artistId", user.id);
+
+        (async () => {
+            try{
+                const res = await dispatch(albumActions.createAlbum(data))
+                // const res = await createAlbum(data);
+                console.log("RES FOR NEW ALBUM ", res.data.newAlbum);
+                await setCurrentIdx(1);
+                await setImg("");
+                await setAlbumFormErrors([]);
+                await setAlbumIsLoading(false);
+            } catch(res) {
+                await setAlbumIsLoading(false);
+                if (res.data && res.data.errors) setAlbumFormErrors(res.data.errors);
+            }
+        })()
+    }
+
+
+    const handleEditAlbumBtn = (e) => {
+        e.preventDefault();
+        setAlbumIsLoading(true);
+
+        const data = new FormData();
+        data.append("title", albumTitle);
+        data.append("description", description);
+        data.append("credits", credits);
+        data.append("isPublished", isPublished);
+        data.append("file", img);
+        data.append("artistId", user.id);
+
+        (async () => {
+            try{
+                await dispatch(albumActions.editAlbum(data, album.id));
+                // await editAlbum(data, album.id);
+                await setImg("");
+                await setAlbumFormErrors([]);
+                await setAlbumIsLoading(false);
+            } catch(res) {
+                setAlbumIsLoading(false);
+                if (res.data && res.data.errors) setAlbumFormErrors(res.data.errors);
+            }
+        })()
+    }
+
     return (
         <div className="album-edit-page__album-detail-form" >
             <ul className="errors">

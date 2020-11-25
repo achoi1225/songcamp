@@ -1,19 +1,95 @@
 import React, {useState} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import * as tracksActions from '../../store/tracks';
 
 const TrackForm = (
     { 
         currentIdx,
-        handleUploadTrackBtn, 
         tracksData,
         setTracksData,
-        updateTrackFormProperty,
         trackCount,
-        handleEditTrackTitleBtn
+        setTrackIsLoading,
+        setUploadedTracksVisible,
+        setCurrentIdx,
+        setTrackCount,
+        currentTrackId,
+
+        // handleUploadTrackBtn, 
+        // updateTrackFormProperty,
+        // handleEditTrackTitleBtn
     }) => {
 
+    const dispatch = useDispatch();
+    const album = useSelector((state) => state.album.current)
+    const [trackFormErrors, setTrackFormErrors] = useState([]);
     const keyName = `title${currentIdx}`;
     const trackUrl = `track${currentIdx}Url`;
     console.log("CURRENT IDX", currentIdx);
+
+// UPDATE TRACK FORM PROPERTY
+    const updateTrackFormProperty = (property, keyName) => (e) => {
+        console.log("IDX VALUE!!! ", keyName)
+        property(prevState => ({...prevState, [keyName]: e.target.value}));
+        console.log("title1!!! ",  tracksData[keyName]);
+    }
+
+// HANDLE UPLOAD TRACK BUTTON 
+    const handleUploadTrackBtn = (e) => {
+        e.preventDefault();
+        setTrackIsLoading(true);
+
+        const data = new FormData();
+
+        data.append("title", tracksData.title1);
+        data.append("albumId", album.id);
+        data.append("allowDownload", false);
+        data.append("file", tracksData.track1Url);
+
+        try {
+            (async () => {
+                //     dispatch(tracksActions.editTrackTitle(data, trackId))
+                // const newTrack = await createTrack(data);
+
+                const newTrack = await dispatch(tracksActions.createTrack(data))
+                await setUploadedTracksVisible(true); 
+                await setTracksData(prevState => ({...prevState, track1Url: ''}));
+                await setTracksData(prevState => ({...prevState, title1: ''}));
+                await setTrackCount(trackCount+1);
+                await setCurrentIdx(1);
+                await setTrackIsLoading(false);
+                //figure out a way to 
+                console.log("TRACKS DATA!!!!! ", tracksData)
+            })()
+        } catch(res) {
+            setTrackIsLoading(false);
+            if (res.data && res.data.errors) setTrackFormErrors(res.data.errors);
+        }
+
+        // createTrack(data)
+        //     .then((res) => {
+        //         setUploadedTracksVisible(true); 
+        //         console.log("LENGTH ", album.Tracks.length);
+        //         trackCount = album.Tracks.length;
+        //     })
+    }
+
+// HANDLE EDIT TRACK BUTTON
+    const handleEditTrackTitleBtn = (e) => {
+        e.preventDefault();
+        const data = new FormData();
+
+        data.append("title", tracksData[`title${currentIdx}`]);
+        data.append("albumId", album.id);
+        data.append("allowDownload", false);
+
+        (async () => {
+            await dispatch(tracksActions.editTrackTitle(data, currentTrackId))
+            // await editTrackTitle(data, currentTrackId);
+            await setCurrentIdx(1);
+        })()
+    }
+
     return (
         <form 
             onSubmit={handleUploadTrackBtn} 
