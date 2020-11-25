@@ -1,46 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import * as albumActions from '../../store/album';
+// import * as albumActions from '../../store/album';
 import * as tracksActions from '../../store/tracks';
-import AlbumForm from './AlbumForm';
-import TrackForm from './TrackForm';
-import AddTrackSection from './AddTrackSection';
-import CircularIndeterminate from './CircularIndeterminate';
+// import AlbumForm from './AlbumForm';
+// import TrackForm from './TrackForm';
+// import AddTrackSection from './AddTrackSection';
+// import CircularIndeterminate from './CircularIndeterminate';
 
 const UploadedTracks = ({
-    // album, 
     tracksData, 
     setTracksData, 
     currentIdx, 
     setCurrentIdx, 
     setCurrentTrackId,
     trackCount,
-    setTrackCount,
+    setTrackCount, }) => {
 
-    // handleDeleteTrackBtn,
-    }) => {
     // if(!album) {
     //     return null;
     // }
-    // const [uploadedTrackClicked, setUploadedTrackClicked] = useState(false)
-    // if(!album) {
-    //     return null;
-    // }
+    
     const dispatch = useDispatch();
     const album = useSelector((state) => state.album.current)
     const tracks = album.tracks;
     const [trackDeleteErrors, setTrackDeleteErrors] = useState({});
-    // const [uploadedTrackClicked, setUploadedTrackClicked] = useState(false);
-    // const [currentIdx, setCurrentIdx] = useState(0);
-    // const [currentTrackId, setCurrentTrackId] = useState(0);
 
+// HANDLE DELETE TRACK BUTTON
     const handleDeleteTrackBtn = (trackId) => (e) => {
         e.preventDefault();
         try{
             (async () => {
                 const res = await dispatch(tracksActions.deleteTrack(trackId))
-                // const res = await deleteTrack(trackId);
                 await setTrackCount(trackCount - 1);
                 await setCurrentIdx(1);
                 console.log("DELETED! ", res);
@@ -56,7 +47,6 @@ const UploadedTracks = ({
                 const keyName = `title${idx+2}`;
                 console.log("KEYNAME", keyName)
                 console.log("TRACKS DATA!!! ", tracksData);
-                // setTracksData(prevState => ({...prevState, [keyName]: track.title}));
                 return (
                     <div key={track.id} onClick={() => 
                             {

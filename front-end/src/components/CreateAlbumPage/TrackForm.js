@@ -14,10 +14,6 @@ const TrackForm = (
         setCurrentIdx,
         setTrackCount,
         currentTrackId,
-
-        // handleUploadTrackBtn, 
-        // updateTrackFormProperty,
-        // handleEditTrackTitleBtn
     }) => {
 
     const dispatch = useDispatch();
@@ -48,9 +44,6 @@ const TrackForm = (
 
         try {
             (async () => {
-                //     dispatch(tracksActions.editTrackTitle(data, trackId))
-                // const newTrack = await createTrack(data);
-
                 const newTrack = await dispatch(tracksActions.createTrack(data))
                 await setUploadedTracksVisible(true); 
                 await setTracksData(prevState => ({...prevState, track1Url: ''}));
@@ -58,20 +51,12 @@ const TrackForm = (
                 await setTrackCount(trackCount+1);
                 await setCurrentIdx(1);
                 await setTrackIsLoading(false);
-                //figure out a way to 
                 console.log("TRACKS DATA!!!!! ", tracksData)
             })()
         } catch(res) {
             setTrackIsLoading(false);
             if (res.data && res.data.errors) setTrackFormErrors(res.data.errors);
         }
-
-        // createTrack(data)
-        //     .then((res) => {
-        //         setUploadedTracksVisible(true); 
-        //         console.log("LENGTH ", album.Tracks.length);
-        //         trackCount = album.Tracks.length;
-        //     })
     }
 
 // HANDLE EDIT TRACK BUTTON
@@ -85,7 +70,6 @@ const TrackForm = (
 
         (async () => {
             await dispatch(tracksActions.editTrackTitle(data, currentTrackId))
-            // await editTrackTitle(data, currentTrackId);
             await setCurrentIdx(1);
         })()
     }
@@ -115,7 +99,9 @@ const TrackForm = (
                     <label>upload track:</label>
                     <input className="album-edit-page__upload-input"
                         type="file"
-                        onChange={(e) => setTracksData(prevState => ({...prevState, [trackUrl]: e.target.files[0]}))}
+                        onChange={(e) => 
+                            setTracksData(prevState => 
+                                ({...prevState, [trackUrl]: e.target.files[0]}))}
                     />
                     <button className="album-edit-page__submit-btn" type="submit">Submit</button>
                 </> :

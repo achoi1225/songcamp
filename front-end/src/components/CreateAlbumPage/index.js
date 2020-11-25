@@ -5,7 +5,7 @@ import CheckIcon from '@material-ui/icons/Check';
 // import classNames from 'classnames';
 
 import * as albumActions from '../../store/album';
-import * as tracksActions from '../../store/tracks';
+// import * as tracksActions from '../../store/tracks';
 import './album-edit-page.css';
 import './upload-form.css';
 import AlbumForm from './AlbumForm';
@@ -14,42 +14,27 @@ import UploadedTracks from './UploadedTracks';
 import AddTrackSection from './AddTrackSection';
 import CircularIndeterminate from './CircularIndeterminate';
 
-const CreateAlbumPage = ( 
-    // user, 
-    // createAlbum, 
-    // editAlbum, 
-    // deleteAlbumArtwork, 
-    // publishAlbum,
-    // album, 
-    // createTrack,
-    // editTrackTitle,
-    // deleteTrack 
-    ) => {
+const CreateAlbumPage = () => {
         
-    const [tracksData, setTracksData] = useState({});
-    const [currentIdx, setCurrentIdx] = useState(0);
-    const albumDetailSelectIdx = 0;
-    const addTrackIdx = 1;
-
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.session.user)
+
+    // const user = useSelector((state) => state.session.user)
     const album = useSelector((state) => state.album.current)
 
+    const [tracksData, setTracksData] = useState({});
+    const [currentIdx, setCurrentIdx] = useState(0);
     const [albumTitle, setAlbumTitle] = useState("");
     const [description, setDescription] = useState("");
     const [credits, setCredits] = useState("");
     const [img, setImg] = useState("");
     const [isPublished, setIsPublished] = useState(false);
-
-
     const [uploadedTracksVisible, setUploadedTracksVisible] = useState(false);
-    // const [uploadedTrackClicked, setUploadedTrackClicked] = useState(false);
-    // const [albumFormErrors, setAlbumFormErrors] = useState([]);
-    // const [trackFormErrors, setTrackFormErrors] = useState([]);
     const [trackCount, setTrackCount] = useState(0);
     const [currentTrackId, setCurrentTrackId] = useState(0);
     const [albumIsLoading, setAlbumIsLoading] = useState(false);
     const [trackIsLoading, setTrackIsLoading] = useState(false);
+    const albumDetailSelectIdx = 0;
+    const addTrackIdx = 1;
     // let albumId;
         // dispatch(albumActions.createAlbum(data))
     // dispatch(albumActions.editAlbum(data, albumId))
@@ -75,84 +60,21 @@ const CreateAlbumPage = (
         })()
     }
 
-    const updateProperty = (property) => (e) => {
-        e.preventDefault();
-        property(e.target.value);
-    }
-
-
-    // const updateTrackFormProperty = (property, keyName) => (e) => {
-    //     console.log("IDX VALUE!!! ", keyName)
-    //     property(prevState => ({...prevState, [keyName]: e.target.value}));
-    //     console.log("title1!!! ",  tracksData[keyName]);
-    // }
-
-    // const handleCreateAlbumSubmitBtn = (e) => {
+    // const updateProperty = (property) => (e) => {
     //     e.preventDefault();
-    //     setAlbumIsLoading(true);
-
-    //     const data = new FormData();
-    //     data.append("title", albumTitle);
-    //     data.append("description", description);
-    //     data.append("credits", credits);
-    //     data.append("isPublished", isPublished);
-    //     data.append("file", img);
-    //     data.append("artistId", user.id);
-
-
-    //     (async () => {
-    //         try{
-    //             const res = await dispatch(albumActions.createAlbum(data))
-    //             // const res = await createAlbum(data);
-    //             console.log("RES FOR NEW ALBUM ", res.data.newAlbum);
-    //             await setCurrentIdx(1);
-    //             await setImg("");
-    //             await setAlbumFormErrors([]);
-    //             await setAlbumIsLoading(false);
-    //         } catch(res) {
-    //             if (res.data && res.data.errors) setAlbumFormErrors(res.data.errors);
-    //         }
-    //     })()
+    //     property(e.target.value);
     // }
 
 
-    // const handleEditAlbumBtn = (e) => {
-    //     e.preventDefault();
-    //     setAlbumIsLoading(true);
-
-    //     const data = new FormData();
-    //     data.append("title", albumTitle);
-    //     data.append("description", description);
-    //     data.append("credits", credits);
-    //     data.append("isPublished", isPublished);
-    //     data.append("file", img);
-    //     data.append("artistId", user.id);
-
-    //     (async () => {
-    //         try{
-    //             await dispatch(albumActions.editAlbum(data, album.id));
-    //             // await editAlbum(data, album.id);
-    //             await setImg("");
-    //             await setAlbumFormErrors([]);
-    //             await setAlbumIsLoading(false);
-    //         } catch(res) {
-    //             setAlbumIsLoading(false);
-    //             if (res.data && res.data.errors) setAlbumFormErrors(res.data.errors);
-    //         }
-    //     })()
-    // }
-
-
+// HANDLE DELETE ALBUM ARTWORK BUTTON 
     const handleDeleteAlbumArtworkBtn = (e) => {
         e.preventDefault();
-        
         const imgUrl = '';
         const data = { imgUrl };
 
         (async () => {
             try{
                 await dispatch(albumActions.deleteAlbumArtwork(data, album.id));
-                // await deleteAlbumArtwork(data, album.id);
                 // e.target.value = null;
             } catch(res) {
                 // if (res.data && res.data.errors) setAlbumFormErrors(res.data.errors);
@@ -160,76 +82,7 @@ const CreateAlbumPage = (
         })()
     }
 
-
-    // const handleUploadTrackBtn = (e) => {
-    //     e.preventDefault();
-    //     setTrackIsLoading(true);
-
-    //     const data = new FormData();
-
-    //     data.append("title", tracksData.title1);
-    //     data.append("albumId", album.id);
-    //     data.append("allowDownload", false);
-    //     data.append("file", tracksData.track1Url);
-
-    //     try {
-    //         (async () => {
-    //             //     dispatch(tracksActions.editTrackTitle(data, trackId))
-    //             // const newTrack = await createTrack(data);
-    //             const newTrack = await dispatch(tracksActions.createTrack(data))
-    //             await setUploadedTracksVisible(true); 
-    //             await setTracksData(prevState => ({...prevState, track1Url: ''}));
-    //             await setTracksData(prevState => ({...prevState, title1: ''}));
-    //             await setTrackCount(trackCount+1);
-    //             await setCurrentIdx(1);
-    //             await setTrackIsLoading(false);
-    //             //figure out a way to 
-    //             console.log("TRACKS DATA!!!!! ", tracksData)
-    //         })()
-    //     } catch(res) {
-    //         setTrackIsLoading(false);
-    //         if (res.data && res.data.errors) setTrackFormErrors(res.data.errors);
-    //     }
-
-    //     // createTrack(data)
-    //     //     .then((res) => {
-    //     //         setUploadedTracksVisible(true); 
-    //     //         console.log("LENGTH ", album.Tracks.length);
-    //     //         trackCount = album.Tracks.length;
-    //     //     })
-    // }
-
-    // const handleEditTrackTitleBtn = (e) => {
-    //     e.preventDefault();
-    //     const data = new FormData();
-
-    //     data.append("title", tracksData[`title${currentIdx}`]);
-    //     data.append("albumId", album.id);
-    //     data.append("allowDownload", false);
-
-    //     (async () => {
-    //         await dispatch(tracksActions.editTrackTitle(data, currentTrackId))
-    //         // await editTrackTitle(data, currentTrackId);
-    //         await setCurrentIdx(1);
-    //     })()
-    // }
-
-
-    // const handleDeleteTrackBtn = (trackId) => (e) => {
-    //     e.preventDefault();
-    //     try{
-    //         (async () => {
-    //             const res = await dispatch(tracksActions.deleteTrack(trackId))
-    //             // const res = await deleteTrack(trackId);
-    //             await setTrackCount(trackCount - 1);
-    //             await setCurrentIdx(1);
-    //             console.log("DELETED! ", res);
-    //         })()
-    //     } catch(res) {
-    //         if (res.data && res.data.errors) setAlbumFormErrors(res.data.errors);
-    //     }
-    // }
-    
+// HANDLE PUBLISH ALBUM BUTTON
     const handlePublishBtn = (e) => {
         e.preventDefault();
 
@@ -240,7 +93,6 @@ const CreateAlbumPage = (
         (async () => {
             try{
                 await dispatch(albumActions.publishAlbum(data, album.id))
-                // await publishAlbum(data, album.id);
                 await setIsPublished(true);
             } catch(res) {
                 // if (res.data && res.data.errors) setAlbumFormErrors(res.data.errors);
@@ -295,18 +147,12 @@ const CreateAlbumPage = (
                 {uploadedTracksVisible && album && album.tracks ? 
                     (
                         <UploadedTracks 
-                        //needs to be passed
                             tracksData={tracksData}
                             setTracksData={setTracksData}
                             currentIdx={currentIdx}
                             setCurrentIdx={setCurrentIdx}
                             setCurrentTrackId={setCurrentTrackId}
                             setTrackCount={setTrackCount}
-
-
-                            // uploadedTrackClicked={uploadedTrackClicked}
-                            // setUploadedTrackClicked={setUploadedTrackClicked}
-                            // handleDeleteTrackBtn={handleDeleteTrackBtn}
                         />
                     ) : null
                 }
@@ -347,8 +193,6 @@ const CreateAlbumPage = (
                     (currentIdx === albumDetailSelectIdx) ? 
                         (
                             <AlbumForm 
-                                // album={album}
-                                // updateProperty={updateProperty}
                                 albumTitle={albumTitle}
                                 setAlbumTitle={setAlbumTitle}
                                 img={img}
@@ -360,10 +204,6 @@ const CreateAlbumPage = (
                                 isPublished={isPublished}
                                 setAlbumIsLoading={setAlbumIsLoading}
                                 setCurrentIdx={setCurrentIdx}
-                                // setIsPublished={setIsPublished}
-                                // handleCreateAlbumSubmitBtn={handleCreateAlbumSubmitBtn}
-                                // handleEditAlbumBtn={handleEditAlbumBtn}
-                                // albumFormErrors={albumFormErrors} 
                                 />
                         ) : null
                 }
@@ -371,7 +211,6 @@ const CreateAlbumPage = (
                     (currentIdx >= addTrackIdx) ? 
                     (
                         <TrackForm 
-                            //needs to be passed
                             currentIdx={currentIdx}
                             trackCount={trackCount}
                             tracksData={tracksData}
@@ -381,10 +220,6 @@ const CreateAlbumPage = (
                             setCurrentIdx={setCurrentIdx}
                             setTrackCount={setTrackCount}
                             currentTrackId={currentTrackId}
-
-                            // handleUploadTrackBtn={handleUploadTrackBtn}
-                            // updateTrackFormProperty={updateTrackFormProperty}
-                            // handleEditTrackTitleBtn={handleEditTrackTitleBtn}
                             />
                     ) : null
                 }

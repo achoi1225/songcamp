@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState  } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as albumActions from '../../store/album';
 
 const AlbumForm = ({ 
-    // album,
-    // updateProperty, 
-
-    //needs to be passed
     albumTitle, 
     setAlbumTitle, 
     description, 
@@ -18,24 +14,20 @@ const AlbumForm = ({
     setImg,
     isPublished,
     setAlbumIsLoading,
-    setCurrentIdx
+    setCurrentIdx }) => {
 
-    
-    // handleCreateAlbumSubmitBtn,
-    // handleEditAlbumBtn,
-    // albumFormErrors 
-                    }) => {
-    // dispatch(albumActions.createAlbum(data))
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user)
     const album = useSelector((state) => state.album.current)
     const [albumFormErrors, setAlbumFormErrors] = useState([]);
 
+// UPDATE FORM PROPERTY
     const updateProperty = (property) => (e) => {
         e.preventDefault();
         property(e.target.value);
     }
-    
+
+// HANDLE CREATE ALBUM BUTTON
     const handleCreateAlbumSubmitBtn = (e) => {
         e.preventDefault();
         setAlbumIsLoading(true);
@@ -51,7 +43,6 @@ const AlbumForm = ({
         (async () => {
             try{
                 const res = await dispatch(albumActions.createAlbum(data))
-                // const res = await createAlbum(data);
                 console.log("RES FOR NEW ALBUM ", res.data.newAlbum);
                 await setCurrentIdx(1);
                 await setImg("");
@@ -64,7 +55,7 @@ const AlbumForm = ({
         })()
     }
 
-
+// HANDLE EDIT ALBUM BUTTON
     const handleEditAlbumBtn = (e) => {
         e.preventDefault();
         setAlbumIsLoading(true);
@@ -80,7 +71,6 @@ const AlbumForm = ({
         (async () => {
             try{
                 await dispatch(albumActions.editAlbum(data, album.id));
-                // await editAlbum(data, album.id);
                 await setImg("");
                 await setAlbumFormErrors([]);
                 await setAlbumIsLoading(false);
