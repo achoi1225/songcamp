@@ -44,9 +44,7 @@ const EditAlbumPage = ({
     const [trackIsLoading, setTrackIsLoading] = useState(false);
     const albumDetailSelectIdx = 0;
     const addTrackIdx = 1;
-    // let albumId;
 
-    // let { slug } = useParams();
     const dispatch = useDispatch();
     let { albumId } = useParams();
 

@@ -6,7 +6,7 @@ import SignupPage from "./components/SignupPage";
 import LoginFormPage from "./components/LoginFormPage/index";
 // import SignupFormPage from "./components/SignupFormPage";
 import Navigation from './components/Navigation';
-import DashboardContainer from './components/DashboardContainer';
+import Dashboard from './components/Dashboard';
 import CreateAlbumPage from './components/CreateAlbumPage';
 import EditAlbumPageContainer from './components/EditAlbumPageContainer';
 import AlbumPage from './components/AlbumPage';
@@ -35,7 +35,7 @@ const App = () => {
           <AlbumPage />
         </Route>
         <Route exact path="/dashboard">
-          <DashboardContainer/>
+          <Dashboard/>
         </Route>
         <Route exact path="/create-album">
           <CreateAlbumPage />

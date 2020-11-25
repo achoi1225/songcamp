@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { BioFormContext } from './Dashboard';
+import { BioFormContext } from './';
 
 
 // export const BioForm = ({ bio, setBio, setBioFormVisible, handleSubmitBioBtn, updateBio, errors }) => {

@@ -1,5 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import * as followsActions from '../../store/follows';
+import * as albumsActions from '../../store/albums';
+import * as userActions from '../../store/user';
 
 
 import './dashboard.css';
@@ -12,25 +16,44 @@ import Followers from './Followers';
 
 export const BioFormContext = React.createContext();
 // Donec faucibus aliquam mi, et varius dui mattis sit amet. Sed interdum elit vel lacus condimentum, et dapibus augue consectetur. Ut libero ante, dictum sed ex id, dignissim aliquam arcu. Mauris venenatis pellentesque nisl quis bibendum. Fusce gravida, justo in bibendum ullamcorper, dolor justo tempor purus, non facilisis leo lorem eu augue.
-const Dashboard = ({ 
-    user, 
-    followers, 
-    following, 
-    albums, 
-    getFollowers, 
-    getFollowing, 
-    getAllAlbumsForOneArtist, 
-    editBio }) => {
+const Dashboard = (
+    // user, 
+    // followers, 
+    // following, 
+    // albums, 
+    // getFollowers, 
+    // getFollowing, 
+    // getAllAlbumsForOneArtist, 
+    // editBio 
+) => {
 
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.session.user);
+    const followers = useSelector((state) => state.follows.followersList);
+    const following = useSelector((state) => state.follows.followingList);
+    const albums = useSelector((state) => state.albums.listForOneArtist);
     const [bio, setBio] = useState("");
     const [bioFormVisible, setBioFormVisible] = useState(false);
     const [bioEditFormVisible, setBioEditFormVisible] = useState(false);
     const [errors, setErrors] = useState([]);
 
+// dispatch(followsActions.getFollowers(id))
+// dispatch(followsActions.getFollowing(id))
+// dispatch(albumsActions.getAllAlbumsForOneArtist(userId))
+// dispatch(userActions.editBio(userId))
+
     useEffect(() => {
-        getFollowers(user.id)
-            .then(() =>  getFollowing(user.id))
-            .then(() =>  getAllAlbumsForOneArtist(user.id))
+        // getFollowers(user.id)
+        dispatch(followsActions.getFollowers(user.id))
+            .then(() =>  
+                // getFollowing(user.id)
+                dispatch(followsActions.getFollowing(user.id))
+            )
+            .then(() =>  
+                // getAllAlbumsForOneArtist(user.id)
+                dispatch(albumsActions.getAllAlbumsForOneArtist(user.id))
+
+            )
     }, [user.id])
 
     const updateBio = () => (e) => {
@@ -55,14 +78,14 @@ const Dashboard = ({
     const handleSubmitBioBtn = (e) => {
         e.preventDefault();
         const data = { bio }
-        return editBio(data)
+        // editBio(data)
+        return dispatch(userActions.editBio(data))
             .then((res) => {
                 handleCloseBioFormBtn();
             })
             .catch((res) => {
                 if(res.data && res.data.errors) setErrors(res.data.errors);
             })
-        // editBio(data)
     }
     
 
