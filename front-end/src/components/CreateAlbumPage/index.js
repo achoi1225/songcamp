@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import CheckIcon from '@material-ui/icons/Check';
 
 import './album-edit-page.css';
-import './upload-form.css';
+// import './upload-form.css';
 import * as albumActions from '../../store/album';
 import AlbumForm from './AlbumForm';
 import TrackForm from './TrackForm';
@@ -15,11 +15,8 @@ import CircularIndeterminate from './CircularIndeterminate';
 const CreateAlbumPage = () => {
         
     const dispatch = useDispatch();
-
-    // const user = useSelector((state) => state.session.user)
     const album = useSelector((state) => state.album.current)
-
-    const [tracksData, setTracksData] = useState({});
+    const [tracksData, setTracksData] = useState({ title1: '', track1Url: '' });
     const [currentIdx, setCurrentIdx] = useState(0);
     const [albumTitle, setAlbumTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -50,7 +47,7 @@ const CreateAlbumPage = () => {
         if(album) {
             dispatch(albumActions.removeAlbum())
         }
-    },[album, dispatch])
+    },[dispatch])
 
     const handleAlbumDetailSelect = (e) => {
         e.preventDefault();
@@ -77,12 +74,7 @@ const CreateAlbumPage = () => {
         const data = { imgUrl };
 
         (async () => {
-            try{
-                await dispatch(albumActions.deleteAlbumArtwork(data, album.id));
-                // e.target.value = null;
-            } catch(res) {
-                // if (res.data && res.data.errors) setAlbumFormErrors(res.data.errors);
-            }
+            await dispatch(albumActions.deleteAlbumArtwork(data, album.id));
         })()
     }
 
@@ -105,10 +97,10 @@ const CreateAlbumPage = () => {
 
     }
 
-    if(album) {
+    // if(album) {
 
-        console.log(!!album.imgUrl)
-    }
+    //     console.log(!!album.imgUrl)
+    // }
     return (
         <div className="album-edit-page__holder">
             <div className="album-edit-page__left-col">
@@ -146,19 +138,23 @@ const CreateAlbumPage = () => {
                     </div>
                 </div>
 
-                
+                {
+                    (currentIdx >= addTrackIdx) ? 
+                        <h4 className="album-edit-page__tracks-header">
+                            TRACKS
+                        </h4> :
+                        null
+                }
                 {uploadedTracksVisible && album && album.tracks ? 
                     (
-                        <>
-                        <h4 className="album-edit-page__tracks-header">TRACKS</h4>
-                            <UploadedTracks 
-                                tracksData={tracksData}
-                                setTracksData={setTracksData}
-                                currentIdx={currentIdx}
-                                setCurrentIdx={setCurrentIdx}
-                                setCurrentTrackId={setCurrentTrackId}
-                                setTrackCount={setTrackCount}/>
-                        </>
+                        <UploadedTracks 
+                            tracksData={tracksData}
+                            setTracksData={setTracksData}
+                            currentIdx={currentIdx}
+                            setCurrentIdx={setCurrentIdx}
+                            setTrackCount={setTrackCount}
+                            setCurrentTrackId={setCurrentTrackId}
+                        />
                     ) : null
                 }
 

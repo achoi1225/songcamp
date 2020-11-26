@@ -16,7 +16,7 @@ router.use(requireAuth);
 const validateAlbumDetails = [
     check('title')
       .exists({ checkFalsy: true })
-      .withMessage('Please provide a TITLE for your album ( max 100 characters ).'),
+      .withMessage('Please provide a TITLE for your album ( max 50 characters ).'),
     handleValidationErrors,
   ];
 

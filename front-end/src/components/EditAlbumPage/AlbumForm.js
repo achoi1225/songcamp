@@ -1,4 +1,4 @@
-import React, { useState  } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as albumActions from '../../store/album';
@@ -55,7 +55,7 @@ const AlbumForm = ({
             }
         })()
     }
-
+    
 // HANDLE EDIT ALBUM BUTTON
     const handleEditAlbumBtn = (e) => {
         e.preventDefault();
@@ -84,8 +84,8 @@ const AlbumForm = ({
 
     return (
         <div className="album-edit-page__album-detail-form" >
-            <ul className="album-form-errors__holder">
-                {albumFormErrors.map((error, idx) => <li className="album-form-errors" key={idx}>{error}</li>)}
+            <ul className="album-form-errors">
+                {albumFormErrors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
             <label className="album-edit-page__album-title-label">ALBUM TITLE</label>
             <input className="album-edit-page__album-title-input" 
@@ -113,10 +113,11 @@ const AlbumForm = ({
             
             { !album ? 
                 <>
-                    <span className="album-edit-page__submit-instruction">Submit to start adding songs!</span>
+                    {/* <span className="album-edit-page__submit-instruction">Submit to start adding songs!</span>
                     <button type="submit" className="album-edit-page__submit-btn" onClick={handleCreateAlbumSubmitBtn}>
                         Submit
-                    </button> 
+                    </button>  */}
+                    null
                 </> :
                 <button type="submit" className="album-edit-page__edit-btn" onClick={handleEditAlbumBtn}>Edit</button>
             }

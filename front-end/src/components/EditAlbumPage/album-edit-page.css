@@ -217,14 +217,19 @@ body {
     margin-top: 50px;
 }
 
+.album-edit-page__album-detail-form input {
+    outline: none;
+    border: 1px solid lightgray;
+}
+
+.album-edit-page__album-detail-form textarea {
+    outline: none;
+    border: 1px solid lightgray;
+}
 
 .album-edit-page__album-detail-form label:first-child{
     font-weight: bold;
     /* margin-top: 0; */
-}
-
-.album-edit-page__album-detail-form input {
-    outline: none;
 }
 
 .album-edit-page__album-title-label {
@@ -245,9 +250,8 @@ body {
 
 .album-edit-page__upload-input {
     padding: 5px 5px;
-    border: 1px solid black;
     margin-bottom: 25px;
-
+    border: 1px solid lightgray
 }
 
 .album-edit-page__upload-input::-webkit-file-upload-button {
@@ -335,6 +339,13 @@ body {
     font-weight: 500;
 }
 
+.album-form-errors__holder {
+    margin: 0 0 25px 17px;
+}
+
+.album-form-errors {
+    color: red;
+}
 
 .album-edit-page__track-form {
     display: flex;
@@ -350,8 +361,16 @@ label.album-edit-page__track-title-input {
     padding: 5px 5px;
     margin: 5px 0 20px 0;
     border: 1px solid lightgray;
+    outline: none;
 }
 
+.track-form-errors__holder {
+    margin: 0 0 25px 17px;
+}
+
+.track-form-errors {
+    color: red;
+}
 
 .album-edit-page__publish-message {
     font-weight: bold;

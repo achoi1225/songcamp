@@ -42,8 +42,8 @@ const TrackForm = (
         data.append("allowDownload", false);
         data.append("file", tracksData.track1Url);
 
-        (async () => {
-            try {
+        try {
+            (async () => {
                 const newTrack = await dispatch(tracksActions.createTrack(data))
                 await setUploadedTracksVisible(true); 
                 await setTracksData(prevState => ({...prevState, track1Url: ''}));
@@ -51,13 +51,12 @@ const TrackForm = (
                 await setTrackCount(trackCount+1);
                 await setTrackFormErrors([])
                 await setCurrentIdx(1);
-                setTrackIsLoading(false);
-            }catch(res) {
-                setTrackIsLoading(false);
-                console.log("ERROR!!")
-                if(res.data && res.data.errors) setTrackFormErrors(res.data.errors);
-            } 
-        })()
+                await setTrackIsLoading(false);
+            })()
+        } catch(res) {
+            setTrackIsLoading(false);
+            if (res.data && res.data.errors) setTrackFormErrors(res.data.errors);
+        }
     }
 
 // HANDLE EDIT TRACK BUTTON
@@ -82,17 +81,18 @@ const TrackForm = (
             }
         })()
     }
-
+    
+    console.log("track count!!! ", album.tracks.length)
     return (
         <form 
             onSubmit={handleUploadTrackBtn} 
             className="album-edit-page__track-form" 
             // style={{ marginTop: `${193+(currentIdx - 2)*(2*(currentIdx - 2) + 74)}px` }}
             style={{ marginTop: currentIdx > 1 ? 
-                `${ (currentIdx-2)*70 + 217}px` :
-                album.tracks.length === 0 ?
-                    `217px` :
-                `${(album.tracks.length)*70 + 217}px`
+                    `${ (currentIdx-2)*70 + 217}px` :
+                     album.tracks.length === 0 ?
+                        `217px` :
+                    `${(album.tracks.length)*70 + 217}px`
             }}>
             <ul className="track-form-errors__holder">
                 {trackFormErrors.map((error, idx) => <li className="track-form-errors" key={idx}>{error}</li>)}
@@ -111,9 +111,7 @@ const TrackForm = (
                     <label>upload track:</label>
                     <input className="album-edit-page__upload-input"
                         type="file"
-                        onChange={(e) => 
-                            setTracksData(prevState => 
-                                ({...prevState, [trackUrl]: e.target.files[0]}))}
+                        onChange={(e) => setTracksData(prevState => ({...prevState, [trackUrl]: e.target.files[0]}))}
                     />
                     <button className="album-edit-page__submit-btn" type="submit">Submit</button>
                 </> :

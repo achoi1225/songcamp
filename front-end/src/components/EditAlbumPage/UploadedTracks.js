@@ -1,29 +1,44 @@
 import React, {useState} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import * as tracksActions from '../../store/tracks';
 
 const UploadedTracks = ({
-    album, 
     tracksData, 
     setTracksData, 
     currentIdx, 
     setCurrentIdx, 
-    handleDeleteTrackBtn,
-    setCurrentTrackId }) => {
-    // if(!album) {
-    //     return null;
-    // }
-    // const [uploadedTrackClicked, setUploadedTrackClicked] = useState(false)
-    // if(!album) {
-    //     return null;
-    // }
+    setCurrentTrackId,
+    trackCount,
+    setTrackCount
+}) => {
 
+    const dispatch = useDispatch();
+    const album = useSelector((state) => state.album.current)
     const tracks = album.tracks;
+    const [trackDeleteErrors, setTrackDeleteErrors] = useState({});
+
+    // HANDLE DELETE TRACK BUTTON
+    const handleDeleteTrackBtn = (trackId) => (e) => {
+        e.preventDefault();
+        try{
+            (async () => {
+                const res = await dispatch(tracksActions.deleteTrack(trackId))
+                await setTrackCount(trackCount - 1);
+                await setCurrentIdx(1);
+                console.log("DELETED! ", res);
+            })()
+        } catch(res) {
+            if (res.data && res.data.errors) setTrackDeleteErrors(res.data.errors);
+        }
+    }
+
     return (
         <>
             {tracks.map((track, idx) => {
                 const keyName = `title${idx+2}`;
                 console.log("KEYNAME", keyName)
                 console.log("TRACKS DATA!!! ", tracksData);
-                // setTracksData(prevState => ({...prevState, [keyName]: track.title}));
                 return (
                     <div key={track.id} onClick={() => 
                             {

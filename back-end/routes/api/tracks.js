@@ -76,7 +76,6 @@ router.post(
       req.body.trackUrl = uploadedTrack.Location; 
     }
 
-    // console.log("REQ BODY!!!", req.body);
     const newTrack = await Track.create(req.body);
     res.json({ newTrack });
   })
@@ -111,7 +110,6 @@ router.patch(
             req.body.trackUrl = uploadedTrack.Location; 
         }
   
-        console.log("REQ BODY!!!", req.body);
         const updatedTrack = await Track.findOne({
             where: {
                 id: req.params.id,

@@ -15,11 +15,9 @@ export const AddTrackSection = ({
                 ("album-edit-page__track-select")
             }
         >
-            {/* <div className="album-edit-page__track-title">  */}
-                <div className="album-edit-page__add-track-text">
-                    add track
-                </div>
-            {/* </div> */}
+            <div className="album-edit-page__add-track-text">
+                add track
+            </div>
 
             {trackIsLoading ?
                 <div className="album-edit-page__progress-bar-holder ">

@@ -8,7 +8,7 @@ import LoginFormPage from "./components/LoginFormPage/index";
 import Navigation from './components/Navigation';
 import Dashboard from './components/Dashboard';
 import CreateAlbumPage from './components/CreateAlbumPage';
-import EditAlbumPageContainer from './components/EditAlbumPageContainer';
+import EditAlbumPage from './components/EditAlbumPage';
 import AlbumPage from './components/AlbumPage';
 import * as sessionActions from "./store/session";
 
@@ -44,7 +44,7 @@ const App = () => {
             <CreateAlbumPage />
           </Route>
           <Route exact path="/edit-album/:albumId">
-            <EditAlbumPageContainer/>
+            <EditAlbumPage/>
           </Route>
           {/* <Route exact path="/signup">
             <SignupFormPage />

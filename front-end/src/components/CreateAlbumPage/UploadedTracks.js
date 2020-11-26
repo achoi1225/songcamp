@@ -15,11 +15,8 @@ const UploadedTracks = ({
     setCurrentIdx, 
     setCurrentTrackId,
     trackCount,
-    setTrackCount, }) => {
-
-    // if(!album) {
-    //     return null;
-    // }
+    setTrackCount, 
+}) => {
     
     const dispatch = useDispatch();
     const album = useSelector((state) => state.album.current)
@@ -81,5 +78,6 @@ const UploadedTracks = ({
         </>
     )
 }
+
 
 export default UploadedTracks;
