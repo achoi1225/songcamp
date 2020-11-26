@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import CheckIcon from '@material-ui/icons/Check';
 
-import * as albumActions from '../../store/album';
 import './album-edit-page.css';
 import './upload-form.css';
+import * as albumActions from '../../store/album';
 import AlbumForm from './AlbumForm';
 import TrackForm from './TrackForm';
 import UploadedTracks from './UploadedTracks';
@@ -146,18 +146,19 @@ const CreateAlbumPage = () => {
                     </div>
                 </div>
 
-                <h4 className="album-edit-page__tracks-header">TRACKS</h4>
                 
                 {uploadedTracksVisible && album && album.tracks ? 
                     (
-                        <UploadedTracks 
-                            tracksData={tracksData}
-                            setTracksData={setTracksData}
-                            currentIdx={currentIdx}
-                            setCurrentIdx={setCurrentIdx}
-                            setCurrentTrackId={setCurrentTrackId}
-                            setTrackCount={setTrackCount}
-                        />
+                        <>
+                        <h4 className="album-edit-page__tracks-header">TRACKS</h4>
+                            <UploadedTracks 
+                                tracksData={tracksData}
+                                setTracksData={setTracksData}
+                                currentIdx={currentIdx}
+                                setCurrentIdx={setCurrentIdx}
+                                setCurrentTrackId={setCurrentTrackId}
+                                setTrackCount={setTrackCount}/>
+                        </>
                     ) : null
                 }
 
@@ -181,13 +182,14 @@ const CreateAlbumPage = () => {
                         <button className="album-edit-page__publish-btn" onClick={handlePublishBtn}>
                             Published <CheckIcon style={{ fontSize: 14 }}/>
                         </button> 
-                    </> :
+                    </> : album ?
                     <>
                         <span className="album-edit-page__publish-message">Album will be saved as a draft until it's published</span>
                         <button className="album-edit-page__publish-btn" onClick={handlePublishBtn}>
                             Publish
                         </button>
-                    </>
+                    </> :
+                    null
                 }
 
             </div>

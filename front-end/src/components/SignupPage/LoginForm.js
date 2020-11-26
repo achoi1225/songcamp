@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 
 import * as sessionActions from "../../store/session";
 
@@ -10,14 +10,15 @@ import './modal-form.css';
 
 const LoginForm = ({ hideLoginForm }) => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
     const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
 
-    if (sessionUser) return (
-        <Redirect to="/" />
-    );
+    // if (sessionUser) return (
+    //     <Redirect to="/" />
+    // );
 
     const updateProperty = (property) => (e) => {
         property(e.target.value);
@@ -33,9 +34,12 @@ const LoginForm = ({ hideLoginForm }) => {
         console.log('IN HANDLESUBMIT!!!');
 
         return dispatch(sessionActions.login({ credential, password }))
-                .then(() => hideLoginForm())
-                .catch((res) => {
-                    if (res.data && res.data.errors) setErrors(res.data.errors);
+            .then(() => {
+                hideLoginForm();
+                return history.push("/dashboard");
+            })
+            .catch((res) => {
+                if (res.data && res.data.errors) setErrors(res.data.errors);
         });
     }
 

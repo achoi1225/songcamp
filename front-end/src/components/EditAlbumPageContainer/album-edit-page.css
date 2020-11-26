@@ -377,8 +377,3 @@ label.album-edit-page__track-title-input {
 .album-edit-page__publish-btn:active {
     background-color: #e55b40;
 }
-
-.errors {
-    margin: 0 0 15px 15px;
-    color: red;
-}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import '../../css/navigation.css'
@@ -7,11 +7,10 @@ import ProfileButton from './ProfileButton';
 
 export const Navigation = ({ isLoaded }) => {
     const sessionUser = useSelector((state) => state.session.user);
-
-    console.log("USER", sessionUser);
-    if(!isLoaded) {
-        return null;
-    }
+    const location = useLocation();
+    console.log("PATHNAME!! ", location.pathname);
+    // console.log("USER", sessionUser);
+    if(location.pathname === '/signup') return null
 
     return (
         <>

@@ -67,14 +67,17 @@ const ArtistSignupForm = () => {
     // }
 
     return (
+        <>
+        <div className="artist-signup-form__header-container">
+            <h3 className="artist-signup-form__header">
+                Sign up for a Songcamp artist account
+            </h3>
+        </div>
         <div className="artist-signup-form__holder">
             <div className="artist-signup-form__content">
-                <div className="artist-signup-form__header-container">
-                    <h3 className="signup-form-header">Sign up for a Songcamp artist account</h3> <span onClick={handleClose} className="signup-form-close-btn">x</span>
-                </div>
                 <form className="artist-signup-form">
-                    <ul>
-                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                    <ul className="error-list">
+                        {errors.map((error, idx) => <li className="errors" key={idx}>{error}</li>)}
                     </ul>
                     <label>Artist/Band name</label>
                     <input type="text" name="artistName" placeholder={artistName} value={artistName} onChange={updateProperty(setArtistName)} />
@@ -97,6 +100,7 @@ const ArtistSignupForm = () => {
                 </form>
             </div>
         </div>
+        </>
     )
 }
 

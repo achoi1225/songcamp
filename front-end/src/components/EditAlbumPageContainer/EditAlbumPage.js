@@ -7,13 +7,12 @@ import CheckIcon from '@material-ui/icons/Check';
 // import {USER_ID} from '../store/actions/authentication';
 import './album-edit-page.css';
 import './upload-form.css';
+import * as albumActions from '../../store/album';
 import AlbumForm from './AlbumForm';
 import TrackForm from './TrackForm';
 import UploadedTracks from './UploadedTracks';
 import AddTrackSection from './AddTrackSection';
 import CircularIndeterminate from './CircularIndeterminate';
-
-import * as albumActions from '../../store/album';
 
 
 const EditAlbumPage = ({ 
@@ -347,15 +346,9 @@ const EditAlbumPage = ({
                             album={album}
                             currentIdx={currentIdx}
                             handleUploadTrackBtn={handleUploadTrackBtn}
-                            // trackTitle={trackTitle}
-                            // setTrackTitle={setTrackTitle}
-                            // setTrack={setTrack}
-                            // updateProperty={updateProperty}
-                            // addTrackIdx={addTrackIdx}
                             tracksData={tracksData}
                             setTracksData={setTracksData}
                             updateTrackFormProperty={updateTrackFormProperty}
-                            // trackCount={trackCount}
                             handleEditTrackTitleBtn={handleEditTrackTitleBtn}/>
                     ) : null
                 }

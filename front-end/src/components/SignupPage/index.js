@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-// import { useParams } from "react-router-dom";
+import React from "react";
+import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector, } from "react-redux";
 
 import './signup-page.css';
@@ -15,24 +15,16 @@ import { showFanSignupForm, hideFanSignupForm } from '../../store/ui-fan-signup-
 import { showArtistSignupForm, hideArtistSignupForm } from '../../store/ui-artist-signup-form';
 import { showLoginForm, hideLoginForm } from '../../store/ui-login-form';
 import { showRoleForm, hideRoleForm } from '../../store/ui-role-form';
-// import { FanSignup } from "../store/actions/authentication";
 
 const SignupPage = ({ setNavVisible }) => {
-    // const [role, setRole] = useState('');
+    const sessionUser = useSelector((state) => state.session.user);
     const fanSignupFormVisible = useSelector(state => state.fanSignupForm.formVisible);
     const artistSignupFormVisible = useSelector(state => state.artistSignupForm.formVisible);
     const loginFormVisible = useSelector(state => state.loginForm.formVisible);
     const roleFormVisible = useSelector(state => state.roleForm.formVisible);
     const dispatch = useDispatch();
 
-    // const updateProperty = (property) => (e) => {
-    //     console.log(e.target.value)
-    //     property(e.target.value);
-    // }
-
-    // useEffect(() => {
-    //     setNavVisible(false);
-    // }, [])
+    if(sessionUser) return <Redirect to="/" />
 
     return (
         <>
@@ -54,8 +46,8 @@ const SignupPage = ({ setNavVisible }) => {
                     <div className="signup-page__header-holder">
 
                             <div className="signup-page__logo-holder">
-                                <img className="signup-page__tent-img" src={tent} />
-                                <h3>songcamp</h3>
+                                <img alt="logo" className="signup-page__tent-img" src={tent} />
+                                <h3 className="signup-page__header">songcamp</h3>
                             </div>
                             <div className="signup-page__discover">
                                 Discover new and amazing music and support the artists who make it. 
@@ -80,7 +72,7 @@ const SignupPage = ({ setNavVisible }) => {
                             <div className="signup-page__message-holder">
                                 <h2>Welcome to Songcamp</h2>
                                 &nbsp;Listen. Create. Share.
-                                <button>Sign Up Now</button>
+                                <button onClick={() => dispatch(showRoleForm())}>Sign Up Now</button>
                             </div>
                         </div>
                     )

@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import { uploadPhoto, deletePhoto, getUser, editBio } from '../store/actions/user'; 
-
-// import {USER_ID} from '../store/actions/authentication';
-// import { createAlbum } from '../store/actions/album';
-// import { createTrack } from '../store/actions/track';
 
 import * as albumActions from '../../store/album';
 import * as tracksActions from '../../store/tracks';
