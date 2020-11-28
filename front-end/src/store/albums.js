@@ -65,7 +65,7 @@ export const getRandomAlbums = () => async (dispatch) => {
 
   const res = await fetch(`/api/albums/random`);
   
-  dispatch(loadRandomAlbums(res.data.RandomAlbums));
+  dispatch(loadRandomAlbums(res.data.randomAlbums));
   return res;
 }
 

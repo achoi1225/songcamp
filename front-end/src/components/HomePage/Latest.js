@@ -17,7 +17,7 @@ export const Latest = () => {
 
     return (
         <>
-        <h5 className="latest__header">LATEST</h5>
+        <div className="latest__header">LATEST</div>
         <div className="latest__holder">
             {newAlbums && newAlbums.map((album) => {
                 return(

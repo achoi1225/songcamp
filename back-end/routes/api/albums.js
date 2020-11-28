@@ -102,7 +102,7 @@ router.get('/new', asyncHandler(async (req, res) => {
 // ========================================================================================
 router.get('/random', asyncHandler(async (req, res) => {
 
-  const featuredAlbums = await Album.findAll({
+  const randomAlbums = await Album.findAll({
     where: {
       isPublished: true,
     },
@@ -114,8 +114,8 @@ router.get('/random', asyncHandler(async (req, res) => {
     ],
   })
 
-  if(featuredAlbums) {
-    res.json({featuredAlbums});
+  if(randomAlbums) {
+    res.json({randomAlbums});
   } else {
     console.log("Albums not found")
   }

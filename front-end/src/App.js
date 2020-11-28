@@ -6,6 +6,7 @@ import SignupPage from "./components/SignupPage";
 import LoginFormPage from "./components/LoginFormPage/index";
 // import SignupFormPage from "./components/SignupFormPage";
 import Navigation from './components/Navigation';
+import Nav from './components/Nav';
 import Dashboard from './components/Dashboard';
 import CreateAlbumPage from './components/CreateAlbumPage';
 import EditAlbumPage from './components/EditAlbumPage';
@@ -25,7 +26,8 @@ const App = () => {
 
   return isLoaded && (
     <>
-      <Navigation/>
+      {/* <Navigation/> */}
+      <Nav />
       <Switch>
         <Route exact={true} path="/signup" 
           render = {() => <SignupPage /> }
