@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as followsActions from '../../store/follows';
 
 export const Followers = ({ artistId }) => {
-
     const dispatch = useDispatch();
     const followers = useSelector((state) => state.follows.followersList);
 

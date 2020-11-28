@@ -8,8 +8,7 @@ import ProfileButton from './ProfileButton';
 export const Navigation = ({ isLoaded }) => {
     const sessionUser = useSelector((state) => state.session.user);
     const location = useLocation();
-    console.log("PATHNAME!! ", location.pathname);
-    // console.log("USER", sessionUser);
+
     if(location.pathname === '/signup') return null
 
     return (

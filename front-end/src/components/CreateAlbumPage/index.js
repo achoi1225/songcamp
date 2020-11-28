@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 import CheckIcon from '@material-ui/icons/Check';
 
 import './album-edit-page.css';
-// import './upload-form.css';
 import * as albumActions from '../../store/album';
 import AlbumForm from './AlbumForm';
 import TrackForm from './TrackForm';
@@ -30,17 +29,6 @@ const CreateAlbumPage = () => {
     const [trackIsLoading, setTrackIsLoading] = useState(false);
     const albumDetailSelectIdx = 0;
     const addTrackIdx = 1;
-    // let albumId;
-        // dispatch(albumActions.createAlbum(data))
-    // dispatch(albumActions.editAlbum(data, albumId))
-//     dispatch(albumActions.deleteAlbumArtwork(data, albumId))
-//    dispatch(albumActions.publishAlbum(data, albumId))
-//     dispatch(tracksActions.createTrack(data))
-//     dispatch(tracksActions.editTrackTitle(data, trackId))
-//    dispatch(tracksActions.deleteTrack(trackId))
-    
-    console.log("TRACK COUNT!!! ", trackCount);
-    console.log(" TRACK ID!!! ", currentTrackId);
  
     //Differs from EditAlbumPage =====================================
     useEffect(() => {
@@ -60,12 +48,6 @@ const CreateAlbumPage = () => {
             }
         })()
     }
-
-    // const updateProperty = (property) => (e) => {
-    //     e.preventDefault();
-    //     property(e.target.value);
-    // }
-
 
 // HANDLE DELETE ALBUM ARTWORK BUTTON 
     const handleDeleteAlbumArtworkBtn = (e) => {
@@ -97,10 +79,6 @@ const CreateAlbumPage = () => {
 
     }
 
-    // if(album) {
-
-    //     console.log(!!album.imgUrl)
-    // }
     return (
         <div className="album-edit-page__holder">
             <div className="album-edit-page__left-col">

@@ -35,13 +35,7 @@ router.get('/following/:id(\\d+)', asyncHandler(async(req, res) => {
                 attributes: ['id','userName','imgUrl']
             },
         ]
-
-        // include: [
-        //     {model: User, attributes: {exclude: ['email','hashedPassword']}},
-        // ]
     })
-    
-    // console.log("FOLLOWING!!!", following[0].followingId)
     res.json({following});    
 }));
 
@@ -65,8 +59,6 @@ router.get('/followers/:id(\\d+)', asyncHandler(async(req, res) => {
             },
         ]
     })
-    
-    // console.log("FOLLOWING!!!", following[0].followingId)
     res.json({followers});    
 }));
 
@@ -75,12 +67,8 @@ router.get('/followers/:id(\\d+)', asyncHandler(async(req, res) => {
 // CREATE A NEW FOLLOWING
 // =============================================================================================
 router.post(`/:id(\\d+)`, asyncHandler( async(req, res) => {
-    // const userId = parseInt(req.params.id);
-    // const { followingId } = req.body;
     const userId = parseInt(req.user.id, 10);
     const followingId = parseInt(req.params.id);
-
-    // console.log("FOLLOWING ID!!!!", req.body);
 
     const newFollow = await Follower.create({
         userId,
@@ -97,8 +85,7 @@ router.post(`/:id(\\d+)`, asyncHandler( async(req, res) => {
 router.delete('/:id(\\d+)', asyncHandler( async(req, res, next) => {
     const userId = parseInt(req.user.id, 10);
     const followingId = parseInt(req.params.id);
-    console.log("INSIDE DELETE!!")
-    // const following = await Follower.findByPk(id);
+
     const following = await Follower.findOne({
         where: {
             userId,

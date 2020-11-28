@@ -25,9 +25,7 @@ const TrackForm = (
 
 // UPDATE TRACK FORM PROPERTY
     const updateTrackFormProperty = (property, keyName) => (e) => {
-        console.log("IDX VALUE!!! ", keyName)
         property(prevState => ({...prevState, [keyName]: e.target.value}));
-        console.log("title1!!! ",  tracksData[keyName]);
     }
 
 // HANDLE UPLOAD TRACK BUTTON 
@@ -44,7 +42,7 @@ const TrackForm = (
 
         try {
             (async () => {
-                const newTrack = await dispatch(tracksActions.createTrack(data))
+                await dispatch(tracksActions.createTrack(data))
                 await setUploadedTracksVisible(true); 
                 await setTracksData(prevState => ({...prevState, track1Url: ''}));
                 await setTracksData(prevState => ({...prevState, title1: ''}));
@@ -82,7 +80,6 @@ const TrackForm = (
         })()
     }
     
-    console.log("track count!!! ", album.tracks.length)
     return (
         <form 
             onSubmit={handleUploadTrackBtn} 

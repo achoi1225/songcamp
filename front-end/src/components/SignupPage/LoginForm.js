@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import * as sessionActions from "../../store/session";
-
-// import { getUser} from "../store/actions/user";
-// import { setToken } from "../store/actions/authentication";
 import './modal-form.css';
 
 const LoginForm = ({ hideLoginForm }) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const sessionUser = useSelector(state => state.session.user);
+    // const sessionUser = useSelector(state => state.session.user);
     const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
@@ -25,13 +22,11 @@ const LoginForm = ({ hideLoginForm }) => {
     }
 
     const handleClose = (e) => {
-        console.log('close');
         hideLoginForm();
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('IN HANDLESUBMIT!!!');
 
         return dispatch(sessionActions.login({ credential, password }))
             .then(() => {

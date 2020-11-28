@@ -2,11 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
 import CheckIcon from '@material-ui/icons/Check';
-// import classNames from 'classnames';
 
-// import {USER_ID} from '../store/actions/authentication';
 import './album-edit-page.css';
-// import './upload-form.css';
 import * as albumActions from '../../store/album';
 import AlbumForm from './AlbumForm';
 import TrackForm from './TrackForm';
@@ -14,16 +11,7 @@ import UploadedTracks from './UploadedTracks';
 import AddTrackSection from './AddTrackSection';
 import CircularIndeterminate from './CircularIndeterminate';
 
-
-const EditAlbumPage = ({ 
-    user, 
-    // getOneAlbum, 
-    editAlbum, 
-    deleteAlbumArtwork, 
-    publishAlbum,
-    createTrack,
-    editTrackTitle,
-    deleteTrack }) => {
+const EditAlbumPage = () => {
 
         
     const dispatch = useDispatch();
@@ -40,17 +28,12 @@ const EditAlbumPage = ({
     const [currentTrackId, setCurrentTrackId] = useState(0);
     const [albumIsLoading, setAlbumIsLoading] = useState(false);
     const [trackIsLoading, setTrackIsLoading] = useState(false);
-    // const [uploadedTracksVisible, setUploadedTracksVisible] = useState(false);
-    // const [uploadedTrackClicked, setUploadedTrackClicked] = useState(false);
-    const [albumFormErrors, setAlbumFormErrors] = useState([]);
-    const [trackFormErrors, setTrackFormErrors] = useState([]);
+    // const [albumFormErrors, setAlbumFormErrors] = useState([]);
+    // const [trackFormErrors, setTrackFormErrors] = useState([]);
     const albumDetailSelectIdx = 0;
     const addTrackIdx = 1;
 
     let { albumId } = useParams();
-
-    console.log("TRACK COUNT!!! ", trackCount);
-    console.log("CURRENT TRACK ID!!! ", currentTrackId);
  
     useEffect(() => {
         (async () => {
@@ -79,7 +62,6 @@ const EditAlbumPage = ({
 
         (async () => {
             await dispatch(albumActions.deleteAlbumArtwork(data, album.id));
-            // e.target.value = null;
         })()
     }
 
@@ -93,10 +75,10 @@ const EditAlbumPage = ({
         
         (async () => {
             try{
-                await publishAlbum(data, album.id);
+                await dispatch(albumActions.publishAlbum(data, album.id));
                 await setIsPublished(true);
             } catch(res) {
-                if (res.data && res.data.errors) setAlbumFormErrors(res.data.errors);
+                // if (res.data && res.data.errors) setAlbumFormErrors(res.data.errors);
             }
         })()
 

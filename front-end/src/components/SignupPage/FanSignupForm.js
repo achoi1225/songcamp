@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
+// import { Redirect } from "react-router-dom";
 
 import './modal-form.css';
 import * as sessionActions from "../../store/session";
-// import { setToken } from "../store/actions/authentication";
 
 const FanSignupForm = ({ hideFanSignupForm }) => {
     const [email, setEmail] = useState("");
@@ -17,10 +16,8 @@ const FanSignupForm = ({ hideFanSignupForm }) => {
     const bio= null; 
     const imgUrl= null;
     const genre= null;
-    // const [formVisible, setFormVisible] = useState("");
     const dispatch = useDispatch();
- 
-    // for testing
+
 
     const updateProperty = (property) => (e) => {
         console.log(e.target.value)
@@ -28,7 +25,6 @@ const FanSignupForm = ({ hideFanSignupForm }) => {
     }
 
     const handleClose = (e) => {
-        console.log('close');
         hideFanSignupForm();
     }
 

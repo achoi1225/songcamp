@@ -123,9 +123,6 @@ AWS.config.update({
 const s3 = new AWS.S3(); // CONSTRUCTS A SERVICE OBJECT
 
 const imgFileFilter = (req, res, next) => {
-  
-  console.log("INSIDE IMG FILE FILTER!!!")
-  console.log("REQ!!! ", req);
   if(req.files) {
     const file = req.files[0];
     if(file.mimetype === "image/jpeg" || file.mimetype === "image/jpg" || file.mimetype === "image/png") {
@@ -144,8 +141,6 @@ router.patch("/:id(\\d+)",
   upload.any(),
   imgFileFilter,
   asyncHandler( async(req, res, next) => {
-
-    console.log("INSIDE PHOTOS ROUTER!!!!")
     // GET FILE REFERENCE
     
     //CREATE PARAMS OBJECT FOR S3
@@ -167,9 +162,6 @@ router.patch("/:id(\\d+)",
     //   // GET URL OF THE FILE AND PUT IT IN THE REQUEST OBJECT FOR LATER USE
       req.body.imgUrl = uploadedImage.Location;
     }
-    
-    // console.log("CHECK IF REQ BODY HAS IMG URL!!!", req.body.imgUrl);
-
     const user = await User.findOne({
           where: {
             id: req.params.id
@@ -182,7 +174,6 @@ router.patch("/:id(\\d+)",
     // next(listNotFoundError(req.params.id));
     } else {
       const updatedUser = await user.update(req.body);
-      console.log("UPDATED USER!!!! ", updatedUser);
       res.json({updatedUser});
     }
   })

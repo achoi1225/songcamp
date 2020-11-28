@@ -43,8 +43,7 @@ const AlbumForm = ({
 
         (async () => {
             try{
-                const res = await dispatch(albumActions.createAlbum(data))
-                console.log("RES FOR NEW ALBUM ", res.data.newAlbum);
+                await dispatch(albumActions.createAlbum(data));
                 await setCurrentIdx(1);
                 await setImg("");
                 await setAlbumFormErrors([]);

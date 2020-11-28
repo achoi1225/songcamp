@@ -10,6 +10,7 @@ import Dashboard from './components/Dashboard';
 import CreateAlbumPage from './components/CreateAlbumPage';
 import EditAlbumPage from './components/EditAlbumPage';
 import AlbumPage from './components/AlbumPage';
+import HomePage from './components/HomePage';
 import * as sessionActions from "./store/session";
 
 const App = () => {
@@ -31,6 +32,9 @@ const App = () => {
         />
         {user ? 
           <>
+          <Route exact path="/">
+            <HomePage/>
+          </Route>
           <Route exact path="/login">
             <LoginFormPage/>
           </Route>

@@ -1,31 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import * as followsActions from '../../store/follows';
 import * as albumsActions from '../../store/albums';
-// import * as userActions from '../../store/user';
-
 
 import './dashboard.css';
 import Albums from './Albums';
 import Following from './Following';
 import AddBioButton from './AddBioButton';
-// import BioForm from './BioForm';
 import BioSection from './BioSection';
 import Followers from './Followers';
 
 export const BioFormContext = React.createContext();
 // Donec faucibus aliquam mi, et varius dui mattis sit amet. Sed interdum elit vel lacus condimentum, et dapibus augue consectetur. Ut libero ante, dictum sed ex id, dignissim aliquam arcu. Mauris venenatis pellentesque nisl quis bibendum. Fusce gravida, justo in bibendum ullamcorper, dolor justo tempor purus, non facilisis leo lorem eu augue.
-const Dashboard = (
-    // user, 
-    // followers, 
-    // following, 
-    // albums, 
-    // getFollowers, 
-    // getFollowing, 
-    // getAllAlbumsForOneArtist, 
-    // editBio 
-) => {
+const Dashboard = () => {
 
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
@@ -34,11 +22,10 @@ const Dashboard = (
     const albums = useSelector((state) => state.albums.oneArtistAlbumsList);
 
     useEffect(() => {
-        // getFollowers(user.id)
         dispatch(followsActions.getFollowers(user.id))
             .then(() =>  dispatch(followsActions.getFollowing(user.id)))
             .then(() =>  dispatch(albumsActions.getAllAlbumsForOneArtist(user.id)))
-    }, [user.id])
+    }, [user.id, dispatch])
 
     const handleEditAlbumBtn = (albumId) => (e) => {
         console.log("edit button clicked!");
@@ -46,7 +33,6 @@ const Dashboard = (
     
 
     if(!albums) {
-        console.log("NOT LOADED YET")
         return null;
     }
 

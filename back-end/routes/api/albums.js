@@ -26,31 +26,6 @@ const validateAlbumDetails = [
   // ]
 
 // ========================================================================================
-// GET FEATURED ALBUMS - Random 5 published records
-// ========================================================================================
-router.get('/featured', asyncHandler(async (req, res) => {
-
-  const featuredAlbums = await Album.findAll({
-    where: {
-      isPublished: true,
-    },
-    order: sequelize.random(),
-    limit: 5,
-    include: [
-        {model: User, as: 'artist', attributes: {exclude: ['email','hashedPassword']}},
-    ],
-    // QUERY FOR PUBLISHED ALBUMS ONLY!!!!
-  })
-
-  if(featuredAlbums) {
-    res.json({featuredAlbums});
-  } else {
-    console.log("Albums not found")
-  }
-
-}))
-
-// ========================================================================================
 // GET ALL PUBLISHED ALBUMS WITH TRACKS AND USER DATA
 // ========================================================================================
 router.get('/', asyncHandler(async (req, res) => {
@@ -82,7 +57,7 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
             id: req.params.id,
         },
         include: [
-            {model: User, as: 'artist', attributes: {exclude: ['email','hashedPassword']}},
+            {model: User, as: 'artist', attributes: ['id', 'artistName', 'genre']},
             {model: Track, as: 'tracks'}
         ]
     })
@@ -96,6 +71,56 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
   
   }))
 
+// ========================================================================================
+// GET NEW ALBUMS - Limit 10 published
+// ========================================================================================
+router.get('/new', asyncHandler(async (req, res) => {
+
+  const newAlbums = await Album.findAll({
+    where: {
+      isPublished: true,
+    },
+    attributes: ['id', 'title', 'description', 'imgUrl'],
+    order: [['createdAt', 'DESC']],
+    limit: 10,
+    include: [
+        {model: User, as: 'artist', attributes: ['id', 'artistName', 'genre'],},
+    ],
+    // QUERY FOR PUBLISHED ALBUMS ONLY!!!!
+  })
+
+  if(newAlbums) {
+    res.json({newAlbums});
+  } else {
+    console.log("Albums not found")
+  }
+
+}))
+
+// ========================================================================================
+// GET RANDOM ALBUMS - Random 8 published records
+// ========================================================================================
+router.get('/random', asyncHandler(async (req, res) => {
+
+  const featuredAlbums = await Album.findAll({
+    where: {
+      isPublished: true,
+    },
+    attributes: ['id', 'title', 'description', 'imgUrl'],
+    order: sequelize.random(),
+    limit: 8,
+    include: [
+        {model: User, as: 'artist', attributes: ['id', 'artistName', 'genre']},
+    ],
+  })
+
+  if(featuredAlbums) {
+    res.json({featuredAlbums});
+  } else {
+    console.log("Albums not found")
+  }
+
+}))
 
 // ========================================================================================
 // GET ALL ALBUMS FOR ARTIST (LOGGED IN USER) WITH TRACKS DATA (id = userId)
@@ -140,7 +165,6 @@ const s3 = new AWS.S3(); // CONSTRUCTS A SERVICE OBJECT
 const fileFilter = (req, res, next) => {
   // CUSTOM CHECK FOR THE MIME TYPES
 
-  console.log("INSIDE FILE FILTER!!");
   const file = req.files[0];
     if(file) {
         if (file.mimetype === "image/jpeg"  || file.mimetype === "image/jpg" || file.mimetype === "image/png") {
@@ -164,8 +188,6 @@ router.post(
   validateAlbumDetails,
   asyncHandler(async function (req, res, next) {
 
-    console.log("INSIDE ALBUM CREATE!!!");
-
     const file = req.files[0];
     if(file) {
         const params = {
@@ -182,10 +204,7 @@ router.post(
         req.body.imgUrl = uploadedImage.Location; 
     }
 
-    console.log("REQ BODY!!!", req.body);
     let newAlbum = await Album.create(req.body);
-
-    console.log("NEW ALBUM CREATED!!", newAlbum);
     res.json({ newAlbum });
   })
 

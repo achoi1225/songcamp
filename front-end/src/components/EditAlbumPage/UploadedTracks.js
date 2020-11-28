@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as tracksActions from '../../store/tracks';
@@ -16,7 +16,7 @@ const UploadedTracks = ({
     const dispatch = useDispatch();
     const album = useSelector((state) => state.album.current)
     const tracks = album.tracks;
-    const [trackDeleteErrors, setTrackDeleteErrors] = useState({});
+    // const [trackDeleteErrors, setTrackDeleteErrors] = useState({});
 
     // HANDLE DELETE TRACK BUTTON
     const handleDeleteTrackBtn = (trackId) => (e) => {
@@ -26,10 +26,9 @@ const UploadedTracks = ({
                 const res = await dispatch(tracksActions.deleteTrack(trackId))
                 await setTrackCount(trackCount - 1);
                 await setCurrentIdx(1);
-                console.log("DELETED! ", res);
             })()
         } catch(res) {
-            if (res.data && res.data.errors) setTrackDeleteErrors(res.data.errors);
+            // if (res.data && res.data.errors) setTrackDeleteErrors(res.data.errors);
         }
     }
 
@@ -37,8 +36,6 @@ const UploadedTracks = ({
         <>
             {tracks.map((track, idx) => {
                 const keyName = `title${idx+2}`;
-                console.log("KEYNAME", keyName)
-                console.log("TRACKS DATA!!! ", tracksData);
                 return (
                     <div key={track.id} onClick={() => 
                             {

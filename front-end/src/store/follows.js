@@ -24,8 +24,6 @@ export const loadFollowers = (list) => ({
 export const getFollowing = (id) => async (dispatch) => {
         const res = await fetch(`/api/follows/following/${id}`);
 
-        console.log("FOLLOWING LIST!!!! ", res.data.following);
-
         dispatch(loadFollowing(res.data.following));
         return res;
 } 
@@ -46,7 +44,6 @@ export const getFollowers = (id) => async (dispatch) => {
 // ==============================================================
 export const follow = (followingId) => async (dispatch, getState) => {
     
-    // const body = { followingId } ;
     const {
         session: { user: { id } }
     } = getState();
@@ -55,7 +52,6 @@ export const follow = (followingId) => async (dispatch, getState) => {
         method: "POST",
     });
 
-    console.log("add follow successful!!!! ", res.data.newFollow);
     dispatch(getFollowing(id));
     return res;
 } 
@@ -69,8 +65,6 @@ export const deleteFollow = (followingId) => async (dispatch, getState) => {
     const {
         session: { user: { id } }
     } = getState();
-
-    console.log("INSIDE DELETE FOLLOW!!", followingId)
 
         const res = await fetch(`/api/follows/${followingId}`, {
             method: "DELETE",

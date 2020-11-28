@@ -2,22 +2,29 @@ import { fetch } from './csrf';
 
 export const LOAD_ALL_ALBUMS = "songcamp/albums/LOAD_ALL_ALBUMS";
 export const LOAD_ALL_ALBUMS_FOR_ONE_ARTIST = "songcamp/albums/LOAD_ALL_ALBUMS_FOR_ONE_ARTIST";
-export const LOAD_FEATURED_ALBUMS = "songcamp/albums/LOAD_FEATURED_ALBUMS";
+export const LOAD_RANDOM_ALBUMS = "songcamp/albums/LOAD_RANDOM_ALBUMS";
+export const LOAD_NEW_ALBUMS = "songcamp/albums/LOAD_NEW_ALBUMS";
 
 export const loadAllAlbums = (list) => ({
-    type: LOAD_ALL_ALBUMS,
-    list
+  type: LOAD_ALL_ALBUMS,
+  list
 })
 
 export const loadAllAlbumsForOneArtist = (list) => ({
-    type: LOAD_ALL_ALBUMS_FOR_ONE_ARTIST,
-    list
-})
-
-export const loadFeaturedAlbums = (list) => ({
-  type: LOAD_FEATURED_ALBUMS,
+  type: LOAD_ALL_ALBUMS_FOR_ONE_ARTIST,
   list
 })
+
+export const loadRandomAlbums = (list) => ({
+  type: LOAD_RANDOM_ALBUMS,
+  list
+})
+
+export const loadNewAlbums = (list) => ({
+  type: LOAD_NEW_ALBUMS,
+  list
+})
+
 // export const setCurrent = (current) => ({
 //     type: SET_CURRENT,
 //     current
@@ -52,13 +59,24 @@ export const getAllAlbumsForOneArtist = (userId) => async (dispatch, getState) =
 
 
 // ========================================================================================
-// GET FEATURED ALBUMS - Random 5 published records
+// GET RANDOM ALBUMS - Random 8 published records
 // ========================================================================================
-export const getFeaturedAlbums = () => async (dispatch) => {
+export const getRandomAlbums = () => async (dispatch) => {
 
-  const res = await fetch(`/api/albums/featured`);
+  const res = await fetch(`/api/albums/random`);
   
-  dispatch(loadFeaturedAlbums(res.data.featuredAlbums));
+  dispatch(loadRandomAlbums(res.data.RandomAlbums));
+  return res;
+}
+
+// ========================================================================================
+// GET NEWEST ALBUMS - 10 published records
+// ========================================================================================
+export const getNewAlbums = () => async (dispatch) => {
+
+  const res = await fetch(`/api/albums/new`);
+  
+  dispatch(loadNewAlbums(res.data.newAlbums));
   return res;
 }
 
@@ -81,10 +99,17 @@ export function albumsReducer(state = {}, action) {
         };
       }
 
-      case LOAD_FEATURED_ALBUMS: {
+      case LOAD_RANDOM_ALBUMS: {
         return {
           ...state,
-          featuredAlbumsList: action.list,
+          randomAlbumsList: action.list,
+        };
+      }
+
+      case LOAD_NEW_ALBUMS: {
+        return {
+          ...state,
+          newestAlbumsList: action.list,
         };
       }
   

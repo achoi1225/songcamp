@@ -1,10 +1,9 @@
-import React, { useContext, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
 
-import { BioFormContext } from './';
+// import { BioFormContext } from './';
 
 import * as userActions from '../../store/user';
-
 
 // export const BioForm = ({ bio, setBio, setBioFormVisible, handleSubmitBioBtn, updateBio, errors }) => {
     // const { bio, handleCloseBioFormBtn, handleSubmitBioBtn, updateBio} = useContext(BioFormContext);

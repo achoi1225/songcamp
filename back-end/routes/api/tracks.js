@@ -57,8 +57,7 @@ router.post(
     trackFileFilter,
     validateTrackDetails,
     asyncHandler(async function (req, res, next) {
-
-    console.log("INSIDE CREATE TRACK!!");
+      
     const file = req.files[0];
 
     if(file) {
@@ -92,7 +91,6 @@ router.patch(
     validateTrackDetails,
     asyncHandler(async function (req, res, next) {
 
-      console.log("INSIDE CREATE TRACK!!");
       const file = req.files[0];
   
         if(file) {

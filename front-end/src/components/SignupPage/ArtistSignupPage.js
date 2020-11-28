@@ -19,8 +19,6 @@ const ArtistSignupForm = () => {
     const isArtist = true;
     const bio = null;
     const imgUrl = null;
-    // const genre= null;
-    // const follows = useSelector((state) => state.follows.list);
     const dispatch = useDispatch();
     const history = useHistory();
 
