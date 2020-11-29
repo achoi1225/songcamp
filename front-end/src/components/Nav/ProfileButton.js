@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { NavLink, useParams } from 'react-router-dom';
 import * as sessionActions from "../../store/session";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+
+import './profile-button.css'
 
 export const ProfileButton = ({ user }) => {
     const dispatch = useDispatch();
@@ -29,15 +33,20 @@ export const ProfileButton = ({ user }) => {
     
       return (
         <>
-          <button className="profile-button" onClick={openMenu}>
-                <i className="fab fa-creative-commons-sampling"></i>
+          <button id="target" className="profile-button" onClick={openMenu}>
+                <AccountCircleIcon fontSize='large' />
           </button>
           {showMenu && (
             <ul className="profile-dropdown">
-              <li>{user.username}</li>
-              <li>{user.email}</li>
+              <li>{user.userName}</li>
+              {/* <li>{user.artistName}</li> */}
               <li>
-                <button onClick={logout}>Log Out</button>
+                <NavLink className="profile__dashboard-link" exact to="/dashboard">
+                  Dashboard
+                </NavLink>
+              </li>
+              <li>
+                <button className="profile__logout" onClick={logout}>Log Out</button>
               </li>
             </ul>
           )}

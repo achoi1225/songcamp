@@ -1,48 +1,39 @@
-import React, { useState,useEffect, useContext } from "react";
-import { NavLink, Route } from "react-router-dom";
+import React from "react";
+import { NavLink, useLocation, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 
 import './nav.css';
+import ProfileButton from './ProfileButton';
 import LoginForm from '../SignupPage/LoginForm';
 import SignupButton from '../SignupPage/SignupButton';
 import LoginButton from '../SignupPage/LoginButton';
-import FanSignupForm from '../SignupPage/FanSignupForm';
+// import FanSignupForm from '../SignupPage/FanSignupForm';
 import RoleForm from '../SignupPage/RoleForm';
-import { showFanSignupForm, hideFanSignupForm } from '../../store/ui-fan-signup-form';
-import { showArtistSignupForm, hideArtistSignupForm } from '../../store/ui-artist-signup-form';
+import { showFanSignupForm } from '../../store/ui-fan-signup-form';
+import { showArtistSignupForm } from '../../store/ui-artist-signup-form';
 import { showLoginForm, hideLoginForm } from '../../store/ui-login-form';
 import { showRoleForm, hideRoleForm } from '../../store/ui-role-form';
-// import SignupButton from './SignupButton';
-// import LoginButton from './LoginButton';
-// import FanSignupForm from './FanSignupForm';
-// import LoginForm from './LoginForm';
-// import RoleForm from './RoleForm';
-// import { showFanSignupForm, hideFanSignupForm } from '../store/actions/ui-fan-signup-form';
-// import { showLoginForm, hideLoginForm } from '../store/actions/ui-login-form';
-// import { showRoleForm, hideRoleForm } from '../store/actions/ui-role-form';
 
 const Nav = () => {
-    const [searchValue, setSearchValue] = useState('');
-    const [role, setRole] = useState('');
-    const fanSignupFormVisible = useSelector(state => state.fanSignupForm.formVisible);
     const artistSignupFormVisible = useSelector(state => state.artistSignupForm.formVisible);
     const loginFormVisible = useSelector(state => state.loginForm.formVisible);
     const roleFormVisible = useSelector(state => state.roleForm.formVisible);
+    const sessionUser = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
+    const location = useLocation();
 
-    console.log("ROLE IS:", role);
-    // console.log("IS FAN SIGN UP FORM VISIBLE?:", fanSignupFormVisible);
-
-    const updateProperty = (e) => {
-        console.log("SEARCH BAR!!!!", e.target.value);
-    }
+    if(location.pathname === '/signup') return null
 
     return (
         <nav>
             <div className="nav__logo-holder">
-                    Songcamp
+                <NavLink className="nav__homepage-link" activeClassName="nav__homepage-link" exact to="/">
+                    <i className="fas fa-campground nav__tent-logo"></i>   
+                    songcamp
+                </NavLink>
+                <span className="nav__discover">Discover new music and support the artists that make it!</span>
             </div>
-            <div className="nav__form-holder">
+            {/* <div className="nav__form-holder">
                 <form>
                     <input className={"search-field"}
                         type="text"
@@ -51,13 +42,21 @@ const Nav = () => {
                         onChange={updateProperty}
                     />
                 </form>
-            </div>
-            <SignupButton 
-                showRoleForm={ () => dispatch(showRoleForm()) }
-            />
-            <LoginButton 
-                showLoginForm={ () => dispatch(showLoginForm()) }
-            />
+            </div> */}
+            <>
+            {
+                sessionUser ? <ProfileButton user={sessionUser} /> :
+                    <>
+                        {/* <NavLink exact to="/">Home</NavLink> */}
+                        <SignupButton 
+                            showRoleForm={ () => dispatch(showRoleForm()) }
+                        />
+                        <LoginButton 
+                            showLoginForm={ () => dispatch(showLoginForm()) }
+                        />
+                    </>
+            }
+            </>
             { roleFormVisible ? 
                 ( 
                     <RoleForm 
@@ -69,7 +68,7 @@ const Nav = () => {
                 ) : null 
             }
             { artistSignupFormVisible ? 
-                ( <FanSignupForm hideFanSignupForm={ () => dispatch(hideFanSignupForm()) } /> ) : null }
+                ( <Redirect to="/signup" /> ) : null }
             { loginFormVisible ? 
                 ( <LoginForm hideLoginForm={ () => dispatch(hideLoginForm()) } /> ) : null } 
            

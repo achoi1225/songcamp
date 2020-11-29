@@ -57,7 +57,7 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
             id: req.params.id,
         },
         include: [
-            {model: User, as: 'artist', attributes: ['id', 'artistName', 'genre']},
+            {model: User, as: 'artist', attributes: ['id', 'artistName', 'genre', 'imgUrl']},
             {model: Track, as: 'tracks'}
         ]
     })

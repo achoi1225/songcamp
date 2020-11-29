@@ -3,18 +3,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
 
 import './homepage.css';
+import DiscoverSection from './DiscoverSection';
 import Latest from './Latest';
 import * as albumsActions from '../../store/albums';
 
 export const HomePage = () => {
     const dispatch = useDispatch();
-    const randomAlbums = useSelector((state) => state.albums.randomAlbumsList)
+    // const randomAlbums = useSelector((state) => state.albums.randomAlbumsList)
 
-    useEffect(() => {
-        (async () => {
-            await dispatch(albumsActions.getRandomAlbums());
-        })()
-    },[]);
+    // useEffect(() => {
+    //     (async () => {
+    //         await dispatch(albumsActions.getRandomAlbums());
+    //     })()
+    // },[]);
 
     return (
         <div className="home-page">
@@ -25,7 +26,14 @@ export const HomePage = () => {
                             className="main-content__feature"
                             style={{backgroundImage: `url(https://songcamp-preuploaded-images.s3-us-west-1.amazonaws.com/main01.jpeg)`}}
                         >
-                            asdf
+                            <div className="main-content__feature-description-holder">
+                                <div className="main-content__feature-description-header">
+                                    consectetur adipiscing
+                                </div>
+                                <div className="main-content__feature-description">
+                                    In non velit eu dolor iaculis ultrices et ac dolor
+                                </div>  
+                            </div>
                         </div>
                     </div>
                     <div className="main-content__sub-feature-holder">
@@ -33,25 +41,47 @@ export const HomePage = () => {
                             className="main-content__sub-feature"
                             style={{backgroundImage: `url(https://songcamp-preuploaded-images.s3-us-west-1.amazonaws.com/main02.jpeg)`}}
                         >
-                            asdf
+                            <div className="main-content__sub-feature-description-holder">
+                                <div className="main-content__sub-feature-description-header">
+                                    Quisque quis
+                                </div>
+                                <div className="main-content__sub-feature-description">
+                                    Nulla in pretium eros.
+                                </div>  
+                            </div>
                         </div>
                         <div 
                             className="main-content__sub-feature"
                             style={{backgroundImage: `url(https://songcamp-preuploaded-images.s3-us-west-1.amazonaws.com/main03.jpeg)`}}
                         >
-                            asdf
+                            <div className="main-content__sub-feature-description-holder">
+                                <div className="main-content__sub-feature-description-header">
+                                    Quisque quis
+                                </div>
+                                <div className="main-content__sub-feature-description">
+                                    Nulla in pretium eros.
+                                </div>  
+                            </div>
                         </div>
                         <div 
                             className="main-content__sub-feature"
                             style={{backgroundImage: `url(https://songcamp-preuploaded-images.s3-us-west-1.amazonaws.com/main04.jpeg)`}}
                         >
-                            asdf
+                            <div className="main-content__sub-feature-description-holder">
+                                <div className="main-content__sub-feature-description-header">
+                                    Quisque quis
+                                </div>
+                                <div className="main-content__sub-feature-description">
+                                    Nulla in pretium eros.
+                                </div>  
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="rest-content__holder">
-                <div className="discover__holder">
+                <DiscoverSection />
+                {/* <div className="discover__holder">
                     <div className="discover__header">DISCOVER</div>
                     <div className="discover">
                         {randomAlbums && randomAlbums.map((album) => {
@@ -72,7 +102,7 @@ export const HomePage = () => {
                             )
                         })}
                     </div>
-                </div>
+                </div> */}
                 <div className="rest-content">
                       <Latest />
                 

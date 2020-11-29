@@ -45,8 +45,8 @@ const LoginForm = ({ hideLoginForm }) => {
                     <h3 className="form-header">Log in</h3> <span onClick={handleClose} className="form-close-btn">x</span>
                 </div>
                 <form className="form">
-                    <ul>
-                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                    <ul className="error-list">
+                        {errors.map((error, idx) => <li className="errors" key={idx}>{error}</li>)}
                     </ul>
                     <label>Email address</label>
                     <input name="email" placeholder={credential} value={credential} onChange={updateProperty(setCredential)}/>

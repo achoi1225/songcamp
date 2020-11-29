@@ -8,7 +8,7 @@ const LoginButton = ({showLoginForm}) => {
 
     return (
         <div>
-            <button onClick={handleClick}>log in</button>
+            <button className="signup-login-btn" onClick={handleClick}>log in</button>
         </div>
     )
 }

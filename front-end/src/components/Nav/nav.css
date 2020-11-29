@@ -4,22 +4,40 @@ nav {
     display: flex;
     /* background-image: linear-gradient(to bottom right, white, #41a2a3); */
     background-image: linear-gradient(to right, #41a2a3, white);
-}
-
-nav button {
-    border: none;
-    font-size: 14px;
-    font-weight: bold;
-    height: 100%;
-    /* width: 80px; */
-    padding: 0 15px 0 15px; 
-    cursor: pointer;
+    box-shadow: 1px 1px 5px #686868;
+    align-items: center;
+    padding: 0 10% 0 15%;
+    position: fixed;
+    z-index: 15;
 }
 
 .nav__logo-holder {
-    width: 100px;
-    height: 35px;
-    background-color: #41A0C3;
+    width: 130px;
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.nav__homepage-link {
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+    display: flex;
+}
+
+.nav__homepage-link:hover {
+    background-color: transparent;
+}
+
+.nav__tent-logo {
+    margin-right: 3px;
+}
+
+.nav__discover {
+    font-size: 13px;
+    color: #353535;
+    /* text-shadow: 1px 1px 5px black; */
 }
 
 .search-field {

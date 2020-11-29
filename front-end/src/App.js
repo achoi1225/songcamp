@@ -26,12 +26,11 @@ const App = () => {
 
   return isLoaded && (
     <>
-      {/* <Navigation/> */}
       <Nav />
       <Switch>
-        <Route exact={true} path="/signup" 
-          render = {() => <SignupPage /> }
-        />
+        <Route exact={true} path="/signup">
+          <SignupPage/>
+        </Route>
         {user ? 
           <>
           <Route exact path="/">

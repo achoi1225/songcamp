@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector, } from "react-redux";
 
 import './signup-page.css';
+import './modal-form.css';
 import tent from '../../images/tent.png';
 import SignupButton from './SignupButton';
 import LoginButton from './LoginButton';

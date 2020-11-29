@@ -78,12 +78,20 @@ const AlbumPage = () => {
                                     </button>
                                 </div>
                             ))}
-                            <div className="description">
+
+                            <div className="album-page__credits">       
+                                <div className="album-page__credits-header">
+                                    credits
+                                </div>
+                                {album.credits}
+                            </div>
+
+                            {/* <div className="description">
                                 <div className="description__header">
                                     About album
                                 </div>
                                 {album.description}
-                            </div>
+                            </div> */}
                             <div className="rights">
                                 all rights reserved &copy;
                             </div>
@@ -93,6 +101,21 @@ const AlbumPage = () => {
                             <div className="album-cover-holder">
                                 <img alt="album cover" className="album-cover" src={album.imgUrl} />
                             </div>
+
+                            {/* <div className="album-page__credits">
+                                <div className="album-page__credits-header">
+                                    credits
+                                </div>
+                                {album.credits}
+                            </div> */}
+
+                            <div className="description">
+                                <div className="description__header">
+                                    About album
+                                </div>
+                                {album.description}
+                            </div>
+
                             <Followers artistId={artist.id} />
                         </div>
 

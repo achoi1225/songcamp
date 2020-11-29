@@ -53,7 +53,7 @@
     display: flex;
 }
 
-.signup-page__signup-login-btn-holder button {
+/* .signup-page__signup-login-btn-holder button {
     border: none;
     background-color: transparent;
     font-size: 17px;
@@ -62,6 +62,18 @@
 }
 
 .signup-page__signup-login-btn-holder button:hover {
+    text-decoration: underline;
+} */
+
+.signup-login-btn {
+    border: none;
+    background-color: transparent;
+    font-size: 17px;
+    font-weight: bold;
+    width: 80px;
+}
+
+.signup-login-btn:hover {
     text-decoration: underline;
 }
 

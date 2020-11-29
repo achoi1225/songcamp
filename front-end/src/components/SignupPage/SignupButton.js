@@ -8,7 +8,7 @@ const SignupButton = ({ showRoleForm }) => {
 
     return (
         <div>
-            <button onClick={handleClick}>sign up</button>
+            <button className="signup-login-btn" onClick={handleClick}>sign up</button>
         </div>
     )
 }

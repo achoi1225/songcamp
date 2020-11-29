@@ -20,7 +20,7 @@
     margin: 15% auto;
     /* box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.2); */
     border-radius: 7px;
-    width: 40%;
+    width: 30%;
     min-width: 360px;
     overflow: hidden;
 }
@@ -101,7 +101,7 @@
     background-color: white;
     /* margin: 33% auto; */
     border-radius: 7px;
-    width: 27%;
+    width: 30%;
     min-width: 430px;
     overflow: hidden;
 }
