@@ -116,12 +116,17 @@ const CreateAlbumPage = () => {
                     </div>
                 </div>
 
-                {
+                {/* {
                     (currentIdx >= addTrackIdx) ? 
                         <h4 className="album-edit-page__tracks-header">
                             TRACKS
                         </h4> :
                         null
+                } */}
+                {album &&
+                    <h4 className="album-edit-page__tracks-header">
+                    TRACKS
+                    </h4> 
                 }
                 {uploadedTracksVisible && album && album.tracks ? 
                     (

@@ -41,6 +41,16 @@ const EditAlbumPage = () => {
         })()
     }, [albumId, dispatch])
 
+    useEffect(() => {
+        (async () => {
+            if(album) {
+                await setAlbumTitle(album.title);
+                await setDescription(album.description);
+                await setCredits(album.credits);
+            }
+        })()
+    }, [album])
+
     const handleAlbumDetailSelect = (e) => {
         e.preventDefault();
         (async () => {
@@ -125,12 +135,17 @@ const EditAlbumPage = () => {
                     </div>
                 </div>
 
-                {
+                {/* {
                 (currentIdx >= addTrackIdx) ? 
                     <h4 className="album-edit-page__tracks-header">
                         TRACKS
                     </h4> :
                     null
+                } */}
+                {album &&
+                    <h4 className="album-edit-page__tracks-header">
+                    TRACKS
+                    </h4> 
                 }
                 {album && album.tracks ? 
                     (
