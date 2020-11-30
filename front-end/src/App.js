@@ -12,6 +12,7 @@ import CreateAlbumPage from './components/CreateAlbumPage';
 import EditAlbumPage from './components/EditAlbumPage';
 import AlbumPage from './components/AlbumPage';
 import HomePage from './components/HomePage';
+import Footer from './components/Footer'
 import * as sessionActions from "./store/session";
 
 const App = () => {
@@ -58,6 +59,7 @@ const App = () => {
           <Redirect to="/signup" />
         }
       </Switch>
+      <Footer />
     </>
   );
 }

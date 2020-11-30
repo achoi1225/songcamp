@@ -1,6 +1,6 @@
 
 .home-page {
-    height: 100vh;
+    min-height: 100vh;
     padding-top: 50px;
 }
 
@@ -119,8 +119,10 @@
 
 /* REST OF CONTENT */
 .rest-content__holder { 
-    /* height: 100vh; */
+    /* position: relative; */
+    min-height: 100vh;
     background-color: #EEF2F3;
+    padding-bottom: 150px;
 }
 
 .rest-content {

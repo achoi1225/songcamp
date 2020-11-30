@@ -4,6 +4,7 @@
 
 .album-edit-page__holder {
     width: 1000px;
+    min-height: 100vh;
     margin: 0 auto;
     display: flex;
     font-size: 13px;
@@ -12,16 +13,18 @@
 
 .album-edit-page__left-col {
     width: 500px;
+    min-height: 100vh;
     padding-top: 20px;
+    /* padding-bottom: 150px; */
     z-index: 9;
 }
 
 .album-edit-page__right-col {
     width: 500px;
+    min-height: 100vh;
     background-color: white;
-    padding: 0 15px;
+    padding: 0 15px 1000px 15px;
     border-left: 1px solid lightgray;
-    height: 100vh;
 }
 
 .album-edit-page__album-select {
@@ -30,7 +33,6 @@
     border-right: none;
     display: flex;
     padding: 10px 0 10px 10px;
-    /* z-index: 9; */
     margin: 0 0 25px 0;
 }
 

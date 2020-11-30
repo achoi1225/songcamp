@@ -81,32 +81,7 @@ export const HomePage = () => {
             </div>
             <div className="rest-content__holder">
                 <DiscoverSection />
-                {/* <div className="discover__holder">
-                    <div className="discover__header">DISCOVER</div>
-                    <div className="discover">
-                        {randomAlbums && randomAlbums.map((album) => {
-                            return (
-                                <div key={album.id} class="discover__album-holder">
-                                    <div 
-                                        className="discover__album"
-                                        style={{backgroundImage: `url(${album.imgUrl})`}}
-                                    >
-                                    </div>
-                                    <h6 className="discover__album-title">
-                                        {album.title}
-                                    </h6>
-                                    <span className="discover__artist-name">
-                                        {album.artist.artistName}
-                                    </span>
-                                </div>
-                            )
-                        })}
-                    </div>
-                </div> */}
-                <div className="rest-content">
-                      <Latest />
-                
-                </div>
+                <Latest />
             </div>
         </div>
     )

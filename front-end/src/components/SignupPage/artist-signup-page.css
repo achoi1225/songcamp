@@ -3,7 +3,7 @@
 .artist-signup-form__holder {
     font-size: 16px;
     color: #333333;
-    height: 80%;
+    /* height: 80%; */
     display: flex;
     justify-content: center;
     background-color: white;
@@ -17,7 +17,7 @@
     min-width: 550px; */
     width: 600px;
     padding: 0 30px;
-    overflow: hidden;
+    /* overflow: hidden; */
     padding: 30px 80px 0 80px;
     /* background-color: aqua; */
     border-top: 1px dashed lightgray;
