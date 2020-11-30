@@ -10,9 +10,7 @@ export async function fetch(url, options = {}) {
     // "application/json", and set the "CSRF-TOKEN" header to the value of the 
     // "XSRF-TOKEN" cookie
   if (options.method.toUpperCase() !== 'GET') {
-    console.log("INSIDE CSRF!!!!");
     if(options.body instanceof FormData) {
-      console.log("INSTANCE OF FORM DATA!!");
       options.headers['XSRF-Token'] = Cookies.get('XSRF-TOKEN');
     }  else {
       options.headers['Content-Type'] =

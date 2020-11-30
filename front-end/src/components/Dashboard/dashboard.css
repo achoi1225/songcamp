@@ -242,20 +242,24 @@
     background-size:     cover;                    
     background-repeat:   no-repeat;
     background-position: center center; 
-
-
+    display: flex;
+    justify-content: flex-end;
 }
 
 .artist-info__photo-placeholder {
     width: 150px;
     height: 150px;
     border: 1px dashed lightgray;
-    background-color: red;
+    background-color: white;
+    font-size: 12px;
+    font-weight: bold;
+    color: #3187F5;
     margin-bottom: 6px;
 }
 
 .artist-info__photo-placeholder:hover {
-    border-bottom: 1px solid  #3187F5;
+    /* border-bottom: 1px solid  #3187F5; */
+    text-decoration: none;
 }
 
 .artist-info__name {
@@ -264,6 +268,17 @@
     margin-bottom: 15px;
 }
 
+.artist-info__photo-delete-btn {
+    color: red;
+    font-size: 14px;
+    line-height: 14px;
+    background-color: black;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    padding: 2px 0;
+    border: none;
+}
 
 /* BIO */
 .artist-info__add-bio-btn {
