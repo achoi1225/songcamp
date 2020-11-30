@@ -80,9 +80,9 @@ const SignupPage = ({ setNavVisible }) => {
                 
                 }
 
-                <div className="signup-page__footer">
+                {/* <div className="signup-page__footer">
                     
-                </div>
+                </div> */}
             </div>
         </>
     )

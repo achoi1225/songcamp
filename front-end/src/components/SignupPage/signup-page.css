@@ -1,7 +1,7 @@
 
 .signup-page__holder {
     /* background-image: linear-gradient(to top right, #F3F3F3, white); */
-    height: 100vh;
+    /* height: 100vh; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -10,9 +10,10 @@
 .signup-page__top-row-holder {
     display:flex;
     padding: 0 3% 0 10%;
-    min-height: 120px;
+    height: 120px;
     align-items: center;
     background-color:  #F3F3F3;
+    /* background-color: red; */
     /* background-image: linear-gradient(to top right, #F3F3F3, white); */
 }
 
@@ -78,8 +79,7 @@
 }
 
 .signup-page__main-img-holder {
-    width: 100%;
-    min-height:450px;
+    min-height:65vh;
     background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('../../images/vinyl.jpg');
     background-color: black;
     background-size:     cover;                    
